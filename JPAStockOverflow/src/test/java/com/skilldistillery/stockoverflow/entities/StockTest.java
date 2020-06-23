@@ -13,12 +13,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class PostTest {
-	
+public class StockTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Post post;
-	
+	private Stock stock;
+
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		emf = Persistence.createEntityManagerFactory("StockOverflowPU");
@@ -32,18 +31,18 @@ public class PostTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		post = em.find(Post.class, 1);
+		stock = em.find(Stock.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
-		post = null;
+		stock = null;
 		em.close();
 	}
 
 	@Test
-	void test_Post_entity_mapping() {
-		assertNotNull(post);
-		assertEquals("", post.getTitle());
+	void test_Stock_entity_mapping() {
+		assertNotNull(stock);
+		assertEquals("", stock.getSymbol());
 	}
 }
