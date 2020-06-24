@@ -10,6 +10,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="comment_rating")
 public class CommentRating {
@@ -27,12 +30,13 @@ public class CommentRating {
 	private LocalDateTime createdAt;
 	
 	//mapping to Comment Rating
+	@JsonIgnoreProperties({"posts"})
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	@MapsId(value="userId")
 	private User user;
 	
-	
+	@JsonIgnoreProperties({"commentRatings"})
 	@ManyToOne
 	@JoinColumn(name="comment_id")
 	@MapsId(value="commentId")
