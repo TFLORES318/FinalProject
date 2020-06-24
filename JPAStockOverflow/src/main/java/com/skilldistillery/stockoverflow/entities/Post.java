@@ -1,6 +1,7 @@
 package com.skilldistillery.stockoverflow.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -110,6 +111,37 @@ public class Post {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	
+
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+	
+	public void addComment(Comment comment) {
+		if (comments == null) {
+			comments = new ArrayList<>();
+		}
+		if(!comments.contains(comment)) {
+			comments.add(comment);
+			if (comment.getPost() != null) {
+				comment.getPost().getComments().remove(comment);
+			}
+		}
+	}
+	
+	public void removeComment(Comment comment) {
+		comment.setPost(null);
+		if(comments != null) {
+			comments.remove(comment);
+		}
 	}
 
 
