@@ -1,8 +1,13 @@
 package com.skilldistillery.stockoverflow.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Stock {
@@ -14,6 +19,12 @@ public class Stock {
 	private String companyName;
 	
 	private String exchange;
+	
+	@ManyToMany
+	@JoinTable(name="user_stock",
+	joinColumns=@JoinColumn(name="stock_symbol"),
+	inverseJoinColumns=@JoinColumn(name="user_id"))
+	private List <User> users;
 
 	// Constructors
 	public Stock() {}
@@ -41,6 +52,14 @@ public class Stock {
 
 	public void setExchange(String exchange) {
 		this.exchange = exchange;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 
 	@Override
