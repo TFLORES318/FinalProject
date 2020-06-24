@@ -14,6 +14,7 @@
 		<class>com.skilldistillery.stockoverflow.entities.Stock</class>
 		<class>com.skilldistillery.stockoverflow.entities.User</class>
 		<class>com.skilldistillery.stockoverflow.entities.UserStock</class>
+		<class>com.skilldistillery.stockoverflow.entities.UserStockJournal</class>
 		<class>com.skilldistillery.stockoverflow.entities.WebinarRating</class>
 		<class>com.skilldistillery.stockoverflow.entities.Webinar</class>
 
