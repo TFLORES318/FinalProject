@@ -1,12 +1,17 @@
 package com.skilldistillery.stockoverflow.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -22,6 +27,17 @@ public class Comment {
 	@CreationTimestamp
 	@Column(name="create_date")
 	private LocalDateTime createDate;
+	
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
+	
+	@ManyToOne
+	@JoinColumn(name="post_id")
+	private Post post;
+	
+	@OneToMany(mappedBy="comment")
+	private List<CommentRating> commentRatings;
 
 	public Comment() {}
 
@@ -54,6 +70,50 @@ public class Comment {
 
 	public void setCreateDate(LocalDateTime createDate) {
 		this.createDate = createDate;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Post getPost() {
+		return post;
+	}
+
+	public void setPost(Post post) {
+		this.post = post;
+	}
+	
+	
+	public List<CommentRating> getCommentRatings() {
+		return commentRatings;
+	}
+
+	public void setCommentRatings(List<CommentRating> commentRatings) {
+		this.commentRatings = commentRatings;
+	}
+
+	public void addCommentRating(CommentRating commentRating) {
+		if (commentRatings == null) {
+			commentRatings = new ArrayList<>();
+		}
+		if(!commentRatings.contains(commentRating)) {
+			commentRatings.add(commentRating);
+			if(commentRating.getComment() != null) {
+				commentRating.getComment().getCommentRatings().remove(commentRating);
+			}
+		}
+	}
+	
+	public void removeCommentRating(CommentRating commentRating) {
+		commentRating.setComment(null);
+		if (commentRatings != null) {
+			commentRatings.remove(commentRating);
+		}
 	}
 
 	@Override

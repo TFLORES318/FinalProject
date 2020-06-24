@@ -47,5 +47,11 @@ class CommentTest {
 		assertEquals("2020-06-05T09:26", comment.getCreateDate().toString());
 		
 	}
+	@Test
+	void test_commentRating_mapping() {
+		assertNotNull(comment);
+		assertEquals("Not very helpful Rich",comment.getCommentRatings().get(0).getNote());
+		
+	}
 
 }

@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `post` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(150) NOT NULL,
   `description` VARCHAR(300) NULL,
-  `create_at` DATETIME NOT NULL,
+  `created_at` DATETIME NOT NULL,
   `enabled` TINYINT NOT NULL,
   `user_id` INT NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
@@ -308,9 +308,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stockoverflowdb`;
-INSERT INTO `post` (`id`, `title`, `description`, `create_at`, `enabled`, `user_id`) VALUES (1, 'Should I buy FakeStock?', 'I dunno they are blowing up but I only have $10...', '2020-06-05T09:26', 1, 1);
-INSERT INTO `post` (`id`, `title`, `description`, `create_at`, `enabled`, `user_id`) VALUES (2, 'How do I transfer stocks into my account?', 'I bought some options I have through work but I don\'t know how to see them in my Ameritrade account.', '2020-06-05T09:26', 1, 5);
-INSERT INTO `post` (`id`, `title`, `description`, `create_at`, `enabled`, `user_id`) VALUES (3, 'My company matches my 401K contributions so should I get one?', 'Like I said, my company matches our contributions. Is this something I should be doing? I\'m 28 btw.', '2020-06-05T09:26', 1, 3);
+INSERT INTO `post` (`id`, `title`, `description`, `created_at`, `enabled`, `user_id`) VALUES (1, 'Should I buy FakeStock?', 'I dunno they are blowing up but I only have $10...', '2020-06-05T09:26', 1, 1);
+INSERT INTO `post` (`id`, `title`, `description`, `created_at`, `enabled`, `user_id`) VALUES (2, 'How do I transfer stocks into my account?', 'I bought some options I have through work but I don\'t know how to see them in my Ameritrade account.', '2020-06-05T09:26', 1, 5);
+INSERT INTO `post` (`id`, `title`, `description`, `created_at`, `enabled`, `user_id`) VALUES (3, 'My company matches my 401K contributions so should I get one?', 'Like I said, my company matches our contributions. Is this something I should be doing? I\'m 28 btw.', '2020-06-05T09:26', 1, 3);
 
 COMMIT;
 
@@ -345,7 +345,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stockoverflowdb`;
-INSERT INTO `user_webinar` (`user_id`, `webinar_id`) VALUES (2, 1);
+INSERT INTO `user_webinar` (`user_id`, `webinar_id`) VALUES (1, 1);
 INSERT INTO `user_webinar` (`user_id`, `webinar_id`) VALUES (2, 2);
 INSERT INTO `user_webinar` (`user_id`, `webinar_id`) VALUES (3, 3);
 INSERT INTO `user_webinar` (`user_id`, `webinar_id`) VALUES (3, 4);
