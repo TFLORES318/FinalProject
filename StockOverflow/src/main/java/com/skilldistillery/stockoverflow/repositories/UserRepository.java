@@ -7,5 +7,5 @@ import com.skilldistillery.stockoverflow.entities.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-//	User findByUsername(String username);
+	User findByUsername(String username);
 }
