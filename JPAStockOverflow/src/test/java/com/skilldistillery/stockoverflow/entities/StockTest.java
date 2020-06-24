@@ -31,7 +31,7 @@ public class StockTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		stock = em.find(Stock.class, 1);
+		stock = em.find(Stock.class, "AA");
 	}
 
 	@AfterEach
@@ -43,6 +43,8 @@ public class StockTest {
 	@Test
 	void test_Stock_entity_mapping() {
 		assertNotNull(stock);
-		assertEquals("", stock.getSymbol());
+		assertEquals("AA", stock.getSymbol());
+		assertEquals("Arthur Aardvark Inc.", stock.getCompanyName());
+		assertEquals("NASDAQ", stock.getExchange());
 	}
 }

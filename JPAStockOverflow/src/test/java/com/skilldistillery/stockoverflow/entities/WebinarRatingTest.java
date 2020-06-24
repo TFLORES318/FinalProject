@@ -41,8 +41,10 @@ public class WebinarRatingTest {
 	}
 
 	@Test
-	void test_Stock_entity_mapping() {
+	void test_WebinarRating_entity_mapping() {
 		assertNotNull(webinarRating);
-//		assertEquals("", webinarRating.getSymbol());
+		assertEquals(5, webinarRating.getRating());
+		assertEquals("Very cool Rich thank you", webinarRating.getRatingNote());
+		assertEquals("2020-06-05T09:26", webinarRating.getCreatedAt().toString());
 	}
 }

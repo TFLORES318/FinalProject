@@ -23,7 +23,7 @@ public class Post {
 	
 	private String description;
 	
-	@Column(name="created_at")
+	@Column(name="create_at") // change to created in DB
 	@CreationTimestamp
 	private LocalDateTime createdAt;
 	
