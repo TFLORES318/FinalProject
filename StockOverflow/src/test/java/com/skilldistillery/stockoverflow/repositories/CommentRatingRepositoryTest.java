@@ -1,9 +1,11 @@
 package com.skilldistillery.stockoverflow.repositories;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.skilldistillery.stockoverflow.entities.CommentRating;
+import com.skilldistillery.stockoverflow.entities.CommentRatingId;
 
 @SpringBootTest
 public class CommentRatingRepositoryTest {
@@ -26,9 +29,13 @@ public class CommentRatingRepositoryTest {
 		assertTrue(commentRatings.size() > 0);
 	}
 	
-//	@Test
-//	@DisplayName("find a single comment rating")
-//	void test1() {
-//		CommentRating commentRating = commentRatingRepo.findById();
-//	}
+	@Test
+	@DisplayName("find a single comment rating")
+	void test1() {
+		CommentRatingId cid = new CommentRatingId(1,1);
+		Optional<CommentRating> commentRating = commentRatingRepo.findById(cid);
+		assertTrue(commentRating.isPresent());
+		assertEquals("IDK lol", commentRating.get().getComment().getContent());
+		
+	}
 }
