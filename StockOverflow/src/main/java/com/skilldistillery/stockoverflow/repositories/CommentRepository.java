@@ -8,4 +8,6 @@ import com.skilldistillery.stockoverflow.entities.Comment;
 
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
 	List<Comment> findByPost_Id(int postId);
+	
+	Comment findByIdAndUserUsername(int commentId, String username);
 }
