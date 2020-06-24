@@ -41,7 +41,8 @@ class UserStockJournalTest {
 
 	@Test
 	void test() {
-		fail("Not yet implemented");
+		assertEquals("I like this stock and this company seems solid.", userStockJournal.getContent());
+		assertEquals("2020-06-05T09:26", userStockJournal.getCreatedAt().toString());
 	}
 
 }
