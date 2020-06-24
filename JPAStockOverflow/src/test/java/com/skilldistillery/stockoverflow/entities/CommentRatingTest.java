@@ -44,5 +44,16 @@ class CommentRatingTest {
 		assertNotNull(commentRating);
 		assertEquals("IDK lol", commentRating.getComment().getContent());
 	}
+	
+	@Test
+	void test_comment_mapping() {
+		assertNotNull(commentRating);
+		assertEquals("IDK lol", commentRating.getComment().getContent());
+	}
+	@Test
+	void test_user_mapping() {
+		assertNotNull(commentRating);
+		assertEquals("admin", commentRating.getUser().getUsername());
+	}
 
 }

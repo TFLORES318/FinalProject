@@ -23,16 +23,16 @@ public class Post {
 	
 	private String description;
 	
-	@Column(name="create_at") // change to created in DB
+	@Column(name="created_at") // change to created in DB
 	@CreationTimestamp
 	private LocalDateTime createdAt;
 	
 	private boolean enabled;
 
 	
-//	@ManyToOne
-//	@JoinColumn(name="user_id")
-//	private User user;
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
 	
 	// constructor
 	
@@ -95,6 +95,16 @@ public class Post {
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 
