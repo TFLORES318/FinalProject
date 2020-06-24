@@ -322,8 +322,8 @@ COMMIT;
 START TRANSACTION;
 USE `stockoverflowdb`;
 INSERT INTO `comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `post_id`) VALUES (1, 'IDK lol', '2020-06-05T09:26', 1, 2, 1);
-INSERT INTO `comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `post_id`) VALUES (2, 'There\'s a form you need to fill out. Try sending a message through the Message Center!', '2020-06-05T09:26', 1, 3, 1);
-INSERT INTO `comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `post_id`) VALUES (3, 'OMG yes that\'s great that your company has that and you should start saving up for retirment ASAP! Goes for anyone.', '2020-06-05T09:26', 1, 4, 1);
+INSERT INTO `comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `post_id`) VALUES (2, 'There\'s a form you need to fill out. Try sending a message through the Message Center!', '2020-06-05T09:26', 1, 3, 2);
+INSERT INTO `comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `post_id`) VALUES (3, 'OMG yes that\'s great that your company has that and you should start saving up for retirment ASAP! Goes for anyone.', '2020-06-05T09:26', 1, 4, 3);
 INSERT INTO `comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `post_id`) VALUES (4, 'I do not love this post!', '2020-06-05T09:26', 1, 1, 1);
 
 COMMIT;
