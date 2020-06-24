@@ -284,11 +284,11 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stockoverflowdb`;
-INSERT INTO `user` (`id`, `username`, `password`, `flair`, `first_name`, `last_name`, `email`, `role`, `profile_picture`, `create_date`, `enabled`) VALUES (1, 'admin', 'admin', 'Admin', 'Admin', 'McAdmin', NULL, 'ADMIN', NULL, '2020-06-05T09:26', 1);
-INSERT INTO `user` (`id`, `username`, `password`, `flair`, `first_name`, `last_name`, `email`, `role`, `profile_picture`, `create_date`, `enabled`) VALUES (2, 'rwasek', 'rwasek', 'Expert', 'Rich', 'Wasek', NULL, 'VERIFIED', NULL, '2020-06-05T09:26', 1);
-INSERT INTO `user` (`id`, `username`, `password`, `flair`, `first_name`, `last_name`, `email`, `role`, `profile_picture`, `create_date`, `enabled`) VALUES (3, 'tflores', 'tflores', 'Beginner', 'Tabatha', 'Flores', NULL, 'STANDARD', NULL, '2020-06-05T09:26', 1);
-INSERT INTO `user` (`id`, `username`, `password`, `flair`, `first_name`, `last_name`, `email`, `role`, `profile_picture`, `create_date`, `enabled`) VALUES (4, 'rjlopez', 'rjlopez', 'Expert', 'Jeff', 'Lopez', NULL, 'APPLICANT', NULL, '2020-06-05T09:26', 1);
-INSERT INTO `user` (`id`, `username`, `password`, `flair`, `first_name`, `last_name`, `email`, `role`, `profile_picture`, `create_date`, `enabled`) VALUES (5, 'tpapp', 'tpapp', 'Beginner', 'Toni', 'Papp', NULL, 'STANDARD', NULL, '2020-06-05T09:26', 1);
+INSERT INTO `user` (`id`, `username`, `password`, `flair`, `first_name`, `last_name`, `email`, `role`, `profile_picture`, `create_date`, `enabled`) VALUES (1, 'admin', '$2a$10$yCcNV79QkFYwlL9kSqCC4eGSrhkI1/ofG.o8vCh0g5OdwSdV7bwre', 'Admin', 'Admin', 'McAdmin', NULL, 'ADMIN', NULL, '2020-06-05T09:26', 1);
+INSERT INTO `user` (`id`, `username`, `password`, `flair`, `first_name`, `last_name`, `email`, `role`, `profile_picture`, `create_date`, `enabled`) VALUES (2, 'rwasek', '$2a$10$yCcNV79QkFYwlL9kSqCC4eGSrhkI1/ofG.o8vCh0g5OdwSdV7bwre', 'Expert', 'Rich', 'Wasek', NULL, 'VERIFIED', NULL, '2020-06-05T09:26', 1);
+INSERT INTO `user` (`id`, `username`, `password`, `flair`, `first_name`, `last_name`, `email`, `role`, `profile_picture`, `create_date`, `enabled`) VALUES (3, 'tflores', '$2a$10$yCcNV79QkFYwlL9kSqCC4eGSrhkI1/ofG.o8vCh0g5OdwSdV7bwre', 'Beginner', 'Tabatha', 'Flores', NULL, 'STANDARD', NULL, '2020-06-05T09:26', 1);
+INSERT INTO `user` (`id`, `username`, `password`, `flair`, `first_name`, `last_name`, `email`, `role`, `profile_picture`, `create_date`, `enabled`) VALUES (4, 'rjlopez', '$2a$10$yCcNV79QkFYwlL9kSqCC4eGSrhkI1/ofG.o8vCh0g5OdwSdV7bwre', 'Expert', 'Jeff', 'Lopez', NULL, 'APPLICANT', NULL, '2020-06-05T09:26', 1);
+INSERT INTO `user` (`id`, `username`, `password`, `flair`, `first_name`, `last_name`, `email`, `role`, `profile_picture`, `create_date`, `enabled`) VALUES (5, 'tpapp', '$2a$10$yCcNV79QkFYwlL9kSqCC4eGSrhkI1/ofG.o8vCh0g5OdwSdV7bwre', 'Beginner', 'Toni', 'Papp', NULL, 'STANDARD', NULL, '2020-06-05T09:26', 1);
 
 COMMIT;
 
