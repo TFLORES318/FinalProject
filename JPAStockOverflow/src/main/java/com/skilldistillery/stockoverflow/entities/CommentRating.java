@@ -46,9 +46,6 @@ public class CommentRating {
 
 
 
-
-
-
 	public CommentRating(CommentRatingId id, int rating, String note, LocalDateTime createdAt, User user,
 			Comment comment) {
 		super();
