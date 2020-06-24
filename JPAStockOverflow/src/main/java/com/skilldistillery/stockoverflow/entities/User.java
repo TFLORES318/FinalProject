@@ -16,6 +16,9 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class User {
 
@@ -49,27 +52,28 @@ public class User {
 	
 	private Boolean enabled;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "userCreator")
 	private List <Webinar> webinarsUserIsHosting;
-	
+	@JsonIgnore
 	@ManyToMany(mappedBy="usersAttending")
 	private List <Webinar> webinarsAttending;
-	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List <Comment> comments;
-	
+	@JsonIgnoreProperties({"user"})
 	@OneToMany(mappedBy="user")
 	private List <Post> posts;
-	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List <CommentRating> commentRatings;
-	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List <WebinarRating> webinarRatings;
-	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List <UserStockJournal> journalEntries;
-
+	@JsonIgnore
 	@ManyToMany(mappedBy="users")
 	private List <Stock> stocks;
 	
