@@ -72,7 +72,7 @@ class UserTest {
 	void test_User_comment() {
 		assertNotNull(user);
 		assertEquals(1, user.getComments().size());
-		assertEquals("I love this post!", user.getComments().get(0).getContent());
+		assertEquals("I do not love this post!", user.getComments().get(0).getContent());
 	}
 	
 	@Test

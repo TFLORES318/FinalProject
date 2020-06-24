@@ -36,5 +36,14 @@ class CommentRepositoryTest {
 		assertEquals("IDK lol", comment.get().getContent());
 		
 	}
+	
+	@Test
+	@DisplayName("find comments by post ID")
+	void test2() {
+		List<Comment> comments = commentRepo.findByPost_Id(1);
+		assertNotNull(comments);
+		assertTrue(comments.size() > 0);
+		assertEquals("IDK lol", comments.get(0).getContent());
+	}
 
 }

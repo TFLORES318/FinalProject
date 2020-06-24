@@ -51,6 +51,7 @@ class CommentTest {
 	void test_commentRating_mapping() {
 		assertNotNull(comment);
 		assertEquals("Not very helpful Rich",comment.getCommentRatings().get(0).getNote());
+		assertTrue(comment.isEnabled());
 		
 	}
 
