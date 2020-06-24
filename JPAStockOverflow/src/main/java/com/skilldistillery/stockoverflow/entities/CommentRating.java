@@ -46,18 +46,22 @@ public class CommentRating {
 
 
 
-	public CommentRating(CommentRatingId id, int userId, int commentId, int rating, String note,
-			LocalDateTime createdAt, User user, Comment comment) {
+
+
+
+	public CommentRating(CommentRatingId id, int rating, String note, LocalDateTime createdAt, User user,
+			Comment comment) {
 		super();
 		this.id = id;
-		this.userId = userId;
-		this.commentId = commentId;
 		this.rating = rating;
 		this.note = note;
 		this.createdAt = createdAt;
 		this.user = user;
 		this.comment = comment;
 	}
+
+
+
 
 
 
@@ -69,30 +73,6 @@ public class CommentRating {
 
 	public void setId(CommentRatingId id) {
 		this.id = id;
-	}
-
-
-
-	public int getUserId() {
-		return userId;
-	}
-
-
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
-
-
-	public int getCommentId() {
-		return commentId;
-	}
-
-
-
-	public void setCommentId(int commentId) {
-		this.commentId = commentId;
 	}
 
 
