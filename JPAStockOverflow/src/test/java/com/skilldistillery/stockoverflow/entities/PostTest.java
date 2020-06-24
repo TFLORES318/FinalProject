@@ -44,6 +44,10 @@ public class PostTest {
 	@Test
 	void test_Post_entity_mapping() {
 		assertNotNull(post);
-		assertEquals("", post.getTitle());
+		assertEquals("Should I buy FakeStock?", post.getTitle());
+		assertEquals("I dunno they are blowing up but I only have $10...", post.getDescription());
+		assertEquals(6, post.getCreatedAt().getMonthValue());
+		assertEquals("2020-06-05T09:26", post.getCreatedAt().toString());
+		assertEquals(true, post.isEnabled());
 	}
 }
