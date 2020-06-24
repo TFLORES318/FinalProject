@@ -11,6 +11,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class WebinarRatingTest {
@@ -46,5 +47,12 @@ public class WebinarRatingTest {
 		assertEquals(5, webinarRating.getRating());
 		assertEquals("Very cool Rich thank you", webinarRating.getRatingNote());
 		assertEquals("2020-06-05T09:26", webinarRating.getCreatedAt().toString());
+	}
+	
+	@DisplayName("Test Webinar Rating to a User and a Webinar")
+	@Test
+	void test2() {
+		assertEquals("Admin",webinarRating.getUser().getFirstName());
+		assertEquals("Day Trading 101",webinarRating.getWebinar().getTitle());
 	}
 }
