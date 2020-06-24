@@ -1,5 +1,6 @@
 package com.skilldistillery.stockoverflow.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -60,6 +61,23 @@ public class Stock {
 
 	public void setUsers(List<User> users) {
 		this.users = users;
+	}
+	
+	public void addUser(User user) {
+		if (users == null) {
+			users = new ArrayList<>();
+		}
+		if(!users.contains(user)) {
+			users.add(user);
+			user.addStock(this);
+		}
+	}
+	
+	public void removeUser(User user) {
+		if (users != null && users.contains(user)) {
+			users.remove(user);
+			user.removeStock(this);
+		}
 	}
 
 	@Override
