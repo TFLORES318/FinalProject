@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Stock {
 
@@ -55,6 +57,7 @@ public class Stock {
 		this.exchange = exchange;
 	}
 
+	@JsonIgnore
 	public List<User> getUsers() {
 		return users;
 	}
