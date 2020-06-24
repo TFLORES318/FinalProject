@@ -372,6 +372,23 @@ public class User {
 		}
 	}
 	
+	public void addStock(Stock stock) {
+		if(stocks == null) {
+			stocks = new ArrayList<>();
+		}
+		if(!stocks.contains(stock)) {
+			stocks.add(stock);
+			stock.addUser(this);
+		}
+	}
+	
+	public void removeStock(Stock stock) {
+		if (stocks != null && stocks.contains(stock)) {
+			stocks.remove(stock);
+			stock.removeUser(this);
+		}
+	}
+	
 
 	public List<Stock> getStocks() {
 		return stocks;
