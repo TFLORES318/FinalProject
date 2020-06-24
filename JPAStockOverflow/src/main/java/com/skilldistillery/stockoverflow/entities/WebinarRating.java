@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -24,6 +27,16 @@ public class WebinarRating {
 	@Column(name="created_at")
 	@CreationTimestamp
 	private LocalDateTime createdAt;
+	
+	@ManyToOne
+	@MapsId(value="webinarId")
+	@JoinColumn(name="webinar_id")
+	private Webinar webinar;
+	
+	@ManyToOne
+	@MapsId(value="userId")
+	@JoinColumn(name="user_id")
+	private User user;
 
 	// Constructors
 	public WebinarRating() {}
@@ -34,6 +47,23 @@ public class WebinarRating {
 		this.rating = rating;
 		this.ratingNote = ratingNote;
 		this.createdAt = createdAt;
+	}
+	
+
+	public Webinar getWebinar() {
+		return webinar;
+	}
+
+	public void setWebinar(Webinar webinar) {
+		this.webinar = webinar;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public WebinarRatingId getId() {

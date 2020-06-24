@@ -10,6 +10,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class UserStockJournalTest {
@@ -43,6 +44,17 @@ class UserStockJournalTest {
 	void test() {
 		assertEquals("I like this stock and this company seems solid.", userStockJournal.getContent());
 		assertEquals("2020-06-05T09:26", userStockJournal.getCreatedAt().toString());
+	}
+	
+	@Test
+	@DisplayName("User Stock Journal to User and their associated Stock Test")
+	void test2() {
+		assertNotNull(userStockJournal);
+		assertEquals("Admin",userStockJournal.getUser().getFirstName());
+		assertEquals("I like this stock and this company seems solid.",userStockJournal.getContent());
+		assertEquals("AA",userStockJournal.getStock().getSymbol());
+		assertEquals("2020-06-05T09:26",userStockJournal.getCreatedAt().toString());
+		
 	}
 
 }
