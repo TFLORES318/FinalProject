@@ -12,10 +12,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class WebinarTest {
+class UserStockJournalTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Webinar webinar;
+	private UserStockJournal userStockJournal;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -30,25 +30,19 @@ class WebinarTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		webinar = em.find(Webinar.class, 1);
+		userStockJournal = em.find(UserStockJournal.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
-		webinar = null;
+		userStockJournal = null;
 		em.close();
 	}
 
 	@Test
 	void test() {
-		assertEquals("Day Trading 101", webinar.getTitle());
-		assertEquals("Don't even know what questions to ask? This is the place for you!", webinar.getDescription());
-		assertEquals("2020-07-15T08:00", webinar.getDateTime().toString());
-		assertEquals("2020-06-05T09:26", webinar.getCreatedAt().toString());
-		assertEquals("https://us04web.zoom.us/j/78138276632?pwd=K2RKSFFIOHltU0loV1hVRWhuaVcyUT09", webinar.getMeetingLink());
-		assertEquals(30, webinar.getMaxAttendees());
-		assertTrue(webinar.getEnabled());
-		
+		assertEquals("I like this stock and this company seems solid.", userStockJournal.getContent());
+		assertEquals("2020-06-05T09:26", userStockJournal.getCreatedAt().toString());
 	}
 
 }

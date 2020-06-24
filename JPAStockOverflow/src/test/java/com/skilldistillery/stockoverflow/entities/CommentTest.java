@@ -1,6 +1,6 @@
 package com.skilldistillery.stockoverflow.entities;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -43,7 +43,9 @@ class CommentTest {
 
 	@Test
 	void test() {
-		fail("Not yet implemented");
+		assertEquals("IDK lol", comment.getContent());
+		assertEquals("2020-06-05T09:26", comment.getCreateDate().toString());
+		
 	}
 
 }
