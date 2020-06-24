@@ -54,10 +54,25 @@ public class StockServiceImpl implements StockService {
 		Stock managedStock = stockOpt.get();
 		managedStock.setCompanyName(stock.getCompanyName());
 		managedStock.setExchange(stock.getExchange());
-		managedStock.setSymbol(stock.getSymbol());
+//		managedStock.setSymbol(stock.getSymbol());
 		stockRepo.saveAndFlush(managedStock);
 		
 		return managedStock;
+	}
+
+	@Override
+	public boolean destroyStock(String stockSymbol) {
+		Optional<Stock> stockOpt = stockRepo.findById(stockSymbol);
+		Stock toDelete = stockOpt.get();
+		boolean deleted;
+		try {
+			stockRepo.delete(toDelete);
+			deleted = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			deleted = false;
+		}
+		return deleted;
 	}
 	
 }
