@@ -1,6 +1,8 @@
 package com.skilldistillery.stockoverflow.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -44,7 +48,31 @@ public class User {
 	private LocalDateTime createDate;
 	
 	private Boolean enabled;
+	
+	@OneToMany(mappedBy = "userCreator")
+	private List <Webinar> webinarsUserIsHosting;
+	
+	@ManyToMany(mappedBy="usersAttending")
+	private List <Webinar> webinarsAttending;
+	
+	@OneToMany(mappedBy="user")
+	private List <Comment> comments;
+	
+	@OneToMany(mappedBy="user")
+	private List <Post> posts;
+	
+	@OneToMany(mappedBy="user")
+	private List <CommentRating> commentRatings;
+	
+	@OneToMany(mappedBy="user")
+	private List <WebinarRating> webinarRatings;
+	
+	@OneToMany(mappedBy="user")
+	private List <UserStockJournal> journalEntries;
 
+	@ManyToMany(mappedBy="users")
+	private List <Stock> stocks;
+	
 	public User() {}
 
 	public User(int id, String username, String password, String flair, String firstName, String lastName, String email,
@@ -149,6 +177,204 @@ public class User {
 
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
+	}
+	
+
+	public List<Webinar> getWebinarsUserIsHosting() {
+		return webinarsUserIsHosting;
+	}
+
+	public void setWebinarsUserIsHosting(List<Webinar> webinarsUserIsHosting) {
+		this.webinarsUserIsHosting = webinarsUserIsHosting;
+	}
+	
+	// Webinar that user is hosting
+	public void addWebinar(Webinar webinar) {
+		if (webinarsUserIsHosting == null) {
+			webinarsUserIsHosting = new ArrayList<>();
+		}
+		if (!webinarsUserIsHosting.contains(webinar)) {
+			webinarsUserIsHosting.add(webinar);
+			if (webinar.getUserCreator() != null) {
+				webinar.getUserCreator().getWebinarsUserIsHosting().remove(webinar);
+			}
+		}
+	}
+	
+	public void removeWebinar(Webinar webinar) {
+		webinar.setUserCreator(null);
+		if (webinarsUserIsHosting != null) {
+			webinarsUserIsHosting.remove(webinar);
+		}
+	}
+	
+	
+
+	public List<Webinar> getWebinarsAttending() {
+		return webinarsAttending;
+	}
+
+	public void setWebinarsAttending(List<Webinar> webinarsAttending) {
+		this.webinarsAttending = webinarsAttending;
+	}
+	
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+	
+	public void addComment(Comment comment) {
+		if (comments == null) {
+			comments = new ArrayList<>();
+		}
+		
+		if (!comments.contains(comment)) {
+			comments.add(comment);
+			if(comment.getUser() != null) {
+				comment.getUser().getComments().remove(comment);
+			}
+			comment.setUser(this);
+		}
+	}
+
+	public void removeComment(Comment comment) {
+		comment.setUser(null);
+		if (comments != null) {
+			comments.remove(comment);
+		}
+	}
+	
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
+	
+	public void addPost(Post post) {
+		if (posts == null) {
+			posts = new ArrayList<>();
+		}
+		
+		if (!posts.contains(post)) {
+			posts.add(post);
+			if(post.getUser() != null) {
+				post.getUser().getPosts().remove(post);
+			}
+			post.setUser(this);
+		}
+	}
+	
+	public void removePost(Post post) {
+		post.setUser(null);
+		if (posts != null) {
+			posts.remove(post);
+		}
+	}
+
+
+	public List<CommentRating> getCommentRatings() {
+		return commentRatings;
+	}
+
+	public void setCommentRatings(List<CommentRating> commentRatings) {
+		this.commentRatings = commentRatings;
+	}
+	
+	
+	
+
+	public void addCommentRating(CommentRating commentRating) {
+		if (commentRatings == null) {
+			commentRatings = new ArrayList<>();
+		}
+		if(!commentRatings.contains(commentRating)) {
+			commentRatings.add(commentRating);
+			if(commentRating.getUser() != null) {
+				commentRating.getUser().getCommentRatings().remove(commentRating);
+			}
+		}
+	}
+	
+	public void removeCommentRating(CommentRating commentRating) {
+		commentRating.setUser(null);
+		if (commentRatings != null) {
+			commentRatings.remove(commentRating);
+		}
+	}
+	
+	
+	
+	public List<WebinarRating> getWebinarRatings() {
+		return webinarRatings;
+	}
+
+	public void setWebinarRatings(List<WebinarRating> webinarRatings) {
+		this.webinarRatings = webinarRatings;
+	}
+	
+	public void addWebinarRating(WebinarRating webinarRating) {
+		if (webinarRatings == null) {
+			webinarRatings = new ArrayList<>();
+		}
+		if(!webinarRatings.contains(webinarRating)) {
+			webinarRatings.add(webinarRating);
+			if(webinarRating.getUser() != null) {
+				webinarRating.getUser().getWebinarRatings().remove(webinarRating);
+			}
+		}
+	}
+	
+	public void removeWebinarRating(WebinarRating webinarRating) {
+		webinarRating.setUser(null);
+		if (webinarRatings != null) {
+			webinarRatings.remove(webinarRating);
+		}
+	}
+	
+
+	public List<UserStockJournal> getJournalEntries() {
+		return journalEntries;
+	}
+
+	public void setJournalEntries(List<UserStockJournal> journalEntries) {
+		this.journalEntries = journalEntries;
+	}
+	
+	public void addJournalEntry(UserStockJournal journalEntry) {
+		if (journalEntries == null) {
+			journalEntries = new ArrayList<>();
+		}
+		
+		if (!journalEntries.contains(journalEntry)) {
+			journalEntries.add(journalEntry);
+			if(journalEntry.getUser() != null) {
+				journalEntry.getUser().getJournalEntries().remove(journalEntry);
+			}
+			journalEntry.setUser(this);
+		}
+	}
+
+	public void removeJournalEntry(UserStockJournal journalEntry) {
+		journalEntry.setUser(null);
+		if (journalEntries != null) {
+			journalEntries.remove(journalEntry);
+		}
+	}
+	
+
+	public List<Stock> getStocks() {
+		return stocks;
+	}
+
+	public void setStocks(List<Stock> stocks) {
+		this.stocks = stocks;
 	}
 
 	@Override

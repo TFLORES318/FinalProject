@@ -41,6 +41,7 @@ class WebinarTest {
 
 	@Test
 	void test() {
+		assertNotNull(webinar);
 		assertEquals("Day Trading 101", webinar.getTitle());
 		assertEquals("Don't even know what questions to ask? This is the place for you!", webinar.getDescription());
 		assertEquals("2020-07-15T08:00", webinar.getDateTime().toString());
@@ -49,6 +50,26 @@ class WebinarTest {
 		assertEquals(30, webinar.getMaxAttendees());
 		assertTrue(webinar.getEnabled());
 		
+	}
+	
+	@Test
+	void test_CreatorOfWebinar() {
+		assertNotNull(webinar);
+		assertEquals("Day Trading 101", webinar.getTitle());
+		assertEquals("admin", webinar.getUserCreator().getUsername());
+	}
+	
+	@Test
+	void test_webinar_rating() {
+		assertNotNull(webinar);
+		assertEquals(5, webinar.getWebinarRatings().get(0).getRating());
+		assertEquals("admin", webinar.getWebinarRatings().get(0).getUser().getUsername());
+	}
+	
+	@Test
+	void test_users_attending() {
+		assertNotNull(webinar);
+		assertEquals(0, webinar.getUsersAttending().size());
 	}
 
 }
