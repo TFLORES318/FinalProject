@@ -24,6 +24,8 @@ public class Comment {
 	
 	private String content;
 	
+	private boolean enabled;
+	
 	@CreationTimestamp
 	@Column(name="create_date")
 	private LocalDateTime createDate;
@@ -88,7 +90,14 @@ public class Comment {
 		this.post = post;
 	}
 	
-	
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
 	public List<CommentRating> getCommentRatings() {
 		return commentRatings;
 	}
