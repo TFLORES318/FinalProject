@@ -36,8 +36,8 @@ public class StockController {
 	
 	//find stock by stock symbol
 	@GetMapping("stocks/{stockSymbol}")
-	public Stock getBySymbol(@PathVariable String symbol, HttpServletResponse res) {
-		Stock stock = stockServ.findById(symbol);
+	public Stock getBySymbol(@PathVariable String stockSymbol, HttpServletResponse res) {
+		Stock stock = stockServ.findById(stockSymbol);
 		if (stock == null) {
 			res.setStatus(404);
 		}
@@ -45,7 +45,7 @@ public class StockController {
 	}
 	
 	//get stock by company name
-	@GetMapping("stocks/{companyName}")
+	@GetMapping("stocks/company/{companyName}")
 	public Stock getByCompanyName(@PathVariable String companyName, HttpServletResponse res) {
 		Stock stock = stockServ.findByCompanyName(companyName);
 		if (stock == null) {
@@ -85,9 +85,19 @@ public class StockController {
 		return stock;
 	}
 	
-//	@DeleteMapping(path = "stocks/{stockSymbol}")
-//	public void destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable String stockSymbol, Principal principal) {
-//		if(stockServ)
-//	}
+	@DeleteMapping(path = "stocks/{stockSymbol}")
+	public void destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable String stockSymbol, Principal principal) {
+		try {
+			if(stockServ.destroyStock(stockSymbol)) {
+				res.setStatus(204);
+			}
+			else {
+				res.setStatus(404);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(409);
+		}
+	}
 	
 }
