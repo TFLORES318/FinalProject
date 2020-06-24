@@ -50,4 +50,19 @@ public class PostTest {
 		assertEquals("2020-06-05T09:26", post.getCreatedAt().toString());
 		assertEquals(true, post.isEnabled());
 	}
+	
+	@Test
+	void test_user_mapping() {
+		assertNotNull(post);
+		assertEquals("admin", post.getUser().getUsername());
+		
+	}
+	
+	@Test
+	void test_comments_mapping() {
+		assertNotNull(post);
+		assertEquals("IDK lol", post.getComments().get(0).getContent());
+		
+	}
+	
 }
