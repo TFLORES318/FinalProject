@@ -29,6 +29,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AuthService } from './services/auth.service';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { LoginComponent } from './components/login/login.component';
     AboutComponent,
     NotFoundComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     NgbModule,
