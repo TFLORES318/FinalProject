@@ -15,6 +15,8 @@ public interface WebinarService {
 	public Webinar create(String username, Webinar webinar);
 	
 	public Webinar update(String username, int webinarId, Webinar webinar);
+
+	Boolean disable(String username, int webinarId);
 	
 	
 
