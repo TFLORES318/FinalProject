@@ -26,6 +26,9 @@ import { UserService } from './services/user.service';
 import { WebinarRatingService } from './services/webinar-rating.service';
 import { WebinarService } from './services/webinar.service';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { AuthService } from './services/auth.service';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,9 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     WebinarsComponent,
     FooterComponent,
     AboutComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     NgbModule,
@@ -58,7 +63,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     UserStockJournalService,
     UserService,
     WebinarRatingService,
-    WebinarService
+    WebinarService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
