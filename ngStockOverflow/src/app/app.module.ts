@@ -35,9 +35,9 @@ import { LoginComponent } from './components/login/login.component';
     AppComponent,
     NavigationComponent,
     StockTickerWidgetComponent,
-    HomeComponent,
     PortfolioComponent,
     AccountSettingsComponent,
+    HomeComponent,
     ProfileViewComponent,
     ForumComponent,
     ResourcesComponent,
@@ -49,9 +49,9 @@ import { LoginComponent } from './components/login/login.component';
     LoginComponent
   ],
   imports: [
+    NgbModule,
     BrowserModule,
     AppRoutingModule,
-    NgbModule,
     FormsModule,
     HttpClientModule
   ],
