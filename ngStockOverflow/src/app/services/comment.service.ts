@@ -3,27 +3,29 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators'
 import { AuthService } from './auth.service';
+import { Comment } from 'src/app/models/comment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommentService {
   private url = 'http://localhost:8090'
-  private baseUrl = this.url + 'api/posts/{postId}/comments'
+  private baseUrl = this.url + '/api/posts'
 
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
 
-  index() {
-    const credentials = this.authService.getCredentials();
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': `Basic ${credentials}`,
-        'X-Requested-With': 'XMLHttpRequest'
-      })
-    };
-    return this.http.get<Comment[]>(this.url, httpOptions).pipe(
+  index(postId: number) {
+    // const credentials = this.authService.getCredentials();
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Authorization': `Basic ${credentials}`,
+    //     'X-Requested-With': 'XMLHttpRequest'
+    //   })
+    // };
+    return this.http.get<Comment[]>(this.baseUrl + '/' + postId + '/comments')
+    .pipe(
       catchError((err : any) => {
         console.log(err);
         return throwError('Error with fetching Comments');
