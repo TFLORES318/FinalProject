@@ -1,1 +1,22 @@
-<p>portfolio works!</p>
+<h1>Your Portfolio</h1>
+
+<div id="userStocks">
+  <table>
+    <tr *ngFor="let stock of userStocks">
+      <td>{{stock.symbol}}</td>
+      <td>{{stock.companyName}}</td>
+      <td>{{stock.exchange}}</td>
+    </tr>
+  </table>
+</div>
+
+<div id="stockWidget">
+  <h4>Placeholder for stock widget</h4>
+</div>
+<div id="stockWidgetHowTo">
+  <h4>Placeholder for information on how to read stock widget</h4>
+</div>
+<div id="outsideResources">
+  <h4>Placeholder for oustide resources to view regarding stock</h4>
+</div>
+
