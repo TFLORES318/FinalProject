@@ -1,5 +1,6 @@
 package com.skilldistillery.stockoverflow.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,15 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public List<Post> index() {
-		return postRepo.findAll();
+		List<Post> allPosts = postRepo.findAll();
+		List<Post> activePosts = new ArrayList<>();
+		for (Post post : allPosts) {
+			if(post.isEnabled()) {
+				activePosts.add(post);
+			}
+			else activePosts.remove(post);
+		}
+		return activePosts;
 	}
 
 	@Override
