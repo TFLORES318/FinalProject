@@ -1,1 +1,10 @@
-<p>login works!</p>
+<form #userLogin='ngForm'>
+  <div class="formGroup">
+  <label for="username">User Name</label>
+  <input type="text" name="username" ngModel><br/>
+  <label for="password">Password</label>
+  <input type="text" name="password" ngModel><br/>
+  <button class="btn btn-primary" (click)='login(userLogin)'>Log In</button>
+  </div>
+</form>
+
