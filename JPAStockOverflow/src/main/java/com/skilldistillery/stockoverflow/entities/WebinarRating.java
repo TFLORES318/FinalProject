@@ -12,6 +12,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "webinar_rating")
 public class WebinarRating {
@@ -28,6 +30,7 @@ public class WebinarRating {
 	@CreationTimestamp
 	private LocalDateTime createdAt;
 	
+	@JsonIgnore
 	@ManyToOne
 	@MapsId(value="webinarId")
 	@JoinColumn(name="webinar_id")
