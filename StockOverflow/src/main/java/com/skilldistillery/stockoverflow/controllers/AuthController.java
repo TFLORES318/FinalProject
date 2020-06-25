@@ -33,7 +33,7 @@ public class AuthController {
 		return user;
 	}
 	
-	@GetMapping("/login")
+	@GetMapping("/authenticate")
 	// principal checks the username/pw - if they are valid depending on encoder
 	public Principal authenticate(Principal principal) {
 	    return principal;
