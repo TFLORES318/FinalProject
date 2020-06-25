@@ -12,6 +12,7 @@ export class User {
   // enabled: boolean;
 
   constructor(id?: number, username?: string, password?: string, flair?: string,
+     // tslint:disable-next-line: align
      firstName?: string, lastName?: string, email?: string, role?: string, profilePicture?: string){
        this.id = id;
        this.username = username;
