@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators'
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +12,18 @@ export class CommentService {
   private baseUrl = this.url + 'api/posts/{postId}/comments'
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
 
   index() {
-    return this.http.get<Comment[]>(this.url).pipe(
+    const credentials = this.authService.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Basic ${credentials}`,
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    };
+    return this.http.get<Comment[]>(this.url, httpOptions).pipe(
       catchError((err : any) => {
         console.log(err);
         return throwError('Error with fetching Comments');
@@ -25,7 +32,14 @@ export class CommentService {
   }
 
   createNewComment(newComment: Comment) {
-    return this.http.post<Comment>(this.url, newComment).pipe(
+    const credentials = this.authService.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Basic ${credentials}`,
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    };
+    return this.http.post<Comment>(this.url, newComment, httpOptions).pipe(
       catchError((err: any) => {
         console.error('Error in service to create a comment');
         return throwError('Error with creating a comment');
@@ -34,7 +48,14 @@ export class CommentService {
   }
 
   updateComment(commentId: number, commentToEdit: Comment) {
-    return this.http.put<Comment>(this.url + '/' + commentId, commentToEdit).pipe(
+    const credentials = this.authService.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Basic ${credentials}`,
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    };
+    return this.http.put<Comment>(this.url + '/' + commentId, commentToEdit, httpOptions).pipe(
       catchError((err: any) => {
         console.error('error in update comment service');
         return throwError('error in update');
@@ -43,7 +64,14 @@ export class CommentService {
   }
 
   destroyComment(commentId:number, commentToDelete: Comment) {
-    return this.http.put<Comment>(this.url + '/delete/' + commentId, commentToDelete).pipe(
+    const credentials = this.authService.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Basic ${credentials}`,
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    };
+    return this.http.put<Comment>(this.url + '/delete/' + commentId, commentToDelete, httpOptions).pipe(
       catchError((err:any) => {
         console.error('error in delete comment');
         return throwError('destroy comment for comment service not working');
