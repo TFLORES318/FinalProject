@@ -11,5 +11,5 @@ public interface StockService {
 	Stock findByCompanyName(String companyName);
 	Stock createStock(String username, Stock stock);
 	Stock updateStock(String stockSymbol, Stock stock);
-
+	boolean destroyStock(String stocksymbol);
 }

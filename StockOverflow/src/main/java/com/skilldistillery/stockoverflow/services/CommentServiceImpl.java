@@ -41,46 +41,58 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public Comment createComment(int postId, int userId, Comment comment) {
+	public Comment createComment(int postId, String username, Comment comment) {
 		Optional<Post> postOpt = postRepo.findById(postId);
 		Post post = postOpt.get();
 		comment.setPost(post);
-		
-		Optional<User> userOpt = userRepo.findById(userId);
-		User user = userOpt.get();
-		comment.setUser(user);
-		return commentRepo.saveAndFlush(comment);
+		comment.setEnabled(true);
+		User user = userRepo.findByUsername(username);
+		if (user != null) {
+			comment.setUser(user);
+			commentRepo.saveAndFlush(comment);
+			return comment;
+		}
+		return null;
 	}
 
 	@Override
-	public Comment updateComment(int commentId, int postId, int userId, Comment comment) {
+	public Comment updateComment(int commentId, int postId, String username, Comment comment) {
 		Optional<Post> postOpt = postRepo.findById(postId);
 		Post post = postOpt.get();
 		
-		Optional<User> userOpt = userRepo.findById(userId);
-		User user = userOpt.get();
+		User user = userRepo.findByUsername(username);
 		
-		Comment managedComment = null;
-		Optional <Comment> commentOpt = commentRepo.findById(commentId);
-		if(commentOpt.isPresent()) {
-			managedComment = commentOpt.get();
-//			managedComment.setCommentRatings(comment.getCommentRatings());
+		
+		Comment managedComment = commentRepo.findByIdAndUserUsername(commentId, username);
+		if(managedComment != null) {
 			managedComment.setContent(comment.getContent());
-			managedComment.setEnabled(comment.isEnabled());
+			managedComment.setEnabled(true);
 			managedComment.setPost(post);
 			managedComment.setUser(user);
+			commentRepo.saveAndFlush(managedComment);
+			return managedComment;
 		}
-		return managedComment;
+		return null;
 	}
 
-	@Override
-	public void disableComment(int commentId) {
-		Optional<Comment> commentOpt = commentRepo.findById(commentId);
-		if(commentOpt.isPresent()) {
-			Comment toDisable = commentOpt.get();
-			toDisable.setEnabled(false);
-			commentRepo.saveAndFlush(toDisable);
+//	@Override
+//	public void disableComment(int commentId) {
+//		Optional<Comment> commentOpt = commentRepo.findById(commentId);
+//		if(commentOpt.isPresent()) {
+//			Comment toDisable = commentOpt.get();
+//			toDisable.setEnabled(false);
+//			commentRepo.saveAndFlush(toDisable);
+//		}
+//	}
+	public Boolean disableComment(String username, int commentId) {
+		boolean disableDeletedComment = false;
+		Comment comment = commentRepo.findByIdAndUserUsername(commentId, username);
+		if (comment != null) {
+			comment.setEnabled(false);
+			commentRepo.saveAndFlush(comment);
+			disableDeletedComment = true;
 		}
+		return disableDeletedComment;
 	}
 
 }
