@@ -32,9 +32,9 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     AppComponent,
     NavigationComponent,
     StockTickerWidgetComponent,
-    HomeComponent,
     PortfolioComponent,
     AccountSettingsComponent,
+    HomeComponent,
     ProfileViewComponent,
     ForumComponent,
     ResourcesComponent,
@@ -44,9 +44,9 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     NotFoundComponent
   ],
   imports: [
+    NgbModule,
     BrowserModule,
     AppRoutingModule,
-    NgbModule,
     FormsModule,
     HttpClientModule
   ],
