@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.stockoverflow.entities.User;
@@ -14,6 +15,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserRepository userRepo;
+	
+	@Autowired
+	private PasswordEncoder encoder;
 
 	@Override
 	public User findById(int userId) {
@@ -38,11 +42,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User updateUser(int userId, User user) {
-		Optional<User> userOpt = userRepo.findById(userId);
-		User managedUser = null;
-		if(userOpt.isPresent()) {
-			managedUser = userOpt.get();
+	public User updateUser(String username, User user) {
+		User managedUser = userRepo.findByUsername(username);
+		if(managedUser != null) {
 //			managedUser.setCommentRatings(user.getCommentRatings());
 			managedUser.setComments(user.getComments());
 			managedUser.setEmail(user.getEmail());
@@ -51,7 +53,7 @@ public class UserServiceImpl implements UserService {
 //			managedUser.setFlair(user.getFlair());
 			managedUser.setJournalEntries(user.getJournalEntries());
 			managedUser.setLastName(user.getLastName());
-			managedUser.setPassword(user.getPassword());
+			managedUser.setPassword(encoder.encode(user.getPassword()));
 			managedUser.setPosts(user.getPosts());
 			managedUser.setProfilePicture(user.getProfilePicture());
 			managedUser.setRole(user.getRole());
@@ -60,19 +62,21 @@ public class UserServiceImpl implements UserService {
 //			managedUser.setWebinarRatings(user.getWebinarRatings());
 			managedUser.setWebinarsAttending(user.getWebinarsAttending());
 			managedUser.setWebinarsUserIsHosting(user.getWebinarsUserIsHosting());
+			userRepo.saveAndFlush(managedUser);
 		}
 		return managedUser;
 	}
 
 	@Override
-	public void disableUser(int userId) {
-		Optional<User> userOpt = userRepo.findById(userId);
-		if(userOpt.isPresent()) {
-			User toDisable = userOpt.get();
+	public boolean disableUser(String username) {
+		User toDisable = userRepo.findByUsername(username);
+		boolean disabled = false;
+		if(toDisable != null) {
 			toDisable.setEnabled(false);
 			userRepo.saveAndFlush(toDisable);
+			disabled = true;
 		}
-		
+		return disabled;
 	}
 
 	@Override

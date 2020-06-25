@@ -8,8 +8,8 @@ public interface UserService {
 	User findById(int userId);
 	User findByUsername(String username);
 	List<User> findUsersAttendingWebinar(int webinarId);
-	User updateUser(int userId, User user);
-	void disableUser(int userId);
+	User updateUser(String username, User user);
+	boolean disableUser(String username);
 	List<User> findUsersUsernameSearch(String keyword);
 
 }
