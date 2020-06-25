@@ -9,6 +9,8 @@ import { ResourcesComponent } from './components/resources/resources.component';
 import { WebinarsComponent } from './components/webinars/webinars.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 
 
@@ -22,6 +24,8 @@ const routes: Routes = [
   { path: 'profile', component: ProfileViewComponent },
   { path: 'resources', component: ResourcesComponent },
   { path: 'webinars', component: WebinarsComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   { path: '**', component: NotFoundComponent }
 ];
 

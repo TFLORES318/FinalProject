@@ -26,6 +26,7 @@ export class RegisterComponent implements OnInit {
     this.auth.register(user).subscribe(
       data => {
         console.log('RegisterComponent.register(): user registered.');
+        console.log(user);
         this.auth.login(user.username, user.password).subscribe(
           next => {
             console.log('RegisterComponent.register(): user logged in, routing to /home.');
