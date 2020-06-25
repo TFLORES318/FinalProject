@@ -62,5 +62,17 @@ public class WebinarServiceImpl implements WebinarService {
 		}
 		return null;
 	}
+	
+	@Override
+	public Boolean disable(String username, int webinarId) {
+		boolean disabledWebinar = false;
+		Webinar webinar = webinarRepo.findByIdAndUserCreatorUsername(webinarId, username);
+		if (webinar != null) {
+			webinar.setEnabled(false);
+			webinarRepo.saveAndFlush(webinar);
+			disabledWebinar = true;
+		}
+		return disabledWebinar;
+	}
 
 }
