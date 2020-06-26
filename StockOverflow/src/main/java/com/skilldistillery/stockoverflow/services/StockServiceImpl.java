@@ -45,6 +45,9 @@ public class StockServiceImpl implements StockService {
 		stockRepo.saveAndFlush(stock);
 		User managedUser = userRepo.findByUsername(username);
 		managedUser.addStock(stock);
+		stock.addUser(managedUser);
+		stockRepo.saveAndFlush(stock);
+		userRepo.saveAndFlush(managedUser);
 		return stock;
 	}
 
