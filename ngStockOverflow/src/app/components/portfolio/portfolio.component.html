@@ -2,15 +2,41 @@
 
 <div id="userStocks" class="container-fluid">
   <table>
+    <tr>
+      <th>Symbol</th>
+      <th>Company Name</th>
+      <th>Exchange</th>
+    </tr>
     <tr *ngFor="let stock of userStocks">
       <td>{{stock.symbol}}</td>
       <td>{{stock.companyName}}</td>
       <td>{{stock.exchange}}</td>
+      <td><button (click)="selected=stock">Edit</button></td>
+      <td><button (click)="removeStock(stock.symbol, stock)">Delete</button></td>
     </tr>
   </table>
 </div>
 
-<div id="addStock" class="container-fluid">
+<div *ngIf="selected" id="editStock" class="container-fluid">
+  <h4>Edit stock:</h4>
+  <form #editStock='ngForm'>
+    <table>
+      <tr>
+        <!-- <th>Symbol:</th> -->
+        <th>Company Name:</th>
+        <th>Exchange:</th>
+      </tr>
+      <tr>
+        <!-- <td><input type="text" name="symbol" [(ngModel)]="selected.symbol"></td> -->
+        <td><input type="text" name="companyName" [(ngModel)]="selected.companyName"></td>
+        <td><input type="text" name="exchange" [(ngModel)]="selected.exchange"></td>
+        <td><button (click)='updateStock(editStock)'>Submit</button></td>
+      </tr>
+    </table>
+  </form>
+</div>
+
+<div *ngIf="!selected" id="addStock" class="container-fluid">
   <h4>Add a Stock:</h4>
   <form #newStock='ngForm'>
     <table>

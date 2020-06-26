@@ -14,6 +14,8 @@ export class PortfolioComponent implements OnInit {
 
   userStocks: Stock[] = [];
 
+  selected: Stock = null;
+
   constructor(
     private auth: AuthService,
     private userService: UserService,
@@ -46,8 +48,36 @@ export class PortfolioComponent implements OnInit {
       err => {
         console.error('error creating stock');
       }
+      )
+      form.reset();
+    }
+
+    updateStock(form: NgForm){
+    const stock: Stock = form.value;
+
+    this.stockService.updateStock(this.selected.symbol, stock).subscribe(
+      data => {
+        console.log('update goal success');
+        this.loadUsersStocks();
+      },
+      err => {
+        console.error('update goal failure');
+      }
     )
-    form.reset();
+    this.selected = null;
+  }
+
+  removeStock(stockSymbol: string, stock: Stock){
+    this.stockService.destroyStock(stockSymbol, stock).subscribe(
+      data => {
+        console.log('removal stock success');
+        this.loadUsersStocks();
+      },
+      err => {
+        console.error('removal failure');
+
+      }
+    )
   }
 
 }
