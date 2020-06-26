@@ -35,7 +35,7 @@ export class UserService {
         console.log('error in get user stock user serv');
         return throwError('error in get user stock user serv')
       })
-    )
+    );
 
   }
 
@@ -71,7 +71,24 @@ export class UserService {
           console.log('error in user serv update user');
           return throwError('ehhrror in user serv update user')
       })
-    )
+    );
   }
+
+ getAllUsers(){
+  const credentials = this.auth.getCredentials();
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': `Basic ${credentials}`,
+      'X-Requested-With': 'XMLHttpRequest'
+    })
+  };
+  return this.http.get<User[]>(this.url, httpOptions)
+  .pipe(
+    catchError((err: any) => {
+      console.log('error in get all users()-user service');
+      return throwError('error in getAllUsers() userSvc');
+    })
+  );
+ }
 
 }
