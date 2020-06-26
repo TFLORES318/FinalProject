@@ -59,6 +59,6 @@
     </table>
     </form>
   </div> -->
-  <button (click)="applyForVerification()">Apply for Verification</button>
+  <button *ngIf="userUpdate.role == 'STANDARD'" (click)="applyForVerification(userUpdate)">Apply for Verification</button>
   <button (click)="disableUser(userUpdate)">Delete account</button>
 </div>

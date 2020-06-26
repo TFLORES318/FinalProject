@@ -48,11 +48,17 @@ export class AccountSettingsComponent implements OnInit, AfterViewInit {
         console.error('user update failure');
 
       }
+      )
+    }
+
+    applyForVerification(user:User){
+      user.role = 'APPLICANT';
+      this.userServ.updateUser(user).subscribe(
+        data => {
+          console.log('succesfully set role to applicant');
+          window.alert('Thank you for your application! Your community standing will be evaluated by our admin. We will get back to you shortly.');
+      }
     )
-  }
-
-  applyForVerification(){
-
   }
 
   disableUser(user: User){
