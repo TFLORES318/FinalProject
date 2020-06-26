@@ -70,7 +70,7 @@ export class PostService {
         'X-Requested-With': 'XMLHttpRequest'
       })
     }
-    return this.http.post<Post>(this.url, newPost)
+    return this.http.post<Post>(this.url, newPost, httpOptions)
     .pipe(
       catchError((err: any) => {
         console.log('post service create is broken');
