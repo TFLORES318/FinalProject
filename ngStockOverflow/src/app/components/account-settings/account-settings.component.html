@@ -40,6 +40,25 @@
 </div>
 
 <div id="verifyOrDelete" class="container-fluid" >
-  <button>Apply for Verification</button>
-  <button>Delete account</button>
+  <!-- <div id="verifyForm">
+    <form>
+    <table>
+      <tr>
+        <p>
+          Please explain why you should be a verified user.
+          Feel free to include credentials such as your degree or relevant work background.
+          Your application will be reviewed by our admin team shortly.
+        </p>
+       </tr>
+       <tr>
+        <textarea name = "description" rows = "4" cols = "30"></textarea>
+      </tr>
+      <tr>
+        <button (click)="storeApplication()">Submit</button>
+      </tr>
+    </table>
+    </form>
+  </div> -->
+  <button (click)="applyForVerification()">Apply for Verification</button>
+  <button (click)="disableUser()">Delete account</button>
 </div>
