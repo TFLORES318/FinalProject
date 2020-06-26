@@ -10,16 +10,20 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of userList" class="table-secondary">
-        <th scope="row">{{user.firstName}}</th>
-        <td>{{user.lastName}}</td>
-        <td>{{user.username}}</td>
+      <tr *ngFor="let userTest of userList" class="table-secondary">
+        <th scope="row">{{userTest.firstName}}</th>
+        <td>{{userTest.lastName}}</td>
+        <td>{{userTest.username}}</td>
         <td>
-          {{user.role.toString() | titlecase}}
-          <!-- <button class="btn btn-danger" (click)="changeRole(user)">Change</button> -->
+          {{userTest.role.toString() | titlecase}}
+
         </td>
         <td>
-          {{user.enabled}}
+          {{userTest.enabled}}
+          <!-- <form> -->
+          <!-- <input type="hidden" value="{{user.enabled}}" name="enabled" [ngModel]="!editUser.enabled"> -->
+          <button class="btn btn-danger" (click)="updateUserStatus(userTest)">Change</button>
+          <!-- </form> -->
           <!-- <button class="btn btn-danger" (click)="changeStatus(user)">Change</button> -->
         </td>
       </tr>

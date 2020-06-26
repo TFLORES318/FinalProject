@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.ws.RespectBinding;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -71,6 +72,22 @@ public class UserController {
 			res.setStatus(400);
 			user = null;
 			e.printStackTrace();
+		}
+		return user;
+	}
+	
+	@PutMapping("users/admin/update")
+	public User adminUserUpdate(@RequestBody User user, HttpServletRequest req, HttpServletResponse res) {
+//		User updateUser = userServ.findById(user.getId());
+		try {
+			if (user == null) {
+				res.setStatus(404);
+			}
+			user = userServ.updateUser(user.getUsername(), user);
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			user = null;
 		}
 		return user;
 	}

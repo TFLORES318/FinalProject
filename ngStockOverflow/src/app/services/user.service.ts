@@ -57,19 +57,36 @@ export class UserService {
       );
     }
 
-    updateUser(user: User){
-      const credentials = this.auth.getCredentials();
-      const httpOptions = {
-        headers: new HttpHeaders({
-          'Authorization': `Basic ${credentials}`,
-          'X-Requested-With': 'XMLHttpRequest'
-        })
-      }
-      return this.http.put<User>(this.url + '/update', user, httpOptions)
-      .pipe(
-        catchError((err: any) => {
-          console.log('error in user serv update user');
-          return throwError('ehhrror in user serv update user')
+  updateUser(user: User){
+    const credentials = this.auth.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Basic ${credentials}`,
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    };
+    return this.http.put<User>(this.url + '/update', user, httpOptions)
+    .pipe(
+      catchError((err: any) => {
+        console.log('error in user serv update user');
+        return throwError('ehhrror in user serv update user');
+      })
+    );
+  }
+
+  adminUpdateUser(user: User){
+    const credentials = this.auth.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Basic ${credentials}`,
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    };
+    return this.http.put<User>(this.url + '/admin/update', user, httpOptions)
+    .pipe(
+      catchError((err: any) => {
+        console.log('error in user serv admin update user');
+        return throwError('error in adminUpdateUser()');
       })
     );
   }
