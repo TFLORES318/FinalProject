@@ -1,1 +1,36 @@
-<p>profile-view works!</p>
+<div class="container-fluid">
+<h1>Profile</h1>
+
+<div id="profilePic">
+{{user.profilePicture}}
+</div>
+
+
+<div id="proinfo">
+<h2>{{user.firstName}} {{user.lastName}}</h2>
+<p>{{user.flair}}</p>
+</div>
+
+<button>View Your Portfolio</button>
+
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Date</th>
+      <th>YOUR NAME</th>
+    </tr>
+    <tr *ngFor="let post of posts">
+    <td>{{post.title}}</td>
+    <td>{{post.description}}</td>
+    <td>{{post.createdAt}}</td>
+    <td>{{post.user.firstName}}</td>
+</tr>
+  </table>
+
+</div>
+
+
+
+
+

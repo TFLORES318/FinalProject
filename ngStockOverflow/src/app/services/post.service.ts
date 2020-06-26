@@ -36,7 +36,7 @@ export class PostService {
         'X-Requested-With': 'XMLHttpRequest'
       })
     }
-    return this.http.get<Post[]>(this.baseUrl + 'api/users/posts')
+    return this.http.get<Post[]>(this.baseUrl + 'api/users/posts', httpOptions)
     .pipe(
       catchError((err: any) => {
         console.log('error in all posts for user post service');

@@ -5,6 +5,8 @@ import { catchError } from 'rxjs/operators';
 import { Post } from '../models/post';
 import { AuthService } from './auth.service';
 import { Stock } from '../models/stock';
+import { identifierModuleUrl } from '@angular/compiler';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +37,24 @@ export class UserService {
       })
     )
 
+  }
+
+  showUser() {
+    const credentials = this.auth.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Basic ${credentials}`,
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    }
+    return this.http.get<User>(this.url + 's/userpro', httpOptions).pipe(
+
+      catchError((err: any) => {
+
+        console.log(err);
+        return throwError('ehh')
+      })
+    );
   }
 
 }
