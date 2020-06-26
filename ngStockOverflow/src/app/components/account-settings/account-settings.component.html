@@ -1,5 +1,5 @@
 <h1>Account Settings</h1>
-{{userUpdate}}
+
 <div class="container-fluid">
   <form #updatedUser='ngForm'>
     <table>
@@ -7,13 +7,13 @@
         <input type="text" placeholder="Change first name" name="firstName" value="{{userUpdate.firstName}}" ngModel>
       </tr>
       <tr>
-        <input type="text" placeholder="Change last name" name="lastName" ngModel>
+        <input type="text" placeholder="Change last name" name="lastName" value="{{userUpdate.lastName}}" ngModel>
       </tr>
       <tr>
-        <input type="text" placeholder="Change profile pic URL" name="profilePicture" ngModel>
+        <input type="text" placeholder="Change profile pic URL" name="profilePicture" value="{{userUpdate.profilePicture}}" ngModel>
       </tr>
       <tr>
-        <input type="text" placeholder="Change email" name="email" ngModel>
+        <input type="text" placeholder="Change email" name="email" value="{{userUpdate.email}}" ngModel>
       </tr>
       <!-- <tr>
         <input type="text" placeholder="Change flair" name="flair" ngModel>

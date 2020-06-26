@@ -96,6 +96,15 @@ public class UserController {
 		return userServ.findUsersUsernameSearch(keyword);
 	}
 	
-
-
+	@GetMapping("users")
+	public List<User> findAll(Principal principal, HttpServletResponse res){
+		List<User> users = null;
+		if(principal.getName().equals("admin")) {
+			users = userServ.findAllUsers();
+		}
+		else {
+			res.setStatus(404);
+		}
+		return users;
+	}
 }

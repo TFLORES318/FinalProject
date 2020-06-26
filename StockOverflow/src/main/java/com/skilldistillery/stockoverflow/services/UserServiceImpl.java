@@ -16,8 +16,8 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository userRepo;
 	
-	@Autowired
-	private PasswordEncoder encoder;
+//	@Autowired
+//	private PasswordEncoder encoder;
 
 	@Override
 	public User findById(int userId) {
@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
 //			managedUser.setFlair(user.getFlair());
 			managedUser.setJournalEntries(user.getJournalEntries());
 			managedUser.setLastName(user.getLastName());
-			managedUser.setPassword(encoder.encode(user.getPassword()));
+//			managedUser.setPassword(encoder.encode(user.getPassword()));
 			managedUser.setPosts(user.getPosts());
 			managedUser.setProfilePicture(user.getProfilePicture());
 			managedUser.setRole(user.getRole());
