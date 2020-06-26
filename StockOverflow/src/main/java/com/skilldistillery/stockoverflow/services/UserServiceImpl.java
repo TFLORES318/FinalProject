@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
 //			managedUser.setCommentRatings(user.getCommentRatings());
 //			managedUser.setComments(user.getComments());
 			managedUser.setEmail(user.getEmail());
-//			managedUser.setEnabled(user.getEnabled());
+			managedUser.setEnabled(user.getEnabled());
 			managedUser.setFirstName(user.getFirstName());
 //			managedUser.setFlair(user.getFlair());
 //			managedUser.setJournalEntries(user.getJournalEntries());
