@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.stockoverflow.entities.Stock;
 import com.skilldistillery.stockoverflow.entities.User;
 import com.skilldistillery.stockoverflow.services.AuthService;
 import com.skilldistillery.stockoverflow.services.UserService;
@@ -39,6 +40,12 @@ public class UserController {
 			res.setStatus(404);
 		}
 		return user;
+	}
+	
+	@GetMapping("users/stocks")
+	public List<Stock> findUserStock(Principal principal){
+		User user = userServ.findByUsername(principal.getName());
+		return user.getStocks();
 	}
 	
 	@PutMapping("users/update")
