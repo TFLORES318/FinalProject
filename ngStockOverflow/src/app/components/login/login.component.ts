@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private userServ: UserService
   ) { }
 
   ngOnInit(): void {
@@ -26,7 +28,15 @@ export class LoginComponent implements OnInit {
       data => {
         console.log('LoginComponent.login(): user logged in.');
         this.router.navigateByUrl('/profile');
+        this.auth.showUser().subscribe(
+          data => {
+            console.log('yay you are here')
+          },
+          err => {
+            console.error('whyyyyyyYYyy');
 
+          }
+        )
           },
           error => {
             console.error('RegisterComponent.register(): error logging in.');

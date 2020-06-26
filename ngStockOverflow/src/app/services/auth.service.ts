@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { UserService } from './user.service';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +14,7 @@ export class AuthService {
   private baseUrl = 'http://localhost:8090/';
   // private baseUrl = environment.baseUrl;
 
+  loggedInUser: User = null;
   constructor(private http: HttpClient) { }
 
   login(username, password) {
@@ -31,6 +34,7 @@ export class AuthService {
       .pipe(
         tap((res) => {
           localStorage.setItem('credentials' , credentials);
+          console.log(res);
           return res;
         }),
         catchError((err: any) => {
@@ -69,4 +73,33 @@ export class AuthService {
   getCredentials() {
     return localStorage.getItem('credentials');
   }
+
+  getLoggedInUser(){
+    console.log(this.loggedInUser);
+
+    return this.loggedInUser;
+  }
+
+  showUser() {
+    const credentials = this.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Basic ${credentials}`,
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    }
+    return this.http.get<User>(this.baseUrl + 'api/users/userpro', httpOptions).pipe(
+      tap((res) => {
+        console.log(res);
+        this.loggedInUser = res;
+        console.log(this.loggedInUser);
+
+      }),
+      catchError((err: any) => {
+
+        console.log(err);
+        return throwError('ehh')
+      })
+      );
+    }
 }

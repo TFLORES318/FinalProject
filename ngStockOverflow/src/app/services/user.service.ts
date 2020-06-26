@@ -14,7 +14,7 @@ import { User } from '../models/user';
 export class UserService {
 
   private baseUrl = 'http://localhost:8090/';
-  private url = this.baseUrl + 'api/user';
+  private url = this.baseUrl + 'api/users';
 
   constructor(
     private http: HttpClient,
@@ -29,7 +29,7 @@ export class UserService {
         'X-Requested-With': 'XMLHttpRequest'
       })
     }
-    return this.http.get<Stock[]>(this.url + 's/stocks', httpOptions)
+    return this.http.get<Stock[]>(this.url + '/stocks', httpOptions)
     .pipe(
       catchError((err: any) => {
         console.log('error in get user stock user serv');
@@ -47,14 +47,31 @@ export class UserService {
         'X-Requested-With': 'XMLHttpRequest'
       })
     }
-    return this.http.get<User>(this.url + 's/userpro', httpOptions).pipe(
+    return this.http.get<User>(this.url + '/userpro', httpOptions).pipe(
 
       catchError((err: any) => {
 
         console.log(err);
         return throwError('ehh')
       })
-    );
+      );
+    }
+
+    updateUser(user: User){
+      const credentials = this.auth.getCredentials();
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization': `Basic ${credentials}`,
+          'X-Requested-With': 'XMLHttpRequest'
+        })
+      }
+      return this.http.put<User>(this.url + '/update', user, httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log('error in user serv update user');
+          return throwError('ehhrror in user serv update user')
+      })
+    )
   }
 
 }
