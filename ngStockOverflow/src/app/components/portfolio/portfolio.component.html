@@ -1,6 +1,6 @@
 <h1>Your Portfolio</h1>
 
-<div id="userStocks">
+<div id="userStocks" class="container-fluid">
   <table>
     <tr *ngFor="let stock of userStocks">
       <td>{{stock.symbol}}</td>
@@ -10,13 +10,32 @@
   </table>
 </div>
 
-<div id="stockWidget">
+<div id="addStock" class="container-fluid">
+  <h4>Add a Stock:</h4>
+  <form #newStock='ngForm'>
+    <table>
+      <tr>
+        <th>Symbol:</th>
+        <th>Company Name:</th>
+        <th>Exchange:</th>
+      </tr>
+      <tr>
+        <td><input type="text" name="symbol" ngModel></td>
+        <td><input type="text" name="companyName" ngModel></td>
+        <td><input type="text" name="exchange" ngModel></td>
+        <td><button (click)='addNewStock(newStock)'>Add</button></td>
+      </tr>
+    </table>
+</form>
+</div>
+
+<div id="stockWidget" class="container-fluid">
   <h4>Placeholder for stock widget</h4>
 </div>
-<div id="stockWidgetHowTo">
+<div id="stockWidgetHowTo" class="container-fluid">
   <h4>Placeholder for information on how to read stock widget</h4>
 </div>
-<div id="outsideResources">
+<div id="outsideResources" class="container-fluid">
   <h4>Placeholder for oustide resources to view regarding stock</h4>
 </div>
 
