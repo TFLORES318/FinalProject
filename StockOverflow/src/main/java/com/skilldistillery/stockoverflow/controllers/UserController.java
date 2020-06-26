@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.stockoverflow.entities.Role;
 import com.skilldistillery.stockoverflow.entities.Stock;
 import com.skilldistillery.stockoverflow.entities.User;
 import com.skilldistillery.stockoverflow.services.AuthService;
@@ -99,7 +100,8 @@ public class UserController {
 	@GetMapping("users")
 	public List<User> findAll(Principal principal, HttpServletResponse res){
 		List<User> users = null;
-		if(principal.getName().equals("admin")) {
+		User user = userServ.findByUsername(principal.getName());
+		if(user.getRole() == Role.ADMIN) {
 			users = userServ.findAllUsers();
 		}
 		else {

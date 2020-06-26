@@ -46,22 +46,22 @@ public class UserServiceImpl implements UserService {
 		User managedUser = userRepo.findByUsername(username);
 		if(managedUser != null) {
 //			managedUser.setCommentRatings(user.getCommentRatings());
-			managedUser.setComments(user.getComments());
+//			managedUser.setComments(user.getComments());
 			managedUser.setEmail(user.getEmail());
-			managedUser.setEnabled(user.getEnabled());
+//			managedUser.setEnabled(user.getEnabled());
 			managedUser.setFirstName(user.getFirstName());
 //			managedUser.setFlair(user.getFlair());
-			managedUser.setJournalEntries(user.getJournalEntries());
+//			managedUser.setJournalEntries(user.getJournalEntries());
 			managedUser.setLastName(user.getLastName());
 //			managedUser.setPassword(encoder.encode(user.getPassword()));
-			managedUser.setPosts(user.getPosts());
+//			managedUser.setPosts(user.getPosts());
 			managedUser.setProfilePicture(user.getProfilePicture());
-			managedUser.setRole(user.getRole());
-			managedUser.setStocks(user.getStocks());
-			managedUser.setUsername(user.getUsername());
+//			managedUser.setRole(user.getRole());
+//			managedUser.setStocks(user.getStocks());
+//			managedUser.setUsername(user.getUsername());
 //			managedUser.setWebinarRatings(user.getWebinarRatings());
-			managedUser.setWebinarsAttending(user.getWebinarsAttending());
-			managedUser.setWebinarsUserIsHosting(user.getWebinarsUserIsHosting());
+//			managedUser.setWebinarsAttending(user.getWebinarsAttending());
+//			managedUser.setWebinarsUserIsHosting(user.getWebinarsUserIsHosting());
 			userRepo.saveAndFlush(managedUser);
 		}
 		return managedUser;
