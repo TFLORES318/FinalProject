@@ -1,13 +1,43 @@
 <h1>Forum</h1>
 <div id="all-posts">
   <table>
-    <tr *ngFor="let post of allPosts">
+    <tr *ngFor="let post of allPosts" (click)="postDetails(post)">
       <td>
         {{post.title}}
       </td>
       <td>posted by {{post.user.username}}</td>
       <td>{{post.createdAt}}</td>
-      <td *ngFor="let comment of post.comments">{{comment.content}}</td>
+      <!-- <td *ngFor="let comment of post.comments">{{comment.content}}</td> -->
     </tr>
   </table>
+</div>
+
+<div *ngIf="selectedPost">
+  <h4>{{selectedPost.title}}</h4>
+  <h6>posted by {{selectedPost.user.username}}  {{selectedPost.createdAt}}</h6>
+  <h6>{{selectedPost.description}}</h6>
+  <h5>Replies</h5>
+
+    <table *ngFor="let comment of selectedPost.comments">
+    <tr>
+    <td>{{comment.user.username}}</td>
+    <td>{{comment.user.flair}}</td>
+    <td>posted on {{comment.createDate}}</td>
+    </tr>
+    <p>{{comment.content}}</p>
+
+    </table>
+
+
+
+</div>
+
+
+<div *ngIf="!selectedPost">
+<form #newPost="ngForm">
+<input type="text" placeholder="title" name="title" ngModel/>
+<input type="description" placeholder="description" name="description" ngModel/>
+<input type="hidden" value="true" name="enabled" ngModel/>
+<button class=button (click)="createPost(newPost)">Submit</button>
+</form>
 </div>

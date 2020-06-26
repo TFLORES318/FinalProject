@@ -5,6 +5,7 @@ import { Post } from 'src/app/models/post';
 import { Comment } from 'src/app/models/comment';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommentService } from 'src/app/services/comment.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-forum',
@@ -18,6 +19,8 @@ export class ForumComponent implements OnInit {
   newPost = new Post();
 
   postComments = [];
+
+  selectedPost = null;
 
   constructor(
     private postService: PostService,
@@ -45,7 +48,9 @@ export class ForumComponent implements OnInit {
     )
   }
 
-  createPost(post: Post){
+  createPost(postForm: NgForm){
+    const post: Post = postForm.value;
+
     this.postService.create(post).subscribe(
       data => {
         console.log('post creation success');
@@ -55,6 +60,7 @@ export class ForumComponent implements OnInit {
         console.error('post creation failure');
       }
     )
+    postForm.reset();
   }
 
   updatePost(post: Post){
@@ -94,6 +100,10 @@ export class ForumComponent implements OnInit {
 
       }
     )
+  }
+
+  postDetails(post:Post) {
+    this.selectedPost = post;
   }
 
 }
