@@ -42,6 +42,15 @@ public class UserController {
 		return user;
 	}
 	
+	@GetMapping("users/userpro")
+	public User findUserProById(HttpServletResponse res, Principal principal) {
+		User user = userServ.findByUsername(principal.getName());
+		if(user == null) {
+			res.setStatus(404);
+		}
+		return user;
+	}
+	
 	@GetMapping("users/stocks")
 	public List<Stock> findUserStock(Principal principal){
 		User user = userServ.findByUsername(principal.getName());
