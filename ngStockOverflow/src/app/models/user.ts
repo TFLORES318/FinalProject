@@ -9,11 +9,12 @@ export class User {
   role: string;
   profilePicture: string;
   createDate: Date;
-  // enabled: boolean;
+  enabled: boolean;
 
   constructor(id?: number, username?: string, password?: string, flair?: string,
      // tslint:disable-next-line: align
-     firstName?: string, lastName?: string, email?: string, role?: string, profilePicture?: string, createDate?: Date){
+     firstName?: string, lastName?: string, email?: string, role?: string,
+      profilePicture?: string, createDate?: Date, enabled?: boolean){
        this.id = id;
        this.username = username;
        this.password = password;
@@ -24,5 +25,6 @@ export class User {
        this.role = role;
        this.profilePicture = profilePicture;
        this.createDate = createDate;
+       this.enabled = enabled;
      }
 }
