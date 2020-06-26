@@ -37,8 +37,8 @@ export class ProfileViewComponent implements OnInit {
 
   getUser() {
     return this.userService.showUser().subscribe(
-      user => {
-        this.user = user;
+      data => {
+        this.user = data;
       },
       fail => {
         console.error('nope');

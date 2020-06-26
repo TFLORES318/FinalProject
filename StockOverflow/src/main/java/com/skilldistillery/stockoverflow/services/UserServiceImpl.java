@@ -84,4 +84,9 @@ public class UserServiceImpl implements UserService {
 		List<User> searchMatches = userRepo.findByUsernameLike(keyword);
 		return searchMatches;
 	}
+
+	@Override
+	public List<User> findAllUsers() {
+		return userRepo.findAll();
+	}
 }

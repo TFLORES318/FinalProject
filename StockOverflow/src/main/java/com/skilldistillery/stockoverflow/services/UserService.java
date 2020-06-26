@@ -11,5 +11,5 @@ public interface UserService {
 	User updateUser(String username, User user);
 	boolean disableUser(String username);
 	List<User> findUsersUsernameSearch(String keyword);
-
+	List<User> findAllUsers();
 }

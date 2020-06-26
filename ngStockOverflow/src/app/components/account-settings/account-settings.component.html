@@ -1,1 +1,29 @@
-<p>account-settings works!</p>
+<h1>Account Settings</h1>
+{{userUpdate}}
+<div class="container-fluid">
+  <form #updatedUser='ngForm'>
+    <table>
+      <tr>
+        <input type="text" placeholder="Change first name" name="firstName" value="{{userUpdate.firstName}}" ngModel>
+      </tr>
+      <tr>
+        <input type="text" placeholder="Change last name" name="lastName" ngModel>
+      </tr>
+      <tr>
+        <input type="text" placeholder="Change profile pic URL" name="profilePicture" ngModel>
+      </tr>
+      <tr>
+        <input type="text" placeholder="Change email" name="email" ngModel>
+      </tr>
+      <!-- <tr>
+        <input type="text" placeholder="Change flair" name="flair" ngModel>
+      </tr> -->
+    </table>
+    <button (click)="updateUser(updatedUser)">Submit</button>
+  </form>
+</div>
+
+<div id="verifyOrDelete" class="container-fluid" >
+  <button>Apply for Verification</button>
+  <button>Delete account</button>
+</div>

@@ -95,5 +95,7 @@ public class UserController {
 	public List<User> searchByUsername(@PathVariable String keyword){
 		return userServ.findUsersUsernameSearch(keyword);
 	}
+	
+
 
 }
