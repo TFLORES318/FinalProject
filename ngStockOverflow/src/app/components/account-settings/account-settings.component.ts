@@ -40,7 +40,7 @@ export class AccountSettingsComponent implements OnInit, AfterViewInit {
     this.userServ.updateUser(userToUpdate).subscribe(
       data => {
         console.log('user update success');
-
+        window.alert('Profile has been updated succesfully');
       },
       err => {
         console.error('user update failure');
