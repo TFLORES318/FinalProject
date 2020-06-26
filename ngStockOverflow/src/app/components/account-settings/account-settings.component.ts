@@ -48,4 +48,21 @@ export class AccountSettingsComponent implements OnInit, AfterViewInit {
       }
     )
   }
+
+  applyForVerification(){
+
+  }
+
+  disableUser(){
+    this.userServ.disableUser().subscribe(
+      data => {
+        console.log('account deleted');
+        window.alert('Account deleted succesfully');
+      },
+      err => {
+        console.error('account deletion failure');
+
+      }
+    )
+  }
 }

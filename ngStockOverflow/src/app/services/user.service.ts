@@ -91,4 +91,21 @@ export class UserService {
   );
  }
 
+ disableUser(){
+  const credentials = this.auth.getCredentials();
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': `Basic ${credentials}`,
+      'X-Requested-With': 'XMLHttpRequest'
+    })
+  };
+  return this.http.put(this.url + '/delete', httpOptions)
+  .pipe(
+    catchError((err: any) => {
+      console.log('account not deleted');
+    return throwError('account not deleted')
+    })
+  )
+ }
+
 }
