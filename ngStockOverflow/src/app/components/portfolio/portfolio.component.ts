@@ -68,7 +68,7 @@ export class PortfolioComponent implements OnInit {
   }
 
   removeStock(stockSymbol: string, stock: Stock){
-    this.stockService.destroyStock(stockSymbol, stock).subscribe(
+    this.stockService.destroyStock(stockSymbol).subscribe(
       data => {
         console.log('removal stock success');
         this.loadUsersStocks();

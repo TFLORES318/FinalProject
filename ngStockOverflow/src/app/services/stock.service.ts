@@ -79,7 +79,7 @@ export class StockService {
     );
   }
 
-  destroyStock(stockSymbol:string, stockToDelete:Stock) {
+  destroyStock(stockSymbol:string) {
     const credentials = this.authService.getCredentials();
     const httpOptions = {
       headers: new HttpHeaders({
@@ -87,7 +87,7 @@ export class StockService {
         'X-Requested-With': 'XMLHttpRequest'
       })
     };
-    return this.http.put<Stock>(this.url + '/' + stockSymbol, stockToDelete, httpOptions).pipe(
+    return this.http.delete(this.url + '/' + stockSymbol, httpOptions).pipe(
       catchError((err: any) => {
         console.error('error in deleting stock');
         return throwError('Error in deleting stock in stock service');
