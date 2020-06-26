@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
 //			managedUser.setPassword(encoder.encode(user.getPassword()));
 //			managedUser.setPosts(user.getPosts());
 			managedUser.setProfilePicture(user.getProfilePicture());
-//			managedUser.setRole(user.getRole());
+			managedUser.setRole(user.getRole());
 //			managedUser.setStocks(user.getStocks());
 //			managedUser.setUsername(user.getUsername());
 //			managedUser.setWebinarRatings(user.getWebinarRatings());
@@ -70,11 +70,16 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean disableUser(String username) {
 		User toDisable = userRepo.findByUsername(username);
+		System.err.println(toDisable.getEmail());
 		boolean disabled = false;
 		if(toDisable != null) {
+			System.out.println("*************************");
+			System.out.println(toDisable.getEnabled());
 			toDisable.setEnabled(false);
+			System.out.println(toDisable.getEnabled());
 			userRepo.saveAndFlush(toDisable);
 			disabled = true;
+			return disabled;
 		}
 		return disabled;
 	}
