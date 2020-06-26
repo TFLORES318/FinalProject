@@ -3,6 +3,7 @@ import { UserService } from 'src/app/services/user.service';
 import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/models/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account-settings',
@@ -15,7 +16,8 @@ export class AccountSettingsComponent implements OnInit, AfterViewInit {
 
   constructor(
     private userServ: UserService,
-    private authServ: AuthService
+    private authServ: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -53,11 +55,13 @@ export class AccountSettingsComponent implements OnInit, AfterViewInit {
 
   }
 
-  disableUser(){
-    this.userServ.disableUser().subscribe(
+  disableUser(user: User){
+    this.userServ.disableUser(user).subscribe(
       data => {
         console.log('account deleted');
         window.alert('Account deleted succesfully');
+        this.authServ.logout();
+        this.router.navigateByUrl('/home');
       },
       err => {
         console.error('account deletion failure');

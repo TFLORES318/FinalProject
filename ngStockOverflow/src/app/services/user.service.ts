@@ -108,7 +108,7 @@ export class UserService {
   );
  }
 
- disableUser(){
+ disableUser(user: User){
   const credentials = this.auth.getCredentials();
   const httpOptions = {
     headers: new HttpHeaders({
@@ -116,7 +116,7 @@ export class UserService {
       'X-Requested-With': 'XMLHttpRequest'
     })
   };
-  return this.http.put(this.url + '/delete', httpOptions)
+  return this.http.put<User>(this.url + '/delete', user, httpOptions)
   .pipe(
     catchError((err: any) => {
       console.log('account not deleted');
