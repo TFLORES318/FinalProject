@@ -1,19 +1,35 @@
 <h1>Account Settings</h1>
 
+<div id="userInfo" class="contianer-fluid">
+  <img [src]="userUpdate.profilePicture" width="200" height="200"/>
+  <table>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+    </tr>
+    <tr>
+      <td>{{userUpdate.firstName}}</td>
+      <td>{{userUpdate.lastName}}</td>
+      <td>{{userUpdate.email}}</td>
+    </tr>
+  </table>
+</div>
+
 <div class="container-fluid">
   <form #updatedUser='ngForm'>
     <table>
       <tr>
-        <input type="text" placeholder="Change first name" name="firstName" value="{{userUpdate.firstName}}" ngModel>
+        <input type="text" placeholder="Change first name" name="firstName" [(ngModel)]="userUpdate.firstName">
       </tr>
       <tr>
-        <input type="text" placeholder="Change last name" name="lastName" value="{{userUpdate.lastName}}" ngModel>
+        <input type="text" placeholder="Change last name" name="lastName" [(ngModel)]="userUpdate.lastName">
       </tr>
       <tr>
-        <input type="text" placeholder="Change profile pic URL" name="profilePicture" value="{{userUpdate.profilePicture}}" ngModel>
+        <input type="text" placeholder="Change profile pic URL" name="profilePicture" [(ngModel)]="userUpdate.profilePicture">
       </tr>
       <tr>
-        <input type="text" placeholder="Change email" name="email" value="{{userUpdate.email}}" ngModel>
+        <input type="text" placeholder="Change email" name="email" [(ngModel)]="userUpdate.email">
       </tr>
       <!-- <tr>
         <input type="text" placeholder="Change flair" name="flair" ngModel>
