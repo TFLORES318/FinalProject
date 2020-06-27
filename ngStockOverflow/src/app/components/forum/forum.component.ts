@@ -55,11 +55,18 @@ export class ForumComponent implements OnInit, AfterViewInit{
         console.log(this.userCheck);
       },
       err => {
-        console.error('prfile view ng after view broken');
+        console.error('profile view ng after view broken');
 
       }
     )
 
+  }
+
+  checkLogin() {
+    if (localStorage.getItem('credentials')) {
+      return true;
+    }
+    return false;
   }
 
 
@@ -122,6 +129,7 @@ export class ForumComponent implements OnInit, AfterViewInit{
 
       }
     )
+    this.selectedPost = null;
   }
 
   loadComments(post: Post){
@@ -167,11 +175,12 @@ export class ForumComponent implements OnInit, AfterViewInit{
       this.selectedComment = comment;
     }
 
-    setEditComment() {
-      this.commentToEdit = Object.assign({}, this.selectedComment);
-    }
+    // setEditComment() {
+    //   this.commentToEdit = this.selectedComment;
+    // }
 
-    updateComment(comment: Comment, postId: number, post: Post) {
+    updateComment(commentForm: NgForm, postId: number, post: Post) {
+      const comment:Comment = commentForm.value;
       this.commentService.updateComment(comment.id, comment, postId).subscribe(
         data => {
           this.selectedComment = this.commentToEdit;
@@ -183,6 +192,7 @@ export class ForumComponent implements OnInit, AfterViewInit{
 
         }
       )
+      commentForm.reset();
     }
 
     deleteComment(comment: Comment, postId: number, post:Post) {

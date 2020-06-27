@@ -15,7 +15,7 @@
 
 
 
-<div>
+<div *ngIf="checkLogin()">
   <form #newPost="ngForm"><label>New Post</label>
   <input type="text" placeholder="title" name="title" ngModel/>
   <input type="description" placeholder="description" name="description" ngModel/>
@@ -45,7 +45,7 @@
     </tr>
     <p>{{comment.content}}</p>
     <div *ngIf="userCheck.username === comment.user.username">
-    <button type="button" (click)="setEditComment()">Edit</button>
+    <button type="button" (click)="commentToEdit = comment">Edit</button>
     <button type="button" (click)="deleteComment(comment, selectedPost.id, selectedPost)">Delete</button>
     </div>
   </table>
@@ -54,19 +54,20 @@
 
 
 
-
-    <form *ngIf="commentToEdit && selectedComment && selectedPost">
+<div>
+    <form #editCommentForm="ngForm" *ngIf="commentToEdit && selectedComment && selectedPost">
       <input type="hidden" name="id" [(ngModel)]="commentToEdit.id"/>
-      <input type="text" placeholder={{commentToEdit.content}} name="content" [(ngModel)]="commentToEdit.content"/>
-      <button type="button" (click)="updateComment(commentToEdit, selectedPost.id, selectedPost)">Save</button>
+      <input type="text" name="content" [(ngModel)]="commentToEdit.content"/>
+      <button type="button" (click)="updateComment(editCommentForm, selectedPost.id, selectedPost)">Save</button>
+      <button type="button" (click)= "commentToEdit=null">Cancel</button>
     </form>
-
+  </div>
 
 
 
 
     <div>
-      <form #newComment="ngForm">
+      <form #newComment="ngForm" *ngIf="!commentToEdit && checkLogin()">
       <input type="text" placeholder="Write a Comment" name="content" ngModel/>
       <button class="button" (click)="postComment(newComment, selectedPost.id, selectedPost)">Post</button>
       </form>
@@ -80,6 +81,7 @@
   <form *ngIf="postToEdit && selectedPost">
     <input type="text" placeholder="title" name="title" [(ngModel)]="postToEdit.title">
     <button type="button" (click)="updatePost(postToEdit)">Save</button>
+    <button type="button" (click)= "postToEdit=null">Cancel</button>
   </form>
 </div>
 
