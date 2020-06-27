@@ -1,0 +1,8 @@
+img {
+	/* border-radius: 50%; */
+	border: 1px solid #6B7A8F;
+  	padding: 5px;
+ 	width: 150px;
+ 	height:200px;
+ 	object-fit: cover;
+}
