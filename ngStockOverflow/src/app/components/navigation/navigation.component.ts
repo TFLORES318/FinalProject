@@ -32,11 +32,5 @@ export class NavigationComponent implements OnInit, AfterViewInit {
   loggedIn(){
     return this.auth.checkLogin();
   }
-
-  isAdmin(){
-    if (this.user.role === 'ADMIN'){
-      return true;
-    }
-  }
 }
 
