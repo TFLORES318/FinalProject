@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS `stock` (
   `symbol` VARCHAR(45) NOT NULL,
   `company_name` VARCHAR(200) NOT NULL,
   `exchange` VARCHAR(45) NOT NULL,
+  `pair_id` VARCHAR(45) NULL,
   PRIMARY KEY (`symbol`))
 ENGINE = InnoDB;
 
@@ -58,7 +59,7 @@ DROP TABLE IF EXISTS `post` ;
 CREATE TABLE IF NOT EXISTS `post` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(150) NOT NULL,
-  `description` VARCHAR(300) NULL,
+  `description` TEXT NULL,
   `created_at` DATETIME NOT NULL,
   `enabled` TINYINT NOT NULL,
   `user_id` INT NOT NULL DEFAULT 1,
@@ -284,11 +285,17 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stockoverflowdb`;
-INSERT INTO `user` (`id`, `username`, `password`, `flair`, `first_name`, `last_name`, `email`, `role`, `profile_picture`, `create_date`, `enabled`) VALUES (1, 'admin', '$2a$10$yCcNV79QkFYwlL9kSqCC4eGSrhkI1/ofG.o8vCh0g5OdwSdV7bwre', 'Admin', 'Admin', 'McAdmin', NULL, 'ADMIN', NULL, '2020-06-05T09:26', 1);
-INSERT INTO `user` (`id`, `username`, `password`, `flair`, `first_name`, `last_name`, `email`, `role`, `profile_picture`, `create_date`, `enabled`) VALUES (2, 'rwasek', '$2a$10$yCcNV79QkFYwlL9kSqCC4eGSrhkI1/ofG.o8vCh0g5OdwSdV7bwre', 'Expert', 'Rich', 'Wasek', NULL, 'VERIFIED', NULL, '2020-06-05T09:26', 1);
-INSERT INTO `user` (`id`, `username`, `password`, `flair`, `first_name`, `last_name`, `email`, `role`, `profile_picture`, `create_date`, `enabled`) VALUES (3, 'tflores', '$2a$10$yCcNV79QkFYwlL9kSqCC4eGSrhkI1/ofG.o8vCh0g5OdwSdV7bwre', 'Beginner', 'Tabatha', 'Flores', NULL, 'STANDARD', NULL, '2020-06-05T09:26', 1);
-INSERT INTO `user` (`id`, `username`, `password`, `flair`, `first_name`, `last_name`, `email`, `role`, `profile_picture`, `create_date`, `enabled`) VALUES (4, 'rjlopez', '$2a$10$yCcNV79QkFYwlL9kSqCC4eGSrhkI1/ofG.o8vCh0g5OdwSdV7bwre', 'Expert', 'Jeff', 'Lopez', NULL, 'APPLICANT', NULL, '2020-06-05T09:26', 1);
-INSERT INTO `user` (`id`, `username`, `password`, `flair`, `first_name`, `last_name`, `email`, `role`, `profile_picture`, `create_date`, `enabled`) VALUES (5, 'tpapp', '$2a$10$yCcNV79QkFYwlL9kSqCC4eGSrhkI1/ofG.o8vCh0g5OdwSdV7bwre', 'Beginner', 'Toni', 'Papp', NULL, 'STANDARD', NULL, '2020-06-05T09:26', 1);
+INSERT INTO `user` (`id`, `username`, `password`, `flair`, `first_name`, `last_name`, `email`, `role`, `profile_picture`, `create_date`, `enabled`) VALUES (1, 'admin', '$2a$10$yCcNV79QkFYwlL9kSqCC4eGSrhkI1/ofG.o8vCh0g5OdwSdV7bwre', 'Admin', 'Admin', 'McAdmin', NULL, 'ADMIN', 'https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/125568526/original/cd9c93141521436a112722e8c5c0c7ba0d60a4a2/be-your-telegram-group-admin.jpg', '2020-06-05T09:26', 1);
+INSERT INTO `user` (`id`, `username`, `password`, `flair`, `first_name`, `last_name`, `email`, `role`, `profile_picture`, `create_date`, `enabled`) VALUES (2, 'rwasek', '$2a$10$yCcNV79QkFYwlL9kSqCC4eGSrhkI1/ofG.o8vCh0g5OdwSdV7bwre', 'Expert', 'Rich', 'Wasek', NULL, 'VERIFIED', 'https://i.imgur.com/IathyS5.jpg', '2020-06-05T09:26', 1);
+INSERT INTO `user` (`id`, `username`, `password`, `flair`, `first_name`, `last_name`, `email`, `role`, `profile_picture`, `create_date`, `enabled`) VALUES (3, 'tflores', '$2a$10$yCcNV79QkFYwlL9kSqCC4eGSrhkI1/ofG.o8vCh0g5OdwSdV7bwre', 'Beginner', 'Tabatha', 'Flores', NULL, 'VERIFIED', 'https://media-exp1.licdn.com/dms/image/C4E03AQG5IgfODr1FvQ/profile-displayphoto-shrink_800_800/0?e=1598486400&v=beta&t=ICUS9P6C5on4V3oqv2urtzO6c32NASCwBoPj6lHYkDs', '2020-06-05T09:26', 1);
+INSERT INTO `user` (`id`, `username`, `password`, `flair`, `first_name`, `last_name`, `email`, `role`, `profile_picture`, `create_date`, `enabled`) VALUES (4, 'rjlopez', '$2a$10$yCcNV79QkFYwlL9kSqCC4eGSrhkI1/ofG.o8vCh0g5OdwSdV7bwre', 'Expert', 'Jeff', 'Lopez', NULL, 'APPLICANT', 'https://i.imgur.com/26zruY6.png', '2020-06-05T09:26', 1);
+INSERT INTO `user` (`id`, `username`, `password`, `flair`, `first_name`, `last_name`, `email`, `role`, `profile_picture`, `create_date`, `enabled`) VALUES (5, 'tpapp', '$2a$10$yCcNV79QkFYwlL9kSqCC4eGSrhkI1/ofG.o8vCh0g5OdwSdV7bwre', 'Beginner', 'Toni', 'Papp', NULL, 'STANDARD', 'https://i.imgur.com/f84lFBM.jpg', '2020-06-05T09:26', 1);
+INSERT INTO `user` (`id`, `username`, `password`, `flair`, `first_name`, `last_name`, `email`, `role`, `profile_picture`, `create_date`, `enabled`) VALUES (6, 'csanders', '$2a$10$yCcNV79QkFYwlL9kSqCC4eGSrhkI1/ofG.o8vCh0g5OdwSdV7bwre', 'Expert', 'Courtney', 'Sanders', NULL, 'APPLICANT', 'https://i.imgur.com/RstvSN1.png', '2020-06-05T09:26', 1);
+INSERT INTO `user` (`id`, `username`, `password`, `flair`, `first_name`, `last_name`, `email`, `role`, `profile_picture`, `create_date`, `enabled`) VALUES (7, 'arios', '$2a$10$yCcNV79QkFYwlL9kSqCC4eGSrhkI1/ofG.o8vCh0g5OdwSdV7bwre', 'Beginner', 'Aldo', 'Rios', NULL, 'STANDARD', 'https://i.imgur.com/T3f4Sj4.png', '2020-06-05T09:26', 1);
+INSERT INTO `user` (`id`, `username`, `password`, `flair`, `first_name`, `last_name`, `email`, `role`, `profile_picture`, `create_date`, `enabled`) VALUES (8, 'ljopson', '$2a$10$yCcNV79QkFYwlL9kSqCC4eGSrhkI1/ofG.o8vCh0g5OdwSdV7bwre', 'Beginner', 'Lauren', 'Jopson', NULL, 'STANDARD', 'https://i.imgur.com/GcCIssl.png?1', '2020-06-05T09:26', 1);
+INSERT INTO `user` (`id`, `username`, `password`, `flair`, `first_name`, `last_name`, `email`, `role`, `profile_picture`, `create_date`, `enabled`) VALUES (9, 'rjenkins', '$2a$10$yCcNV79QkFYwlL9kSqCC4eGSrhkI1/ofG.o8vCh0g5OdwSdV7bwre', 'Beginner', 'Rachel', 'Jenkins', NULL, 'STANDARD', 'https://i.imgur.com/I0Dr7ts.png', '2020-06-05T09:26', 1);
+INSERT INTO `user` (`id`, `username`, `password`, `flair`, `first_name`, `last_name`, `email`, `role`, `profile_picture`, `create_date`, `enabled`) VALUES (10, 'bmiller', '$2a$10$yCcNV79QkFYwlL9kSqCC4eGSrhkI1/ofG.o8vCh0g5OdwSdV7bwre', 'Beginner', 'Braiden', 'Miller', NULL, 'STANDARD', 'https://scontent.fapa1-1.fna.fbcdn.net/v/t31.0-8/17972278_10213021584398389_5835261068912409918_o.jpg?_nc_cat=110&_nc_sid=09cbfe&_nc_ohc=g-Q4AcH1n_8AX8ogtyg&_nc_ht=scontent.fapa1-1.fna&oh=a9334c62ca83bb3befc490a230b18e7c&oe=5F1E9BD1', '2020-06-05T09:26', 1);
+INSERT INTO `user` (`id`, `username`, `password`, `flair`, `first_name`, `last_name`, `email`, `role`, `profile_picture`, `create_date`, `enabled`) VALUES (11, 'jdebroux', '$2a$10$yCcNV79QkFYwlL9kSqCC4eGSrhkI1/ofG.o8vCh0g5OdwSdV7bwre', 'Beginner', 'Joe', 'DeBroux', NULL, 'STANDARD', 'https://i.imgur.com/pOcfSDk.png', '2020-06-05T09:26', 1);
 
 COMMIT;
 
@@ -298,8 +305,29 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stockoverflowdb`;
-INSERT INTO `stock` (`symbol`, `company_name`, `exchange`) VALUES ('AA', 'Arthur Aardvark Inc.', 'NASDAQ');
-INSERT INTO `stock` (`symbol`, `company_name`, `exchange`) VALUES ('BB', 'Bullet Bill Ltd.', 'NYSE');
+INSERT INTO `stock` (`symbol`, `company_name`, `exchange`, `pair_id`) VALUES ('AA', 'Arthur Aardvark Inc.', 'NASDAQ', NULL);
+INSERT INTO `stock` (`symbol`, `company_name`, `exchange`, `pair_id`) VALUES ('BB', 'Bullet Bill Ltd.', 'NYSE', NULL);
+INSERT INTO `stock` (`symbol`, `company_name`, `exchange`, `pair_id`) VALUES ('MSFT', 'Microsoft', 'NASDAQ', '252');
+INSERT INTO `stock` (`symbol`, `company_name`, `exchange`, `pair_id`) VALUES ('RTX', 'Raytheon', 'NYSE', '8235');
+INSERT INTO `stock` (`symbol`, `company_name`, `exchange`, `pair_id`) VALUES ('FSLY', 'Fastly', 'NYSE', '1130931');
+INSERT INTO `stock` (`symbol`, `company_name`, `exchange`, `pair_id`) VALUES ('SPOT', 'Spotify', 'NYSE', '1072316');
+INSERT INTO `stock` (`symbol`, `company_name`, `exchange`, `pair_id`) VALUES ('ORCL', 'Oracle', 'NYSE', '274');
+INSERT INTO `stock` (`symbol`, `company_name`, `exchange`, `pair_id`) VALUES ('DIS', 'The Walt Disney Co.', 'NYSE', '258');
+INSERT INTO `stock` (`symbol`, `company_name`, `exchange`, `pair_id`) VALUES ('FSLR', 'First Solar', 'NASDAQ', '13569');
+INSERT INTO `stock` (`symbol`, `company_name`, `exchange`, `pair_id`) VALUES ('BBY', 'Best Buy', 'NYSE', '8077');
+INSERT INTO `stock` (`symbol`, `company_name`, `exchange`, `pair_id`) VALUES ('GOOGL', 'Alphabet', 'NASDAQ', '6369');
+INSERT INTO `stock` (`symbol`, `company_name`, `exchange`, `pair_id`) VALUES ('PFE', 'Pfizer', 'NYSE', '7989');
+INSERT INTO `stock` (`symbol`, `company_name`, `exchange`, `pair_id`) VALUES ('TSLA', 'Tesla', 'NASDAQ', '13994');
+INSERT INTO `stock` (`symbol`, `company_name`, `exchange`, `pair_id`) VALUES ('NKLA', 'Nikola', 'NASDAQ', '1162166');
+INSERT INTO `stock` (`symbol`, `company_name`, `exchange`, `pair_id`) VALUES ('BA', 'Boeing', 'NYSE', '238');
+INSERT INTO `stock` (`symbol`, `company_name`, `exchange`, `pair_id`) VALUES ('AMD', 'Advanced Micro Devices', 'NASDAQ', '8274');
+INSERT INTO `stock` (`symbol`, `company_name`, `exchange`, `pair_id`) VALUES ('MDB', 'MongoDB', 'NASDAQ', '1052405');
+INSERT INTO `stock` (`symbol`, `company_name`, `exchange`, `pair_id`) VALUES ('MU', 'Micron', 'NASDAQ', '8092');
+INSERT INTO `stock` (`symbol`, `company_name`, `exchange`, `pair_id`) VALUES ('AAPL', 'Apple', 'NASDAQ', '6408');
+INSERT INTO `stock` (`symbol`, `company_name`, `exchange`, `pair_id`) VALUES ('FB', 'Facebook', 'NASDAQ', '26490');
+INSERT INTO `stock` (`symbol`, `company_name`, `exchange`, `pair_id`) VALUES ('CCL', 'Carnival', 'NYSE', '22696');
+INSERT INTO `stock` (`symbol`, `company_name`, `exchange`, `pair_id`) VALUES ('UAL', 'United Airlines', 'NASDAQ', '13061');
+INSERT INTO `stock` (`symbol`, `company_name`, `exchange`, `pair_id`) VALUES ('NVDA', 'NVIDIA', 'NASDAQ', '6497');
 
 COMMIT;
 
@@ -312,6 +340,11 @@ USE `stockoverflowdb`;
 INSERT INTO `post` (`id`, `title`, `description`, `created_at`, `enabled`, `user_id`) VALUES (1, 'Should I buy FakeStock?', 'I dunno they are blowing up but I only have $10...', '2020-06-05T09:26', 1, 1);
 INSERT INTO `post` (`id`, `title`, `description`, `created_at`, `enabled`, `user_id`) VALUES (2, 'How do I transfer stocks into my account?', 'I bought some options I have through work but I don\'t know how to see them in my Ameritrade account.', '2020-06-05T09:26', 1, 5);
 INSERT INTO `post` (`id`, `title`, `description`, `created_at`, `enabled`, `user_id`) VALUES (3, 'My company matches my 401K contributions so should I get one?', 'Like I said, my company matches our contributions. Is this something I should be doing? I\'m 28 btw.', '2020-06-05T09:26', 1, 3);
+INSERT INTO `post` (`id`, `title`, `description`, `created_at`, `enabled`, `user_id`) VALUES (4, 'What stocks are on your radar for next week?', 'I think it\'d be super cool to see what people are looking at on the weekends for the trading week ahead.\n', '2020-06-05T09:26', 1, 9);
+INSERT INTO `post` (`id`, `title`, `description`, `created_at`, `enabled`, `user_id`) VALUES (5, 'A question for the more experienced traders', 'I\'m brand new to stock trading, and as such I have a practical question. Let\'s assume I buy a stock at $1 on Thursday and it goes up to $2 by close on Friday. I believe it will eventually hit $10, but I also believe it will dip slightly on Monday. It starts to dip Monday, I sell at $1.95, it hits a low of $1.65, then rebounds. I buy in again at $1.70 and ride the wave back up, a week later its at $6 and climbing.\n\nHere\'s my question: Have I made the correct choice to sell and buy back in, or should I have just left my original purchase ride? The only other factor might be that instead of buying back the 248 stocks I sold, I was able to buy 265 the 2nd time around... I\'m 99% sure what I did was risky, but ultimately a good thing, but I\'m smart enough to know I don\'t know enough higher/theoretical mathematics to know for sure. Give me the answer stock gurus!', '2020-06-05T09:26', 1, 11);
+INSERT INTO `post` (`id`, `title`, `description`, `created_at`, `enabled`, `user_id`) VALUES (6, 'Best brokerage for one stock buy?', 'I have no experience trading and i am interested to invest on AMAZON stock.\nI will buy one time and let it rest for few years.\nmy question is what is good brokerage for my on the fee section, maybe some brokers just charge buy and sell fees and other also overnight fees.\n', '2020-06-05T09:26', 1, 7);
+INSERT INTO `post` (`id`, `title`, `description`, `created_at`, `enabled`, `user_id`) VALUES (7, 'Where do I start with investments?', 'Everybody knows that investing for the future is important, but not everybody knows how to go about it. Where do I start with investments? How much risk should I take?', '2020-06-05T09:26', 1, 8);
+INSERT INTO `post` (`id`, `title`, `description`, `created_at`, `enabled`, `user_id`) VALUES (8, 'Investing in Real Estate vs Stocks - or both', 'My primary problem with real estate is simply the risk. Real estate is probably the best debt to have, but what if your properties don\'t rent? It could quickly stack up depending on the amount of properties and debt you have. I hear of real estate investors that have millions of dollars in debt, but they make more on the return than the interest rate so they are still profiting. But what if 3 or 4 of your houses are vacant, and remain that way for a couple months? That could add up quick, and make it almost impossible to pay for.', '2020-06-05T09:26', 1, 10);
 
 COMMIT;
 
@@ -334,10 +367,14 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `stockoverflowdb`;
-INSERT INTO `webinar` (`id`, `title`, `description`, `date_time`, `created_at`, `update_date`, `picture`, `meeting_link`, `max_attendees`, `enabled`, `creator_user_id`) VALUES (1, 'Day Trading 101', 'Don\'t even know what questions to ask? This is the place for you!', '2020-07-15T08:00', '2020-06-05T09:26', NULL, NULL, 'https://us04web.zoom.us/j/78138276632?pwd=K2RKSFFIOHltU0loV1hVRWhuaVcyUT09', 30, 1, 1);
-INSERT INTO `webinar` (`id`, `title`, `description`, `date_time`, `created_at`, `update_date`, `picture`, `meeting_link`, `max_attendees`, `enabled`, `creator_user_id`) VALUES (2, 'Getting Started: How to Stock', 'The basics of the basics. Please join us for an open forum discussion where you get your questions answered!', '2020-07-15T10:00', '2020-06-05T09:26', NULL, NULL, 'https://us04web.zoom.us/j/78138276632?pwd=K2RKSFFIOHltU0loV1hVRWhuaVcyUT09', 100, 1, 2);
-INSERT INTO `webinar` (`id`, `title`, `description`, `date_time`, `created_at`, `update_date`, `picture`, `meeting_link`, `max_attendees`, `enabled`, `creator_user_id`) VALUES (3, 'How to Invest for Retirement Depending on Your Age', 'Did you know different generations should be investing differently? Who should invest in a tech fund? Fnd out this and more in this webinar!', '2020-07-07T10:00', '2020-06-05T09:26', NULL, NULL, 'https://us04web.zoom.us/j/78138276632?pwd=K2RKSFFIOHltU0loV1hVRWhuaVcyUT09', 50, 1, 3);
-INSERT INTO `webinar` (`id`, `title`, `description`, `date_time`, `created_at`, `update_date`, `picture`, `meeting_link`, `max_attendees`, `enabled`, `creator_user_id`) VALUES (4, 'Tax Liabilities: Short vs Long Term Gains', 'Find out why you need to be worrying about taxation in relation stocks.', '2020-07-08T10:00', '2020-06-05T09:26', NULL, NULL, 'https://us04web.zoom.us/j/78138276632?pwd=K2RKSFFIOHltU0loV1hVRWhuaVcyUT09', 25, 1, 3);
+INSERT INTO `webinar` (`id`, `title`, `description`, `date_time`, `created_at`, `update_date`, `picture`, `meeting_link`, `max_attendees`, `enabled`, `creator_user_id`) VALUES (1, 'Day Trading 101', 'Don\'t even know what questions to ask? This is the place for you!', '2020-07-15T08:00', '2020-06-05T09:26', NULL, 'https://cdn.pixabay.com/photo/2019/02/04/02/42/stock-exchange-3973854_1280.jpg', 'https://us04web.zoom.us/j/78138276632?pwd=K2RKSFFIOHltU0loV1hVRWhuaVcyUT09', 30, 1, 1);
+INSERT INTO `webinar` (`id`, `title`, `description`, `date_time`, `created_at`, `update_date`, `picture`, `meeting_link`, `max_attendees`, `enabled`, `creator_user_id`) VALUES (2, 'Getting Started: How to Stock', 'The basics of the basics. Please join us for an open forum discussion where you get your questions answered!', '2020-07-15T10:00', '2020-06-05T09:26', NULL, 'https://cdn.pixabay.com/photo/2017/05/16/15/08/courses-2318035_1280.jpg', 'https://us04web.zoom.us/j/78138276632?pwd=K2RKSFFIOHltU0loV1hVRWhuaVcyUT09', 100, 1, 2);
+INSERT INTO `webinar` (`id`, `title`, `description`, `date_time`, `created_at`, `update_date`, `picture`, `meeting_link`, `max_attendees`, `enabled`, `creator_user_id`) VALUES (3, 'How to Invest for Retirement Depending on Your Age', 'Did you know different generations should be investing differently? Who should invest in a tech fund? Fnd out this and more in this webinar!', '2020-07-07T10:00', '2020-06-05T09:26', NULL, 'https://cdn.pixabay.com/photo/2020/05/31/09/41/analysis-5242025_1280.jpg', 'https://us04web.zoom.us/j/78138276632?pwd=K2RKSFFIOHltU0loV1hVRWhuaVcyUT09', 50, 1, 3);
+INSERT INTO `webinar` (`id`, `title`, `description`, `date_time`, `created_at`, `update_date`, `picture`, `meeting_link`, `max_attendees`, `enabled`, `creator_user_id`) VALUES (4, 'Tax Liabilities: Short vs Long Term Gains', 'Find out why you need to be worrying about taxation in relation stocks.', '2020-07-08T10:00', '2020-06-05T09:26', NULL, 'https://cdn.pixabay.com/photo/2020/05/18/00/12/iphone-5183932_1280.jpg', 'https://us04web.zoom.us/j/78138276632?pwd=K2RKSFFIOHltU0loV1hVRWhuaVcyUT09', 25, 1, 3);
+INSERT INTO `webinar` (`id`, `title`, `description`, `date_time`, `created_at`, `update_date`, `picture`, `meeting_link`, `max_attendees`, `enabled`, `creator_user_id`) VALUES (5, 'Beat the Bell', 'It’s easy to become overwhelmed by the swirl of headlines in the financial world. But stocks often move on those headlines — sometimes a lot — and knowing what to make of the price action will set you on the right path for winning trades.', '2020-07-20T10:00', '2020-06-05T09:26', NULL, 'https://cdn.pixabay.com/photo/2018/01/12/16/15/graph-3078540_1280.png', 'https://us04web.zoom.us/j/78138276632?pwd=K2RKSFFIOHltU0loV1hVRWhuaVcyUT09', 100, 1, 2);
+INSERT INTO `webinar` (`id`, `title`, `description`, `date_time`, `created_at`, `update_date`, `picture`, `meeting_link`, `max_attendees`, `enabled`, `creator_user_id`) VALUES (6, 'Should You Be Worried About a Market Crash in 2020?', 'It may be time to consider whether your investments are in trouble.', '2020-07-16T10:00', '2020-06-05T09:26', NULL, 'https://cdn.pixabay.com/photo/2020/02/25/07/43/stock-exchange-4878214_1280.jpg', 'https://us04web.zoom.us/j/78138276632?pwd=K2RKSFFIOHltU0loV1hVRWhuaVcyUT09', 20, 1, 3);
+INSERT INTO `webinar` (`id`, `title`, `description`, `date_time`, `created_at`, `update_date`, `picture`, `meeting_link`, `max_attendees`, `enabled`, `creator_user_id`) VALUES (7, 'Intimidated by the Stock Market? Try Trading Index Funds.', 'A run-down of where index stocks can benefit and hurt your investments. ', '2020-07-22T10:00', '2020-06-05T09:26', NULL, 'https://cdn.pixabay.com/photo/2016/03/21/10/13/coins-1270301_1280.jpg', 'https://us04web.zoom.us/j/78138276632?pwd=K2RKSFFIOHltU0loV1hVRWhuaVcyUT09', 45, 1, 2);
+INSERT INTO `webinar` (`id`, `title`, `description`, `date_time`, `created_at`, `update_date`, `picture`, `meeting_link`, `max_attendees`, `enabled`, `creator_user_id`) VALUES (8, 'Immunize Your Franchise Portfolio', 'There\'s no polite way to put this: The coronavirus (COVID-19) crisis is going to cause a lot of franchise owners who aren\'t properly diversified. Learn how to protect yourself here.', '2020-07-25T10:00', '2020-06-05T09:26', NULL, 'https://cdn.pixabay.com/photo/2020/06/21/04/21/stock-exchange-5323147_1280.jpg', 'https://us04web.zoom.us/j/78138276632?pwd=K2RKSFFIOHltU0loV1hVRWhuaVcyUT09', 15, 1, 3);
 
 COMMIT;
 
