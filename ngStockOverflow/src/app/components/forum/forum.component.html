@@ -46,17 +46,19 @@
     <p>{{comment.content}}</p>
     <div *ngIf="userCheck.username === comment.user.username">
     <button type="button" (click)="setEditComment()">Edit</button>
-    <button type="button" (click)="deleteComment(comment, selectedPost.id)">Delete</button>
+    <button type="button" (click)="deleteComment(comment, selectedPost.id, selectedPost)">Delete</button>
     </div>
   </table>
   </div>
 
 
 
+
+
     <form *ngIf="commentToEdit && selectedComment && selectedPost">
       <input type="hidden" name="id" [(ngModel)]="commentToEdit.id"/>
       <input type="text" placeholder={{commentToEdit.content}} name="content" [(ngModel)]="commentToEdit.content"/>
-      <button type="button" (click)="updateComment(commentToEdit, selectedPost.id)">Save</button>
+      <button type="button" (click)="updateComment(commentToEdit, selectedPost.id, selectedPost)">Save</button>
     </form>
 
 
@@ -66,7 +68,7 @@
     <div>
       <form #newComment="ngForm">
       <input type="text" placeholder="Write a Comment" name="content" ngModel/>
-      <button class="button" (click)="postComment(newComment, selectedPost.id)">Post</button>
+      <button class="button" (click)="postComment(newComment, selectedPost.id, selectedPost)">Post</button>
       </form>
     </div>
 

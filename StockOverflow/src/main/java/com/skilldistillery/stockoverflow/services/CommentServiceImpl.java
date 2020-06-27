@@ -1,5 +1,6 @@
 package com.skilldistillery.stockoverflow.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +38,14 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public List<Comment> findAllPostComments(int postId) {
 		List<Comment> comments = commentRepo.findByPost_Id(postId);
-		return comments;
+		List<Comment> activeComments = new ArrayList<>();
+		for (Comment comment: comments) {
+			if (comment.isEnabled()) {
+				activeComments.add(comment);
+			}
+			else activeComments.remove(comment);
+		}
+		return activeComments;
 	}
 
 	@Override
