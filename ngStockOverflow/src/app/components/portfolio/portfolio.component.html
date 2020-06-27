@@ -31,6 +31,7 @@
         <td><input type="text" name="companyName" [(ngModel)]="selected.companyName"></td>
         <td><input type="text" name="exchange" [(ngModel)]="selected.exchange"></td>
         <td><button (click)='updateStock(editStock)'>Submit</button></td>
+        <td><button (click)='selected = null'>Cancel</button></td>
       </tr>
     </table>
   </form>
