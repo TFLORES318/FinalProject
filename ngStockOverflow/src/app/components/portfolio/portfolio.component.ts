@@ -4,6 +4,7 @@ import { UserService } from 'src/app/services/user.service';
 import { StockService } from 'src/app/services/stock.service';
 import { Stock } from 'src/app/models/stock';
 import { NgForm } from '@angular/forms';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-portfolio',
@@ -13,7 +14,7 @@ import { NgForm } from '@angular/forms';
 export class PortfolioComponent implements OnInit {
 
   userStocks: Stock[] = [];
-
+  user: User = new User();
   selected: Stock = null;
 
   constructor(
@@ -24,7 +25,20 @@ export class PortfolioComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUsersStocks();
+    this.loggedInUserLoad();
   }
+
+  loggedInUserLoad(){
+    this.auth.showUser().subscribe(
+      data => {
+        this.user = data;
+      },
+      err => {
+        console.error('userLoad() error in portfolio component');
+      }
+    );
+  }
+
 
   loadUsersStocks(){
     this.userService.getUserStock().subscribe(
