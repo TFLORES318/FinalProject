@@ -19,7 +19,7 @@ public class StockServiceImpl implements StockService {
 
 	@Autowired
 	private UserRepository userRepo;
-	
+
 	@Autowired
 	private UserService userServ;
 
@@ -61,8 +61,8 @@ public class StockServiceImpl implements StockService {
 				managedUser.addStock(stock);
 				userRepo.saveAndFlush(managedUser);
 				return stock;
-			} 
-		}else {
+			}
+		} else {
 			return null;
 		}
 	}
@@ -80,18 +80,28 @@ public class StockServiceImpl implements StockService {
 	}
 
 	@Override
-	public boolean destroyStock(String stockSymbol) {
+	public boolean destroyStock(String stockSymbol, String username) {
+//		Optional<Stock> stockOpt = stockRepo.findById(stockSymbol);
+//		Stock toDelete = stockOpt.get();
+//		boolean deleted;
+//		try {
+//			stockRepo.delete(toDelete);
+//			deleted = true;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			deleted = false;
+//		}
+//		return deleted;
+		boolean removed = false;
+		User managedUser = userRepo.findByUsername(username);
 		Optional<Stock> stockOpt = stockRepo.findById(stockSymbol);
-		Stock toDelete = stockOpt.get();
-		boolean deleted;
-		try {
-			stockRepo.delete(toDelete);
-			deleted = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			deleted = false;
+		if (stockOpt.isPresent()) {
+			Stock stock = stockOpt.get();
+			managedUser.removeStock(stock);
+			userRepo.saveAndFlush(managedUser);
+			removed = true;
 		}
-		return deleted;
+		return removed;
 	}
 
 }

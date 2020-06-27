@@ -88,7 +88,7 @@ public class StockController {
 	@DeleteMapping(path = "stocks/{stockSymbol}")
 	public void destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable String stockSymbol, Principal principal) {
 		try {
-			if(stockServ.destroyStock(stockSymbol)) {
+			if(stockServ.destroyStock(stockSymbol, principal.getName())) {
 				res.setStatus(204);
 			}
 			else {
