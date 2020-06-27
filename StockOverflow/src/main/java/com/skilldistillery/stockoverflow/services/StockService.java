@@ -11,5 +11,5 @@ public interface StockService {
 	Stock findByCompanyName(String companyName);
 	Stock createStock(String username, Stock stock) throws Exception;
 	Stock updateStock(String stockSymbol, Stock stock);
-	boolean destroyStock(String stocksymbol);
+	boolean destroyStock(String stockSymbol, String username);
 }
