@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.stockoverflow.entities.Comment;
 import com.skilldistillery.stockoverflow.entities.Post;
+import com.skilldistillery.stockoverflow.entities.User;
 import com.skilldistillery.stockoverflow.services.CommentService;
+import com.skilldistillery.stockoverflow.services.UserService;
 
 @RestController
 @RequestMapping("api")
@@ -27,11 +29,23 @@ public class CommentController {
 
 	@Autowired
 	private CommentService commSvc;
+	@Autowired
+	private UserService userSvc;
 
 	@GetMapping("posts/{pId}/comments")
 	public List<Comment> index(@PathVariable int pId) {
 		return commSvc.findAllPostComments(pId);
 	}
+//	
+//	@GetMapping("posts/{pId}/post/comments")
+//	public List<Comment> index(@PathVariable int pId, Principal principal) {
+//		try {
+//			User user = userSvc.findByUsername(principal.getName());
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return commSvc.findAllPostComments(pId);
+//	}
 
 	@PostMapping("posts/{postId}/comments")
 	public Comment createComment(HttpServletRequest req, HttpServletResponse res, @PathVariable int postId,

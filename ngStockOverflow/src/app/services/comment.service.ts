@@ -33,7 +33,7 @@ export class CommentService {
     );
   }
 
-  createNewComment(newComment: Comment) {
+  commentsForPost(postId: number) {
     const credentials = this.authService.getCredentials();
     const httpOptions = {
       headers: new HttpHeaders({
@@ -41,7 +41,26 @@ export class CommentService {
         'X-Requested-With': 'XMLHttpRequest'
       })
     };
-    return this.http.post<Comment>(this.url, newComment, httpOptions).pipe(
+    return this.http.get<Comment[]>(this.baseUrl + '/' + postId + '/comments')
+    .pipe(
+      catchError((err : any) => {
+        console.log(err);
+        return throwError('Error with fetching Comments');
+      })
+    );
+  }
+
+
+
+  createNewComment(newComment: Comment, postId: number) {
+    const credentials = this.authService.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Basic ${credentials}`,
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    };
+    return this.http.post<Comment>(this.baseUrl + '/' + postId + '/comments', newComment, httpOptions).pipe(
       catchError((err: any) => {
         console.error('Error in service to create a comment');
         return throwError('Error with creating a comment');
@@ -49,7 +68,7 @@ export class CommentService {
     );
   }
 
-  updateComment(commentId: number, commentToEdit: Comment) {
+  updateComment(commentId: number, commentToEdit: Comment, postId: number) {
     const credentials = this.authService.getCredentials();
     const httpOptions = {
       headers: new HttpHeaders({
@@ -57,7 +76,7 @@ export class CommentService {
         'X-Requested-With': 'XMLHttpRequest'
       })
     };
-    return this.http.put<Comment>(this.url + '/' + commentId, commentToEdit, httpOptions).pipe(
+    return this.http.put<Comment>(this.baseUrl + '/' + postId + '/comments/' + commentId, commentToEdit, httpOptions).pipe(
       catchError((err: any) => {
         console.error('error in update comment service');
         return throwError('error in update');
@@ -65,7 +84,7 @@ export class CommentService {
     );
   }
 
-  destroyComment(commentId:number, commentToDelete: Comment) {
+  destroyComment(commentId:number, commentToDelete: Comment, postId: number) {
     const credentials = this.authService.getCredentials();
     const httpOptions = {
       headers: new HttpHeaders({
@@ -73,7 +92,7 @@ export class CommentService {
         'X-Requested-With': 'XMLHttpRequest'
       })
     };
-    return this.http.put<Comment>(this.url + '/delete/' + commentId, commentToDelete, httpOptions).pipe(
+    return this.http.put<Comment>(this.baseUrl + '/' + postId + '/delete/' + commentId, commentToDelete, httpOptions).pipe(
       catchError((err:any) => {
         console.error('error in delete comment');
         return throwError('destroy comment for comment service not working');

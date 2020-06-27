@@ -7,37 +7,79 @@
       </td>
       <td>posted by {{post.user.username}}</td>
       <td>{{post.createdAt}}</td>
-      <!-- <td *ngFor="let comment of post.comments">{{comment.content}}</td> -->
     </tr>
   </table>
 </div>
+
+
+
+
+
+<div>
+  <form #newPost="ngForm"><label>New Post</label>
+  <input type="text" placeholder="title" name="title" ngModel/>
+  <input type="description" placeholder="description" name="description" ngModel/>
+  <input type="hidden" value="true" name="enabled" ngModel/>
+  <button class="button" (click)="createPost(newPost)">Submit</button>
+  </form>
+  </div>
+
+
+
+
 
 <div *ngIf="selectedPost">
   <h4>{{selectedPost.title}}</h4>
   <h6>posted by {{selectedPost.user.username}}  {{selectedPost.createdAt}}</h6>
   <h6>{{selectedPost.description}}</h6>
+  <button *ngIf="userCheck.username === selectedPost.user.username" (click)="setEditPost()">Edit</button>
+  <button *ngIf="userCheck.username === selectedPost.user.username" (click)="deletePost(selectedPost.id)">Delete</button>
   <h5>Replies</h5>
 
-    <table *ngFor="let comment of selectedPost.comments">
+    <div *ngIf="selectedPost && selectedPost.comments">
+    <table *ngFor="let comment of selectedPost.comments" (click)="commentDetails(comment)">
     <tr>
     <td>{{comment.user.username}}</td>
     <td>{{comment.user.flair}}</td>
     <td>posted on {{comment.createDate}}</td>
     </tr>
     <p>{{comment.content}}</p>
+    <div *ngIf="userCheck.username === comment.user.username">
+    <button type="button" (click)="setEditComment()">Edit</button>
+    <button type="button" (click)="deleteComment(comment, selectedPost.id)">Delete</button>
+    </div>
+  </table>
+  </div>
 
-    </table>
+
+
+    <form *ngIf="commentToEdit && selectedComment && selectedPost">
+      <input type="hidden" name="id" [(ngModel)]="commentToEdit.id"/>
+      <input type="text" placeholder={{commentToEdit.content}} name="content" [(ngModel)]="commentToEdit.content"/>
+      <button type="button" (click)="updateComment(commentToEdit, selectedPost.id)">Save</button>
+    </form>
+
+
+
+
+
+    <div>
+      <form #newComment="ngForm">
+      <input type="text" placeholder="Write a Comment" name="content" ngModel/>
+      <button class="button" (click)="postComment(newComment, selectedPost.id)">Post</button>
+      </form>
+    </div>
 
 
 
 </div>
 
-
-<div *ngIf="!selectedPost">
-<form #newPost="ngForm">
-<input type="text" placeholder="title" name="title" ngModel/>
-<input type="description" placeholder="description" name="description" ngModel/>
-<input type="hidden" value="true" name="enabled" ngModel/>
-<button class=button (click)="createPost(newPost)">Submit</button>
-</form>
+<div>
+  <form *ngIf="postToEdit && selectedPost">
+    <input type="text" placeholder="title" name="title" [(ngModel)]="postToEdit.title">
+    <button type="button" (click)="updatePost(postToEdit)">Save</button>
+  </form>
 </div>
+
+
+

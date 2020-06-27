@@ -1,9 +1,12 @@
+import { Post } from './post';
+
 export class Comment {
 
   id: number;
   content: string;
   enabled: boolean;
   createDate: Date;
+  // post: Post;
 
   constructor(id?:number, content?:string, enabled?:boolean, createDate?:Date) {
     this.id = id;
