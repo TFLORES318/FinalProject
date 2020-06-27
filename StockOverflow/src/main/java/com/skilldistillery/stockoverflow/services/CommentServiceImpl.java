@@ -91,6 +91,7 @@ public class CommentServiceImpl implements CommentService {
 			comment.setEnabled(false);
 			commentRepo.saveAndFlush(comment);
 			disableDeletedComment = true;
+			System.out.println(disableDeletedComment);
 		}
 		return disableDeletedComment;
 	}

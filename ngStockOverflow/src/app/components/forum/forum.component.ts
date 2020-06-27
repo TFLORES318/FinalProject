@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import { Router } from '@angular/router';
 import { Post } from 'src/app/models/post';
@@ -6,13 +6,15 @@ import { Comment } from 'src/app/models/comment';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommentService } from 'src/app/services/comment.service';
 import { NgForm } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-forum',
   templateUrl: './forum.component.html',
   styleUrls: ['./forum.component.css']
 })
-export class ForumComponent implements OnInit {
+export class ForumComponent implements OnInit, AfterViewInit{
 
   allPosts: Post[] = [];
 
@@ -22,16 +24,44 @@ export class ForumComponent implements OnInit {
 
   selectedPost = null;
 
+  comment = new Comment();
+
+  userCheck = new User();
+
+  postToEdit = null;
+
+  commentToEdit = null;
+
+  selectedComment = null;
+
+
   constructor(
     private postService: PostService,
     private router: Router,
     private auth: AuthService,
-    private commentService: CommentService
+    private commentService: CommentService,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
     this.loadAllPosts();
   }
+
+
+  ngAfterViewInit(){
+    this.auth.showUser().subscribe(
+      data => {
+        this.userCheck = data;
+        console.log(this.userCheck);
+      },
+      err => {
+        console.error('prfile view ng after view broken');
+
+      }
+    )
+
+  }
+
 
   loadAllPosts(){
     this.postService.index().subscribe(
@@ -63,10 +93,16 @@ export class ForumComponent implements OnInit {
     postForm.reset();
   }
 
+  setEditPost() {
+    this.postToEdit = Object.assign({}, this.selectedPost);
+  }
+
   updatePost(post: Post){
-    this.postService.update(post).subscribe(
+    this.postService.update(post, post.id).subscribe(
       data => {
         console.log('post update success');
+        this.selectedPost = this.postToEdit;
+        this.postToEdit = null;
         this.loadAllPosts();
       },
       err => {
@@ -106,4 +142,58 @@ export class ForumComponent implements OnInit {
     this.selectedPost = post;
   }
 
-}
+  displayPosts() {
+    this.selectedPost = null;
+  }
+
+
+  postComment(commentForm: NgForm, postId: number) {
+    const comment: Comment = commentForm.value;
+    this.commentService.createNewComment(comment, postId).subscribe(
+      data => {
+        this.comment = data;
+        console.log('comment is posted')
+      },
+      err => {
+        console.error('comment did not get posted');
+
+      }
+      )
+    }
+
+    commentDetails(comment:Comment) {
+      this.selectedComment = comment;
+    }
+
+    setEditComment() {
+      this.commentToEdit = Object.assign({}, this.selectedComment);
+    }
+
+    updateComment(comment: Comment, postId: number) {
+      this.commentService.updateComment(comment.id, comment, postId).subscribe(
+        data => {
+          this.selectedComment = this.commentToEdit;
+          this.commentToEdit = null;
+        },
+        err => {
+          console.error('dun work it dun wok');
+
+        }
+      )
+    }
+
+    deleteComment(comment: Comment, postId: number) {
+      this.commentService.destroyComment(comment.id, comment, postId).subscribe(
+        data => {
+          console.log('comment deleted');
+
+        },
+        err => {
+          console.error('this is not working wah');
+        }
+      )
+    }
+
+  }
+
+
