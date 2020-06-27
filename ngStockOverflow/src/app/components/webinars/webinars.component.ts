@@ -55,11 +55,26 @@ export class WebinarsComponent implements OnInit {
     this.webinarServ.signUpUser(webinarId).subscribe(
       data => {
         this.attendees = data;
-        console.log(this.attendees);
+        this.selected = null;
+        this.loadWebinars();
 
       },
       error => {
         console.error('webinar component sign up broken');
+      }
+      )
+    }
+
+    withdrawUser(webinarId: number){
+      this.webinarServ.withdrawUser(webinarId).subscribe(
+        data => {
+          this.attendees = data;
+          this.selected = null;
+          this.loadWebinars();
+      },
+      error => {
+        console.error('withdraw user failure');
+
       }
     )
   }

@@ -107,4 +107,21 @@ export class WebinarService {
     )
   }
 
+  withdrawUser(webinarId: number){
+    const credentials = this.auth.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Basic ${credentials}`,
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    }
+    return this.http.put<User[]>(this.url+'/'+webinarId+'/withdraw', webinarId, httpOptions)
+    .pipe(
+      catchError((err:any) =>{
+        console.log('withdraw user broken');
+        return throwError('withdraw user broken');
+      })
+    )
+  }
+
 }

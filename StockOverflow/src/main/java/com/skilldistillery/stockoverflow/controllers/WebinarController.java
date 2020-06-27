@@ -111,6 +111,21 @@ public class WebinarController {
 		return attendees;
 	}
 	
+	@PutMapping("webinars/{webinarId}/withdraw")
+	public List<User> withdrawromrWebinar(@PathVariable int webinarId, Principal principal, HttpServletResponse res){
+		List<User> attendees = null;
+		try {
+			attendees = webinarSvc.removeUserToAttendees(principal.getName(), webinarId);
+			if(attendees == null) {
+				res.setStatus(400);
+			}
+		} catch (Exception e) {
+			res.setStatus(404);
+			e.printStackTrace();
+		}
+		return attendees;
+	}
+	
 	
 	
 	

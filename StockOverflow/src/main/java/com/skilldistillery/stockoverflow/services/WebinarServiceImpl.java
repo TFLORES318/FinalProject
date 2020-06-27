@@ -94,4 +94,22 @@ public class WebinarServiceImpl implements WebinarService {
 		return null;
 	}
 
+	@Override
+	public List<User> removeUserToAttendees(String username, int webinarId) {
+		User userToRemove = userRepo.findByUsername(username);
+		Optional<Webinar> webinarOpt = webinarRepo.findById(webinarId);
+		if(webinarOpt.isPresent()) {
+			Webinar webinar = webinarOpt.get();
+			List<User> attendees = webinar.getUsersAttending();
+			if(attendees.contains(userToRemove)) {
+				attendees.remove(userToRemove);
+				userToRemove.getWebinarsAttending().remove(webinar);
+				userRepo.saveAndFlush(userToRemove);
+				webinarRepo.saveAndFlush(webinar);
+			}
+			return attendees;
+		}
+		return null;
+	}
+
 }
