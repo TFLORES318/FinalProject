@@ -21,6 +21,8 @@ export class ProfileViewComponent implements OnInit {
 
   posts: Post[] = [];
 
+  enabledPosts: Post[] = [];
+
   selected = null;
 
   constructor(private userService: UserService, private authService: AuthService, private currentRoute: ActivatedRoute, private router: Router, private postService: PostService,
@@ -50,7 +52,12 @@ export class ProfileViewComponent implements OnInit {
     return this.postService.allPostsForUser(this.user.id).subscribe(
       posts => {
         this.posts = posts;
-        // localStorage.getItem('credentials');
+       for (let index = 0; index < posts.length; index++) {
+         if (posts[index].enabled) {
+           this.enabledPosts.push(posts[index]);
+         }
+
+       }
         console.log(localStorage.getItem('credentials'));
       },
       fail => {
