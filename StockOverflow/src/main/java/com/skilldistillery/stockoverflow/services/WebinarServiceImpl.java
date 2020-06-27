@@ -1,6 +1,7 @@
 package com.skilldistillery.stockoverflow.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ import com.skilldistillery.stockoverflow.repositories.WebinarRepository;
 
 @Service
 public class WebinarServiceImpl implements WebinarService {
-	
+
 	@Autowired
 	private WebinarRepository webinarRepo;
 	@Autowired
@@ -55,14 +56,14 @@ public class WebinarServiceImpl implements WebinarService {
 			updatedWebinar.setMeetingLink(webinar.getMeetingLink());
 			updatedWebinar.setMaxAttendees(webinar.getMaxAttendees());
 			updatedWebinar.setEnabled(webinar.getEnabled());
-			
+
 			webinarRepo.saveAndFlush(updatedWebinar);
 			return updatedWebinar;
-		
+
 		}
 		return null;
 	}
-	
+
 	@Override
 	public Boolean disable(String username, int webinarId) {
 		boolean disabledWebinar = false;
@@ -73,6 +74,24 @@ public class WebinarServiceImpl implements WebinarService {
 			disabledWebinar = true;
 		}
 		return disabledWebinar;
+	}
+
+	@Override
+	public List<User> addUserToAttendees(String username, int webinarId) {
+		User attendee = userRepo.findByUsername(username);
+		Optional<Webinar> webinarOpt = webinarRepo.findById(webinarId);
+		if (webinarOpt.isPresent()) {
+			Webinar webinar = webinarOpt.get();
+			List<User> attendees = webinar.getUsersAttending();
+			if (!attendees.contains(attendee)) {
+				attendees.add(attendee);
+				attendee.getWebinarsAttending().add(webinar);
+				userRepo.saveAndFlush(attendee);
+				webinarRepo.saveAndFlush(webinar);
+			}
+			return attendees;
+		}
+		return null;
 	}
 
 }

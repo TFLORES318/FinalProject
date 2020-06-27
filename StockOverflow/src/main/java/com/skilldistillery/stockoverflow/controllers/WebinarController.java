@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.stockoverflow.entities.User;
 import com.skilldistillery.stockoverflow.entities.Webinar;
 import com.skilldistillery.stockoverflow.services.WebinarService;
 
@@ -94,4 +95,29 @@ public class WebinarController {
 			res.setStatus(400);
 		}
 	}
+	
+	@PutMapping("webinars/{webinarId}/signUp")
+	public List<User> signUpForWebinar(@PathVariable int webinarId, Principal principal, HttpServletResponse res){
+		List<User> attendees = null;
+		try {
+			attendees = webinarSvc.addUserToAttendees(principal.getName(), webinarId);
+				if(attendees == null) {
+					res.setStatus(400);
+				}
+		} catch (Exception e) {
+			res.setStatus(404);
+			e.printStackTrace();
+		}
+		return attendees;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
