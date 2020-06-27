@@ -25,6 +25,10 @@ export class ProfileViewComponent implements OnInit {
 
   selected = null;
 
+  userLookUp= null;
+
+  userDetailsDisplay = null;
+
   constructor(private userService: UserService, private authService: AuthService, private currentRoute: ActivatedRoute, private router: Router, private postService: PostService,
     ) { }
 
@@ -48,6 +52,14 @@ export class ProfileViewComponent implements OnInit {
     );
   }
 
+  checkLogin() {
+    if (localStorage.getItem('credentials')) {
+      return true;
+    }
+    return false;
+  }
+
+
   loadPosts() {
     return this.postService.allPostsForUser(this.user.id).subscribe(
       posts => {
@@ -62,6 +74,18 @@ export class ProfileViewComponent implements OnInit {
       },
       fail => {
         console.error('ERRORRRR');
+      }
+    );
+  }
+
+  getSpecificUser(userId: number) {
+    console.log(userId);
+    return this.userService.getAnotherUser(userId).subscribe(
+      data => {
+        this.userDetailsDisplay = data;
+      },
+      fail => {
+        console.error('error in profile component - cannot obtain user')
       }
     );
   }

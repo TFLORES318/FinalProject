@@ -125,4 +125,21 @@ export class UserService {
   )
  }
 
+ getAnotherUser(userId: number) {
+  const credentials = this.auth.getCredentials();
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': `Basic ${credentials}`,
+      'X-Requested-With': 'XMLHttpRequest'
+    })
+  };
+   return this.http.get<User>(this.url + '/' + userId, httpOptions)
+   .pipe(
+     catchError((err:any) => {
+       console.log('cannot get user');
+       return throwError('error in getting specific user');
+     })
+   );
+ }
+
 }
