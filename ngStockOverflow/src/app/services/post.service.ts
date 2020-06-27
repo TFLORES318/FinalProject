@@ -79,7 +79,7 @@ export class PostService {
     )
   }
 
-  update(post: Post){
+  update(post: Post, postId: number){
     const credentials = this.auth.getCredentials();
     const httpOptions = {
       headers: new HttpHeaders({
@@ -87,7 +87,7 @@ export class PostService {
         'X-Requested-With': 'XMLHttpRequest'
       })
     }
-    return this.http.put<Post>(this.url + '/' + post.id, post)
+    return this.http.put<Post>(this.url + '/' + post.id, post, httpOptions)
     .pipe(
       catchError((err: any) => {
         console.log('post service update is broken');
@@ -104,7 +104,7 @@ export class PostService {
         'X-Requested-With': 'XMLHttpRequest'
       })
     }
-    return this.http.put(this.baseUrl + '/disable/' + postId, postId)
+    return this.http.put(this.url + '/disable/' + postId, postId, httpOptions)
     .pipe(
       catchError((err: any) => {
         console.log('error in post serv disable');
