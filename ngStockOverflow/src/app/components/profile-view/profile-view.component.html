@@ -25,11 +25,36 @@
     <td>{{post.title}}</td>
     <td>{{post.description}}</td>
     <td>{{post.createdAt}}</td>
-    <td>{{post.user.firstName}}</td>
 </tr>
   </table>
 
+
+<div id="otherUserProfile" *ngIf="!checkLogin() && userDetailsDisplay">
+  <img src={{userDetailsDisplay.profilePicture}}/>
+<p>{{userDetailsDisplay.username}}</p>  {{userDetailsDisplay.role}}
+<p>{{userDetailsDisplay.firstName}} {{userDetailsDisplay.lastName}}</p>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Date</th>
+    <th>YOUR NAME</th>
+  </tr>
+<tr *ngFor="let post of enabledPosts">
+  <td>{{post.title}}</td>
+  <td>{{post.description}}</td>
+  <td>{{post.createdAt}}</td>
+</tr>
+</table>
 </div>
+
+
+
+</div>
+
+
+
 
 
 
