@@ -147,18 +147,20 @@ export class ForumComponent implements OnInit, AfterViewInit{
   }
 
 
-  postComment(commentForm: NgForm, postId: number) {
+  postComment(commentForm: NgForm, postId: number, post: Post) {
     const comment: Comment = commentForm.value;
     this.commentService.createNewComment(comment, postId).subscribe(
       data => {
         this.comment = data;
         console.log('comment is posted')
+        this.loadComments(post);
       },
       err => {
         console.error('comment did not get posted');
 
       }
       )
+      commentForm.reset();
     }
 
     commentDetails(comment:Comment) {
@@ -169,11 +171,12 @@ export class ForumComponent implements OnInit, AfterViewInit{
       this.commentToEdit = Object.assign({}, this.selectedComment);
     }
 
-    updateComment(comment: Comment, postId: number) {
+    updateComment(comment: Comment, postId: number, post: Post) {
       this.commentService.updateComment(comment.id, comment, postId).subscribe(
         data => {
           this.selectedComment = this.commentToEdit;
           this.commentToEdit = null;
+          this.loadComments(post);
         },
         err => {
           console.error('dun work it dun wok');
@@ -182,11 +185,11 @@ export class ForumComponent implements OnInit, AfterViewInit{
       )
     }
 
-    deleteComment(comment: Comment, postId: number) {
+    deleteComment(comment: Comment, postId: number, post:Post) {
       this.commentService.destroyComment(comment.id, comment, postId).subscribe(
         data => {
           console.log('comment deleted');
-
+          this.loadComments(post);
         },
         err => {
           console.error('this is not working wah');
