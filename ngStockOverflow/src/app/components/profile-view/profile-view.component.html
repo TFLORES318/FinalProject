@@ -14,12 +14,14 @@
 <div *ngIf="user.role === 'ADMIN'">
 <button [routerLink]="['/admin']">Admin Page</button>
 </div>
+
+<div id="posts">
+  <h3>Your Posts</h3>
   <table>
     <tr>
       <th>Title</th>
       <th>Description</th>
       <th>Date</th>
-      <th>YOUR NAME</th>
     </tr>
     <tr *ngFor="let post of enabledPosts">
     <td>{{post.title}}</td>
@@ -27,7 +29,39 @@
     <td>{{post.createdAt}}</td>
 </tr>
   </table>
+</div>
 
+<div id="webinarsAttending">
+  <h3>Webinars You Are Attending</h3>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Date</th>
+    <th>Meeting Link</th>
+  </tr>
+  <tr *ngFor="let webinar of enabledWebinars">
+    <td>{{webinar.title}}</td>
+    <td>{{webinar.description}}</td>
+    <td>{{webinar.dateTime}}</td>
+    <td>{{webinar.meetingLink}}</td>
+  </tr>
+</table>
+
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+  <div class="container-fluid">
 
 <div id="otherUserProfile" *ngIf="!checkLogin() && userDetailsDisplay">
   <img src={{userDetailsDisplay.profilePicture}}/>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.skilldistillery.stockoverflow.entities.Stock;
 import com.skilldistillery.stockoverflow.entities.User;
+import com.skilldistillery.stockoverflow.entities.Webinar;
 
 public interface UserService {
 	User findById(int userId);
@@ -14,4 +15,5 @@ public interface UserService {
 	List<User> findUsersUsernameSearch(String keyword);
 	List<User> findAllUsers();
 	List<Stock> addUserStock(String username, Stock stock);
+	public List<Webinar> findWebinarsUserIsGoingTo(String username);
 }

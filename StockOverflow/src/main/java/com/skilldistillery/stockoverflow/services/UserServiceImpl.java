@@ -4,12 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.stockoverflow.entities.Stock;
 import com.skilldistillery.stockoverflow.entities.User;
+import com.skilldistillery.stockoverflow.entities.Webinar;
 import com.skilldistillery.stockoverflow.repositories.UserRepository;
+import com.skilldistillery.stockoverflow.repositories.WebinarRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -20,6 +21,9 @@ public class UserServiceImpl implements UserService {
 //	@Autowired
 //	private PasswordEncoder encoder;
 
+	@Autowired
+	private WebinarRepository webRepo;
+	
 	@Override
 	public User findById(int userId) {
 		Optional<User> userOpt = userRepo.findById(userId);
@@ -105,5 +109,9 @@ public class UserServiceImpl implements UserService {
 			return managedUser.getStocks();
 		}
 		return null;
+	}
+	
+	public List<Webinar> findWebinarsUserIsGoingTo(String username) {
+		return webRepo.findByUsersAttendingUsername(username);
 	}
 }

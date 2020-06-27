@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.skilldistillery.stockoverflow.entities.Role;
 import com.skilldistillery.stockoverflow.entities.Stock;
 import com.skilldistillery.stockoverflow.entities.User;
+import com.skilldistillery.stockoverflow.entities.Webinar;
 import com.skilldistillery.stockoverflow.services.AuthService;
 import com.skilldistillery.stockoverflow.services.UserService;
 
@@ -125,5 +126,10 @@ public class UserController {
 			res.setStatus(404);
 		}
 		return users;
+	}
+	
+	@GetMapping("users/webinars")
+	public List<Webinar> findAllWebinars(Principal principal) {
+		return userServ.findWebinarsUserIsGoingTo(principal.getName());
 	}
 }

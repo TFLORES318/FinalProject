@@ -7,6 +7,7 @@ import { AuthService } from './auth.service';
 import { Stock } from '../models/stock';
 import { identifierModuleUrl } from '@angular/compiler';
 import { User } from '../models/user';
+import { Webinar } from '../models/webinar';
 
 @Injectable({
   providedIn: 'root'
@@ -141,5 +142,23 @@ export class UserService {
      })
    );
  }
+
+ allWebinarsForUser(userId:number) {
+  const credentials = this.auth.getCredentials();
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': `Basic ${credentials}`,
+      'X-Requested-With': 'XMLHttpRequest'
+    })
+  }
+  return this.http.get<Webinar[]>(this.url + '/webinars', httpOptions).pipe(
+    catchError((err: any) => {
+      console.log('cannot retrieve webinars');
+      return throwError('error in getting webinars for user');
+    })
+  );
+ }
+
+
 
 }

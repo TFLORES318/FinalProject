@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { PostService } from 'src/app/services/post.service';
 import { User } from 'src/app/models/user';
 import { Post } from 'src/app/models/post';
+import { Webinar } from 'src/app/models/webinar';
 
 @Component({
   selector: 'app-profile-view',
@@ -23,6 +24,10 @@ export class ProfileViewComponent implements OnInit {
 
   enabledPosts: Post[] = [];
 
+  webinars: Webinar[] = [];
+
+  enabledWebinars: Webinar[] = [];
+
   selected = null;
 
   userLookUp= null;
@@ -37,6 +42,7 @@ export class ProfileViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadPosts();
+    this.loadWebinars();
     this.getUser();
 
   }
@@ -74,6 +80,23 @@ export class ProfileViewComponent implements OnInit {
       },
       fail => {
         console.error('ERRORRRR');
+      }
+    );
+  }
+
+  loadWebinars() {
+    return this.userService.allWebinarsForUser(this.user.id).subscribe(
+      webinars => {
+        this.webinars = webinars;
+        for (let i = 0; i < webinars.length; i++) {
+          if (webinars[i].enabled) {
+            this.enabledWebinars.push(webinars[i]);
+          }
+        }
+        console.log('webinars retrieved');
+      },
+      fail => {
+        console.error('could not retrieve user webinars from profile view component');
       }
     );
   }
