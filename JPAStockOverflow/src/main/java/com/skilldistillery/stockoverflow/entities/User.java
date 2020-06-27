@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,6 +12,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -71,11 +74,14 @@ public class User {
 	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List <WebinarRating> webinarRatings;
-	@JsonIgnore
+	@JsonIgnoreProperties({"user"})
 	@OneToMany(mappedBy="user")
 	private List <UserStockJournal> journalEntries;
 	@JsonIgnore
-	@ManyToMany(mappedBy="users")
+	@ManyToMany
+	@JoinTable(name="user_stock",
+	joinColumns=@JoinColumn(name="user_id"),
+	inverseJoinColumns=@JoinColumn(name="stock_symbol"))
 	private List <Stock> stocks;
 	
 	public User() {}
@@ -379,14 +385,14 @@ public class User {
 		}
 		if(!stocks.contains(stock)) {
 			stocks.add(stock);
-			stock.addUser(this);
+//			stock.addUser(this);
 		}
 	}
 	
 	public void removeStock(Stock stock) {
 		if (stocks != null && stocks.contains(stock)) {
 			stocks.remove(stock);
-			stock.removeUser(this);
+//			stock.removeUser(this);
 		}
 	}
 	
