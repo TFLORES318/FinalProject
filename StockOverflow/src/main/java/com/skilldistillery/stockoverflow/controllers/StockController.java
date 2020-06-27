@@ -58,7 +58,7 @@ public class StockController {
 	public Stock createStock(@RequestBody Stock stock, Principal principal, HttpServletRequest req, HttpServletResponse res) {
 		try {
 			stock = stockServ.createStock(principal.getName(), stock);
-			res.setStatus(200);
+			res.setStatus(201);
 			StringBuffer url = req.getRequestURL();
 			url.append("/").append(stock.getSymbol());
 			res.setHeader("Location", url.toString());

@@ -2,6 +2,7 @@ package com.skilldistillery.stockoverflow.services;
 
 import java.util.List;
 
+import com.skilldistillery.stockoverflow.entities.Stock;
 import com.skilldistillery.stockoverflow.entities.User;
 
 public interface UserService {
@@ -12,4 +13,5 @@ public interface UserService {
 	boolean disableUser(String username);
 	List<User> findUsersUsernameSearch(String keyword);
 	List<User> findAllUsers();
+	List<Stock> addUserStock(String username, Stock stock);
 }

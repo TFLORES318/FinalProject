@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.stockoverflow.entities.Stock;
 import com.skilldistillery.stockoverflow.entities.User;
 import com.skilldistillery.stockoverflow.repositories.UserRepository;
 
@@ -93,5 +94,16 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> findAllUsers() {
 		return userRepo.findAll();
+	}
+
+	@Override
+	public List<Stock> addUserStock(String username, Stock stock) {
+		User managedUser = userRepo.findByUsername(username);
+		if(managedUser != null) {
+			managedUser.addStock(stock);
+			userRepo.saveAndFlush(managedUser);
+			return managedUser.getStocks();
+		}
+		return null;
 	}
 }

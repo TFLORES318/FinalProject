@@ -16,9 +16,12 @@ public class StockServiceImpl implements StockService {
 
 	@Autowired
 	private StockRepository stockRepo;
-	
+
 	@Autowired
 	private UserRepository userRepo;
+	
+	@Autowired
+	private UserService userServ;
 
 	@Override
 	public List<Stock> findAllStocks() {
@@ -29,7 +32,7 @@ public class StockServiceImpl implements StockService {
 	public Stock findById(String stockSymbol) {
 		Optional<Stock> stockOpt = stockRepo.findById(stockSymbol);
 		Stock stock = null;
-		if(stockOpt.isPresent()) {
+		if (stockOpt.isPresent()) {
 			stock = stockOpt.get();
 		}
 		return stock;
@@ -41,14 +44,27 @@ public class StockServiceImpl implements StockService {
 	}
 
 	@Override
-	public Stock createStock(String username, Stock stock) {
-		stockRepo.saveAndFlush(stock);
+	public Stock createStock(String username, Stock stock) throws Exception {
+		Optional<Stock> existingStock = stockRepo.findById(stock.getSymbol());
 		User managedUser = userRepo.findByUsername(username);
-		managedUser.addStock(stock);
-		stock.addUser(managedUser);
-		stockRepo.saveAndFlush(stock);
-		userRepo.saveAndFlush(managedUser);
-		return stock;
+		if (managedUser != null) {
+			if (existingStock.isPresent()) {
+				Stock stockExists = existingStock.get();
+				if (!managedUser.getStocks().contains(stockExists)) {
+					userServ.addUserStock(username, stockExists);
+				}
+				return stockExists;
+			} else {
+				System.out.println(stock);
+				stockRepo.saveAndFlush(stock);
+				System.out.println(stock);
+				managedUser.addStock(stock);
+				userRepo.saveAndFlush(managedUser);
+				return stock;
+			} 
+		}else {
+			return null;
+		}
 	}
 
 	@Override
@@ -59,7 +75,7 @@ public class StockServiceImpl implements StockService {
 		managedStock.setExchange(stock.getExchange());
 //		managedStock.setSymbol(stock.getSymbol());
 		stockRepo.saveAndFlush(managedStock);
-		
+
 		return managedStock;
 	}
 
@@ -77,5 +93,5 @@ public class StockServiceImpl implements StockService {
 		}
 		return deleted;
 	}
-	
+
 }

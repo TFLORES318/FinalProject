@@ -23,11 +23,12 @@ public class Stock {
 	
 	private String exchange;
 	
-	@ManyToMany
-	@JoinTable(name="user_stock",
-	joinColumns=@JoinColumn(name="stock_symbol"),
-	inverseJoinColumns=@JoinColumn(name="user_id"))
-	private List <User> users;
+//	@JsonIgnore
+//	@ManyToMany
+//	@JoinTable(name="user_stock",
+//	joinColumns=@JoinColumn(name="stock_symbol"),
+//	inverseJoinColumns=@JoinColumn(name="user_id"))
+//	private List <User> users;
 
 	// Constructors
 	public Stock() {}
@@ -57,31 +58,31 @@ public class Stock {
 		this.exchange = exchange;
 	}
 
-	@JsonIgnore
-	public List<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
-	}
 	
-	public void addUser(User user) {
-		if (users == null) {
-			users = new ArrayList<>();
-		}
-		if(!users.contains(user)) {
-			users.add(user);
-			user.addStock(this);
-		}
-	}
-	
-	public void removeUser(User user) {
-		if (users != null && users.contains(user)) {
-			users.remove(user);
-			user.removeStock(this);
-		}
-	}
+//	public List<User> getUsers() {
+//		return users;
+//	}
+//
+//	public void setUsers(List<User> users) {
+//		this.users = users;
+//	}
+//	
+//	public void addUser(User user) {
+//		if (users == null) {
+//			users = new ArrayList<>();
+//		}
+//		if(!users.contains(user)) {
+//			users.add(user);
+//			user.addStock(this);
+//		}
+//	}
+//	
+//	public void removeUser(User user) {
+//		if (users != null && users.contains(user)) {
+//			users.remove(user);
+//			user.removeStock(this);
+//		}
+//	}
 
 	@Override
 	public int hashCode() {
