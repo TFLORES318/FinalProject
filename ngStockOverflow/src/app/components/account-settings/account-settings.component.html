@@ -18,6 +18,8 @@
 
 <div class="container-fluid">
   <form #updatedUser='ngForm'>
+    <input type="hidden" name="enabled" [(ngModel)]="userUpdate.enabled">
+    <input type="hidden" name="role" [(ngModel)]="userUpdate.role">
     <table>
       <tr>
         <input type="text" placeholder="Change first name" name="firstName" [(ngModel)]="userUpdate.firstName">
