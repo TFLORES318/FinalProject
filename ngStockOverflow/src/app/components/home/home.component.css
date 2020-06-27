@@ -1,0 +1,15 @@
+img {
+	/* border-radius: 50%; */
+	border: 1px solid #6B7A8F;
+  	padding: 5px;
+ 	width: 250px;
+ 	height:300px;
+   object-fit: cover;
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+.card-group {
+  text-align:center;
+}
