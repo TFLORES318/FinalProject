@@ -20,5 +20,7 @@ public interface WebinarService {
 	Boolean disable(String username, int webinarId);
 	
 	List<User> addUserToAttendees(String username, int webinarId);
+	
+	List<User> removeUserToAttendees(String username, int webinarId);
 
 }

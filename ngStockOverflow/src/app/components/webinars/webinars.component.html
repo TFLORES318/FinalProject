@@ -23,7 +23,8 @@
     </tr>
     <tr>
       <td>
-        <button *ngIf='!checkIfUserAlreadyAttending(selected)' (click)="signUpUser(selected.id)">Sign Up</button>
+        <button *ngIf='checkLogin() && !checkIfUserAlreadyAttending(selected)' (click)="signUpUser(selected.id)">Sign Up</button>
+        <button *ngIf='checkLogin() && checkIfUserAlreadyAttending(selected)' (click)="withdrawUser(selected.id)">Withdraw</button>
       </td>
     </tr>
   </table>
