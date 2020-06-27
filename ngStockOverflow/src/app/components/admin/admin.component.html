@@ -6,29 +6,44 @@
         <th>Last Name</th>
         <th>Username</th>
         <th>Role</th>
-        <th>Status</th>
+        <th>Change Role</th>
+        <th>Enabled (True/False)</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let userTest of userList" class="table-secondary">
-        <th scope="row">{{userTest.firstName}}</th>
-        <td>{{userTest.lastName}}</td>
-        <td>{{userTest.username}}</td>
+      <tr *ngFor="let user of userList" class="table-secondary">
+        <th scope="row">{{user.firstName}}</th>
+        <td>{{user.lastName}}</td>
+        <td>{{user.username}}</td>
         <td>
-          {{userTest.role.toString() | titlecase}}
+          {{user.role.toString() | titlecase}}
+          <button class="btn btn-danger" (click)="selectedUser(user)">Change</button>
+        </td>
+        <td *ngIf="selected && selected.username === user.username">
+          <form *ngIf="selected" name="updateRole">
+          <select *ngIf="selected" name="role" [(ngModel)]="selected.role" (change)="updateUserRole(selected)">
+            <option *ngIf="selected" value='STANDARD'>Standard</option>
+            <option *ngIf="selected" value='VERIFIED'>Verified</option>
+            <option *ngIf="selected" value='ADMIN'>Admin</option>
+            <option *ngIf="selected" value='APPLICANT'>Applicant</option>
+          </select>
+          </form>
+        </td>
+        <td *ngIf="!(selected && selected.username === user.username)">
 
         </td>
         <td>
-          {{userTest.enabled}}
-          <!-- <form> -->
-          <!-- <input type="hidden" value="{{user.enabled}}" name="enabled" [ngModel]="!editUser.enabled"> -->
-          <button class="btn btn-danger" (click)="updateUserStatus(userTest)">Change</button>
-          <!-- </form> -->
-          <!-- <button class="btn btn-danger" (click)="changeStatus(user)">Change</button> -->
+          {{user.enabled}}
+          <button class="btn btn-danger" (click)="updateUserStatus(user)">Change</button>
         </td>
       </tr>
-
     </tbody>
   </table>
   <!-- <button class="btn btn-success" [routerLink]="['/addrun']">Add Run</button> -->
 </div>
+<!-- <div *ngIf="selected" class="container-fluid">
+  <form>
+  <p>{{selected.role}}</p>
+  </form>
+</div> -->
+
