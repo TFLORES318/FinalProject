@@ -1,1 +1,30 @@
-<p>webinars works!</p>
+<div id='allWebinars' class='container-fluid'>
+  <h1>Webinars</h1>
+  <h5>Browse through our online events hosted by StockOverflow verified experts.</h5>
+  <table>
+    <tr *ngFor='let webinar of allWebinars'>
+      <td (click)="selected=webinar">{{webinar.title}}</td>
+    </tr>
+  </table>
+</div>
+
+<div id='selectedWebinar' class='container-fluid' *ngIf='selected'>
+  <table>
+    <tr>
+      <td><img src={{selected.picture}}/></td>
+    </tr>
+    <tr>
+      <td>Date and Time: {{selected.dateTime}}</td>
+      <td>Hosted by: {{selected.userCreator.username}}</td>
+    </tr>
+    <tr>
+      <td>{{selected.description}}</td>
+      <td>{{selected.usersAttending.length}} / {{selected.maxAttendees}}</td>
+    </tr>
+    <tr>
+      <td>
+        <button *ngIf='!checkIfUserAlreadyAttending(selected)' (click)="signUpUser(selected.id)">Sign Up</button>
+      </td>
+    </tr>
+  </table>
+</div>

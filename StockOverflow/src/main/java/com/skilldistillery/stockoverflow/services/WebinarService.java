@@ -2,6 +2,7 @@ package com.skilldistillery.stockoverflow.services;
 
 import java.util.List;
 
+import com.skilldistillery.stockoverflow.entities.User;
 import com.skilldistillery.stockoverflow.entities.Webinar;
 
 public interface WebinarService {
@@ -18,6 +19,6 @@ public interface WebinarService {
 
 	Boolean disable(String username, int webinarId);
 	
-	
+	List<User> addUserToAttendees(String username, int webinarId);
 
 }
