@@ -10,7 +10,7 @@ import { User } from 'src/app/models/user';
 })
 export class AdminComponent implements OnInit, AfterViewInit {
 
-  // editUser: User = new User();
+  selected: User = null;
   user: User = new User();
   userList: User[] = null;
 
@@ -54,6 +54,24 @@ export class AdminComponent implements OnInit, AfterViewInit {
       data => {
         editUser = data;
         console.log(editUser);
+        this.getAllUsers();
+        console.log('user status changed');
+      },
+      err => {
+        console.log('error in admin component updateUserStatus()');
+      }
+    );
+  }
+
+  selectedUser(user: User){
+    this.selected = user;
+  }
+
+  updateUserRole(user: User) {
+    this.userServ.adminUpdateUser(user).subscribe(
+      data => {
+        user = data;
+        console.log(user);
         this.getAllUsers();
         console.log('user status changed');
       },
