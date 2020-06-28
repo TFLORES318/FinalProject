@@ -1,70 +1,97 @@
-<div class="jumbotron-fluid">
-<h1 id="portfolioTitle">{{user.firstName}}'s Portfolio</h1>
-</div>
-<div id="userStocks" class="container-fluid">
-  <button [routerLink]="['/profile']">View Your Profile</button>
-  <table>
-    <tr>
-      <th>Symbol</th>
-      <th>Company Name</th>
-      <th>Exchange</th>
-    </tr>
-    <tr *ngFor="let stock of userStocks">
-      <td>{{stock.symbol}}</td>
-      <td>{{stock.companyName}}</td>
-      <td>{{stock.exchange}}</td>
-      <td><button (click)="selected=stock">Edit</button></td>
-      <td><button (click)="removeStock(stock.symbol, stock)">Delete</button></td>
-    </tr>
-  </table>
-</div>
-
-<div *ngIf="selected" id="editStock" class="container-fluid">
-  <h4>Edit stock:</h4>
-  <form #editStock='ngForm'>
-    <table>
-      <tr>
-        <!-- <th>Symbol:</th> -->
-        <th>Company Name:</th>
-        <th>Exchange:</th>
-      </tr>
-      <tr>
-        <!-- <td><input type="text" name="symbol" [(ngModel)]="selected.symbol"></td> -->
-        <td><input type="text" name="companyName" [(ngModel)]="selected.companyName"></td>
-        <td><input type="text" name="exchange" [(ngModel)]="selected.exchange"></td>
-        <td><button (click)='updateStock(editStock)'>Submit</button></td>
-        <td><button (click)='selected = null'>Cancel</button></td>
-      </tr>
+<main>
+  <div class="jumbotron-fluid">
+  <h1 id="portfolioTitle">{{user.firstName}}'s Portfolio</h1>
+  </div>
+  <div id="userStocks" class="container-fluid">
+    <button [routerLink]="['/profile']" class="btn btn-dark">View Your Profile</button>
+    <table class="table table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th id="tablehead">Symbol</th>
+          <th id="tablehead">Company Name</th>
+          <th id="tablehead">Exchange</th>
+          <th id="tablehead">Edit</th>
+          <th id="tablehead">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let stock of userStocks" class="table-secondary" (click)="chartSelect=stock">
+          <td>{{stock.symbol}}</td>
+          <td>{{stock.companyName}}</td>
+          <td>{{stock.exchange}}</td>
+          <td><button (click)="selected=stock" class="btn btn-warning">Edit</button></td>
+          <td><button (click)="removeStock(stock.symbol, stock)" class="btn btn-danger">X</button></td>
+        </tr>
+      </tbody>
     </table>
+  </div>
+  <div *ngIf="chartSelect">
+    <iframe height="480" width="650" [src]='chartSelect.chartId'></iframe>
+  </div>
+
+  <div *ngIf="selected" id="editStock" class="container-fluid">
+    <h4>Edit stock:</h4>
+    <form #editStock='ngForm'>
+      <table>
+        <tr>
+          <!-- <th>Symbol:</th> -->
+          <th>Company Name:</th>
+          <th>Exchange:</th>
+        </tr>
+        <tr>
+          <!-- <td><input type="text" name="symbol" [(ngModel)]="selected.symbol"></td> -->
+          <td><input type="text" name="companyName" [(ngModel)]="selected.companyName"></td>
+          <td><input type="text" name="exchange" [(ngModel)]="selected.exchange"></td>
+          <td><button (click)='updateStock(editStock)'>Submit</button></td>
+          <td><button (click)='selected = null'>Cancel</button></td>
+        </tr>
+      </table>
+    </form>
+  </div>
+
+  <div *ngIf="!selected" id="addStock" class="container-fluid">
+    <h4>Add a Stock:</h4>
+    <form #newStock='ngForm'>
+      <table>
+        <tr>
+          <th>Symbol:</th>
+          <th>Company Name:</th>
+          <th>Exchange:</th>
+        </tr>
+        <tr>
+          <td><input type="text" name="symbol" ngModel></td>
+          <td><input type="text" name="companyName" ngModel></td>
+          <td><input type="text" name="exchange" ngModel></td>
+          <ng-template #tipContent><b>Click to add a new Stock!</b></ng-template>
+          <td><button class="btn btn-info" (click)='addNewStock(newStock)' [ngbTooltip]="tipContent">Add</button></td>
+        </tr>
+      </table>
   </form>
-</div>
+  </div>
 
-<div *ngIf="!selected" id="addStock" class="container-fluid">
-  <h4>Add a Stock:</h4>
-  <form #newStock='ngForm'>
-    <table>
-      <tr>
-        <th>Symbol:</th>
-        <th>Company Name:</th>
-        <th>Exchange:</th>
-      </tr>
-      <tr>
-        <td><input type="text" name="symbol" ngModel></td>
-        <td><input type="text" name="companyName" ngModel></td>
-        <td><input type="text" name="exchange" ngModel></td>
-        <td><button (click)='addNewStock(newStock)'>Add</button></td>
-      </tr>
-    </table>
-</form>
-</div>
+  <div id="stockWidget" class="container-fluid">
+    <h4>Placeholder for stock widget</h4>
+  </div>
+  <div id="stockWidgetHowTo" class="container-fluid">
+    <h4>Placeholder for information on how to read stock widget</h4>
+  </div>
+  <div id="outsideResources" class="container-fluid">
+    <h4>Placeholder for oustide resources to view regarding stock</h4>
+  </div>
 
-<div id="stockWidget" class="container-fluid">
-  <h4>Placeholder for stock widget</h4>
-</div>
-<div id="stockWidgetHowTo" class="container-fluid">
-  <h4>Placeholder for information on how to read stock widget</h4>
-</div>
-<div id="outsideResources" class="container-fluid">
-  <h4>Placeholder for oustide resources to view regarding stock</h4>
-</div>
+  <div class="container-fluid" id="widgets">
+    <div class="row">
+      <div class=".col-sm-6">
+        <iframe height="450" width="420" src="https://ssltvc.forexprostools.com/?pair_ID=6408&height=480&width=1600&interval=300&plotStyle=candles&domain_ID=1&lang_ID=1&timezone_ID=5"></iframe>
+      </div>
+      <div class=".col-sm-3">
+        <iframe frameborder="0" scrolling="no" height="450" width="420" allowtransparency="true" marginwidth="0" marginheight="0" src="https://ssltools.forexprostools.com/profit-calculator/index.php?force_lang=1&acc=12&pair=1"></iframe>
+      </div>
+      <div class=".col-sm-3">
+        <iframe frameborder="0" scrolling="no" height="450" width="420" allowtransparency="true" marginwidth="0" marginheight="0" src="https://ssltools.forexprostools.com/margin-calculator/index.php?force_lang=1&acc=12&pair=1"></iframe>
+      </div>
+    </div>
+  </div>
 
+
+</main>

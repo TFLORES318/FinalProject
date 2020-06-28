@@ -16,6 +16,7 @@ export class PortfolioComponent implements OnInit {
   userStocks: Stock[] = [];
   user: User = new User();
   selected: Stock = null;
+  chartSelect: Stock = null;
 
   constructor(
     private auth: AuthService,
