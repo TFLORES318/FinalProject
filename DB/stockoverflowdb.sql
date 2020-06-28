@@ -470,7 +470,6 @@ COMMIT;
 START TRANSACTION;
 USE `stockoverflowdb`;
 INSERT INTO `user_stock_journal` (`id`, `user_id`, `stock_symbol`, `content`, `created_at`) VALUES (1, 1, 'AA', 'I like this stock and this company seems solid.', '2020-06-05T09:26');
-INSERT INTO `user_stock_journal` (`id`, `user_id`, `stock_symbol`, `content`, `created_at`) VALUES (2, 2, 'BB', 'Seems promising - could explode at any moment!', '2020-06-05T09:26');
 
 COMMIT;
 
