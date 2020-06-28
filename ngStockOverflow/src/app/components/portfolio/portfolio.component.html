@@ -67,51 +67,33 @@
       </table>
   </form>
   </div>
-  <div *ngIf="resources" class="container-fluid">
-    <h4>Resources for {{resources.companyName}}</h4>
+  <div *ngIf="resources" class="container-fluid" id="resourceTabs">
+    <h2>Resources for {{resources.companyName}}</h2>
   </div>
   <div *ngIf="resources" class="container-fluid">
     <ul ngbNav #nav="ngbNav" [activeId]="2" class="nav-tabs justify-content-center">
       <li [ngbNavItem]="1">
-        <a ngbNavLink>Simple</a>
+        <a ngbNavLink>Analyst Ratings</a>
         <ng-template ngbNavContent>
-          <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth
-            master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro
-            keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat
-            salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+          <p><a href="https://www.marketbeat.com/stocks/{{resources.exchange}}/{{resources.symbol}}/price-target/" target="_blank">Marketbeat</a> analyst price target information for {{resources.companyName}}</p>
         </ng-template>
       </li>
       <li [ngbNavItem]="2">
-        <a ngbNavLink><b>Fancy</b></a>
+        <a ngbNavLink><b>Stocktwits</b></a>
         <ng-template ngbNavContent>
-          <p>Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko
-            farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts
-            ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar
-            helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson
-            8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester
-            stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+          <p>See what people are saying about {{resources.companyName}} on <a href="https://www.stocktwits.com/symbol/{{resources.symbol}}" target="_blank">Stocktwits</a>!</p>
         </ng-template>
       </li>
       <li [ngbNavItem]="3">
-        <a ngbNavLink><b>Fancy2</b></a>
+        <a ngbNavLink><b>Seeking Alpha</b></a>
         <ng-template ngbNavContent>
-          <p>POOPelit, blog sartorial PBR leggings next level wes anderson artisan four loko
-            farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts
-            ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar
-            helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson
-            8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester
-            stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+          <p>Read analysis articles on <a href="https://seekingalpha.com/symbol/{{resources.symbol}}/analysis" target="_blank">Seeking Alpha</a>!</p>
         </ng-template>
       </li>
       <li [ngbNavItem]="4">
-        <a ngbNavLink><b>Fancy3</b></a>
+        <a ngbNavLink><b>SEC Filings</b></a>
         <ng-template ngbNavContent>
-          <p>eeeeeeblog sartorial PBR leggings next level wes anderson artisan four loko
-            farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts
-            ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar
-            helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson
-            8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester
-            stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+          <p>View all of {{resources.companyName}}'s <a href="https://www.sec.gov/cgi-bin/browse-edgar?CIK={{resources.symbol}}&Find=Search&owner=exclude&action=getcompany" target="_blank">SEC Filings</a></p>
         </ng-template>
       </li>
     </ul>
