@@ -465,6 +465,16 @@ COMMIT;
 
 
 -- -----------------------------------------------------
+-- Data for table `user_stock_journal`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `stockoverflowdb`;
+INSERT INTO `user_stock_journal` (`id`, `user_id`, `stock_symbol`, `content`, `created_at`) VALUES (1, 1, 'AA', 'I like this stock and this company seems solid.', '2020-06-05T09:26');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
 -- Data for table `resource`
 -- -----------------------------------------------------
 START TRANSACTION;
