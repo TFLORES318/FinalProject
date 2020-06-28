@@ -60,7 +60,7 @@ export class OtherUserProfileComponent implements OnInit {
   }
 
   loadWebinars() {
-    return this.userService.allWebinarsForUser(this.userId).subscribe(
+    return this.userService.allWebinarsForOtherUser(this.userId).subscribe(
       data => {
         this.webinars = data;
         for (let i = 0; i < this.webinars.length; i++) {
@@ -77,7 +77,7 @@ export class OtherUserProfileComponent implements OnInit {
   }
 
   loadPosts() {
-    return this.postService.allPostsForUser(this.userId).subscribe(
+    return this.userService.allPostsForOtherUser(this.userId).subscribe(
       data => {
         this.posts = data;
        for (let index = 0; index < this.posts.length; index++) {
@@ -86,7 +86,6 @@ export class OtherUserProfileComponent implements OnInit {
          }
 
        }
-        console.log(localStorage.getItem('credentials'));
       },
       fail => {
         console.error('ERRORRRR');

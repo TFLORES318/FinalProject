@@ -141,6 +141,7 @@ public class UserController {
 	
 	@GetMapping("users/{userId}/posts")
 	public List<Post> displayPostsByUser(@PathVariable int userId){
+		System.err.print("**********************************************"+userId);
 		return userServ.findPostsByUser(userId);
 	}
 	
