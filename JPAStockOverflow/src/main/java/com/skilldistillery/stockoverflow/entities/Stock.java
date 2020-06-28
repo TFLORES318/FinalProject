@@ -23,6 +23,9 @@ public class Stock {
 	
 	private String exchange;
 	
+	@Column(name="pair_id")
+	private int chartId;
+	
 //	@JsonIgnore
 //	@ManyToMany
 //	@JoinTable(name="user_stock",
@@ -32,12 +35,30 @@ public class Stock {
 
 	// Constructors
 	public Stock() {}
+	
+
+	public Stock(String symbol, String companyName, String exchange, int chartId) {
+	super();
+	this.symbol = symbol;
+	this.companyName = companyName;
+	this.exchange = exchange;
+	this.chartId = chartId;
+}
+
 
 	// Methods
+	public int getChartId() {
+		return chartId;
+	}
+
+	public void setChartId(int chartId) {
+		this.chartId = chartId;
+	}
+
 	public String getSymbol() {
 		return symbol;
 	}
-
+	
 	public void setSymbol(String symbol) {
 		this.symbol = symbol;
 	}
