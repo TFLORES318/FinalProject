@@ -1,19 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
 
 main {
-  background-image: url('https://cdn.wallpapersafari.com/9/50/m2XPkq.jpg');
+  background-image: url('src/images/portfoliobg2.jpg');
   background-position: center center;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-size: cover;
   font-family: 'Playfair Display', serif;
+  color: whitesmoke;
 }
 
 /* Classes */
 .jumbotron-fluid {
-  background-image: url('https://lh3.googleusercontent.com/proxy/pR0VtuuBdEuNGY6UzmlEC9teiuRmoWBZXs45AQrMZSfwfbbtDoIroisSKzyD6jP7lYaQ0CyvOSKX4xTOkCks4f8BkxrVaGr0URPNomhwjCcs');
+  border-bottom: whitesmoke ridge thick;
+
   font-family: 'Playfair Display', serif;
   text-align: center;
+}
+
+.table-secondary:hover {
+  background-color: teal;
 }
 
 /* ID's */
@@ -30,4 +36,18 @@ main {
 
 #tablehead {
   color: rgba(67, 222, 67, 0.927);
+}
+
+#addStock {
+  text-align: center;
+}
+
+#editStock {
+  text-align: center;
+}
+
+#addEditForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
