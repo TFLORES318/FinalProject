@@ -15,7 +15,7 @@
     </tr>
     <tr>
       <td>Date and Time: {{selected.dateTime}}</td>
-      <td>Hosted by: {{selected.userCreator.username}}</td>
+      <td>Hosted by: <a [routerLink]="['/profile/', selected.userCreator.id]"> {{selected.userCreator.username}}</a></td>
     </tr>
     <tr>
       <td>{{selected.description}}</td>
@@ -24,7 +24,7 @@
     <tr>
       <td>
         <button *ngIf='checkLogin() && !checkIfUserAlreadyAttending(selected) && !checkIfUserIsHosting(selected)' (click)="signUpUser(selected.id)">Sign Up</button>
-        <button *ngIf='checkLogin() && checkIfUserAlreadyAttending(selected)' (click)="withdrawUser(selected.id)">Withdraw</button>
+        <button *ngIf='checkLogin() && checkIfUserAlreadyAttending(selected) && !checkIfUserIsHosting(selected)' (click)="withdrawUser(selected.id)">Withdraw</button>
         <button *ngIf='checkLogin() && checkIfUserIsHosting(selected)' (click)="webinarToEdit = selected">Update Your Webinar</button>
         <button *ngIf='checkLogin() && checkIfUserIsHosting(selected)' (click)="cancelWebinar(selected.id)">Cancel Webinar</button>
       </td>
