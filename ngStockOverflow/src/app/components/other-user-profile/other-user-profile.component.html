@@ -9,6 +9,11 @@
   <div id="proinfo">
   <h2>{{user.firstName}} {{user.lastName}}</h2>
   <p>{{userFlakeFlair}}</p>
+    <div id="flairExplanation">
+      <p *ngIf="userFlakeFlair==='Beginner'"> {{user.firstName}} is just getting started.</p>
+      <p *ngIf="userFlakeFlair==='Intermediate'"> People find {{user.firstName}}'s answers helpful.</p>
+      <p *ngIf="userFlakeFlair==='Expert'"> {{user.firstName}} is a strong contributor and advisor.</p>
+    </div>
   </div>
 
   <div id="posts">
