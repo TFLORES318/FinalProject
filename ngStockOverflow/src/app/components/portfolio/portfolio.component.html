@@ -3,7 +3,8 @@
   <h1 id="portfolioTitle">{{user.firstName}}'s Portfolio</h1>
   </div>
   <div id="userStocks" class="container-fluid">
-    <button [routerLink]="['/profile']" class="btn btn-dark">View Your Profile</button>
+    <ng-template #profileTip><b>Click to go back to your profile, {{user.firstName}}!</b></ng-template>
+    <button [routerLink]="['/profile']" class="btn btn-dark" [ngbTooltip]="profileTip">View Your Profile</button>
     <table class="table table-hover">
       <thead class="thead-dark">
         <tr>
@@ -15,12 +16,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let stock of userStocks" class="table-secondary" (click)="chartSelect=stock">
+        <tr *ngFor="let stock of userStocks" (click)="chartSelect=stock" id="portfolioRow">
           <td>{{stock.symbol}}</td>
           <td>{{stock.companyName}}</td>
-          <td>{{stock.exchange}}</td>
-          <td><button (click)="selected=stock" class="btn btn-warning">Edit</button></td>
-          <td><button (click)="removeStock(stock.symbol, stock)" class="btn btn-danger">X</button></td>
+          <td id="exchange">{{stock.exchange}}</td>
+          <ng-template #editTip><b>Click to Edit {{stock.companyName}}</b></ng-template>
+          <td><button (click)="selected=stock" class="btn btn-info" [ngbTooltip]="editTip">Edit</button></td>
+          <ng-template #deleteTip><b>Click to Delete {{stock.companyName}}</b></ng-template>
+          <td><button (click)="removeStock(stock.symbol, stock)" class="btn btn-danger" [ngbTooltip]="deleteTip">X</button></td>
         </tr>
       </tbody>
     </table>
@@ -35,17 +38,15 @@
           <th>Exchange:</th>
         </tr>
         <tr>
-          <!-- <td><input type="text" name="symbol" [(ngModel)]="selected.symbol"></td> -->
           <td><input type="text" name="companyName" [(ngModel)]="selected.companyName"></td>
           <td><input type="text" name="exchange" [(ngModel)]="selected.exchange"></td>
-          <td><button (click)='updateStock(editStock)' class="btn btn-success">Submit</button></td>
+          <td><button (click)='updateStock(editStock)' class="btn btn-info">Submit</button></td>
           <ng-template #cancelTip><b>Click to go back to Add!</b></ng-template>
-          <td><button (click)='selected = null' class="btn btn-warning" [ngbTooltip]="cancelTip">Cancel</button></td>
+          <td><button (click)='selected = null' class="btn btn-danger" [ngbTooltip]="cancelTip">Cancel</button></td>
         </tr>
       </table>
     </form>
   </div>
-
   <div *ngIf="!selected" id="addStock" class="container-fluid">
     <h4>Add a Stock:</h4>
     <form #newStock='ngForm' id="addEditForm">
@@ -60,12 +61,59 @@
           <td><input type="text" name="companyName" ngModel></td>
           <td><input type="text" name="exchange" ngModel></td>
           <ng-template #addTip><b>Click to add a new Stock!</b></ng-template>
-          <td><button class="btn btn-success" (click)='addNewStock(newStock)' [ngbTooltip]="addTip">Add</button></td>
+          <td><button class="btn btn-info" (click)='addNewStock(newStock)' [ngbTooltip]="addTip">Add</button></td>
         </tr>
       </table>
   </form>
   </div>
+  <div class="container-fluid">
+    <ul ngbNav #nav="ngbNav" [activeId]="2" class="nav-tabs justify-content-center">
+      <li [ngbNavItem]="1">
+        <a ngbNavLink>Simple</a>
+        <ng-template ngbNavContent>
+          <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth
+            master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro
+            keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat
+            salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="2">
+        <a ngbNavLink><b>Fancy</b></a>
+        <ng-template ngbNavContent>
+          <p>Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko
+            farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts
+            ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar
+            helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson
+            8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester
+            stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="3">
+        <a ngbNavLink><b>Fancy2</b></a>
+        <ng-template ngbNavContent>
+          <p>POOPelit, blog sartorial PBR leggings next level wes anderson artisan four loko
+            farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts
+            ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar
+            helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson
+            8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester
+            stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="4">
+        <a ngbNavLink><b>Fancy3</b></a>
+        <ng-template ngbNavContent>
+          <p>eeeeeeblog sartorial PBR leggings next level wes anderson artisan four loko
+            farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts
+            ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar
+            helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson
+            8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester
+            stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+        </ng-template>
+      </li>
+    </ul>
 
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+  </div>
   <div class="container-fluid">
     <div class="row">
       <div class=".col-sm-6" id="widget">
@@ -79,6 +127,4 @@
       </div>
     </div>
   </div>
-
-
 </main>

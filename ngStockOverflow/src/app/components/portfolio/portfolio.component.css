@@ -12,14 +12,8 @@ main {
 
 /* Classes */
 .jumbotron-fluid {
-  border-bottom: whitesmoke ridge thick;
-
   font-family: 'Playfair Display', serif;
   text-align: center;
-}
-
-.table-secondary:hover {
-  background-color: teal;
 }
 
 /* ID's */
@@ -35,15 +29,17 @@ main {
 }
 
 #tablehead {
-  color: rgba(67, 222, 67, 0.927);
+  color: #17a2b8;
 }
 
 #addStock {
   text-align: center;
+  padding-bottom: 70px;
 }
 
 #editStock {
   text-align: center;
+  padding-bottom: 70px;
 }
 
 #addEditForm {
@@ -51,3 +47,36 @@ main {
   justify-content: center;
   align-items: center;
 }
+
+#portfolioRow {
+  background-color: whitesmoke;
+}
+#portfolioRow:hover {
+  background-color: #EBF1E8;
+}
+
+#exchange {
+  color: black;
+  font-weight: bolder;
+}
+
+#resourceTab {
+  color:black;
+  background-color: white;
+}
+
+#ngb-nav-0, #ngb-nav-1, #ngb-nav-2, #ngb-nav-3 {
+  border: thin solid black;
+  color: white;
+  background-color: #17a2b8;
+}
+
+/* #ngb-nav-1 {
+  color: black;
+  background-color: white;
+} */
+
+#ngb-nav-0:hover, #ngb-nav-1:hover, #ngb-nav-2:hover, #ngb-nav-3:hover {
+  color: black;
+}
+
