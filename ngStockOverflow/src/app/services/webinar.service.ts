@@ -81,7 +81,7 @@ export class WebinarService {
         'X-Requested-With': 'XMLHttpRequest'
       })
     }
-    return this.http.put<Webinar>(this.url+'/delete/'+webinarId, httpOptions)
+    return this.http.put<Webinar>(this.url+'/delete/'+webinarId, webinarId, httpOptions)
     .pipe(
       catchError((err: any) => {
         console.log('error deleting webinar');
