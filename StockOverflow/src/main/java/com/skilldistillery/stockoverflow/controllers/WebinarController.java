@@ -22,7 +22,7 @@ import com.skilldistillery.stockoverflow.services.WebinarService;
 
 @RestController
 @RequestMapping("api")
-@CrossOrigin({ "*", "http://localhost:4205" })
+@CrossOrigin({ "*", "http://localhost:4210" })
 public class WebinarController {
 
 	@Autowired

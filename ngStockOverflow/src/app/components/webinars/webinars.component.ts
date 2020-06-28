@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { WebinarService } from 'src/app/services/webinar.service';
 import { Webinar } from 'src/app/models/webinar';
 import { User } from 'src/app/models/user';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-webinars',
@@ -18,6 +19,8 @@ export class WebinarsComponent implements OnInit {
   loggedInUser: User = new User();
 
   attendees: User[] = [];
+
+  webinarToEdit: Webinar = null;
 
   constructor(
     private authServ: AuthService,
@@ -95,6 +98,67 @@ export class WebinarsComponent implements OnInit {
     return false;
     }
 
+    checkIfUserIsHosting(webinar: Webinar) {
+      if(this.selected.userCreator.username === this.loggedInUser.username) {
+        return true;
+      }
+      return false;
+    }
 
-    
-}
+
+
+    createWebinar(newWebinar: NgForm) {
+        const webinar: Webinar = newWebinar.value;
+
+        this.webinarServ.createWebinar(webinar).subscribe(
+          data => {
+            console.log('webinar was created success');
+            this.loadWebinars();
+          },
+          err => {
+            console.error('webinar failed to create');
+          }
+        )
+        newWebinar.reset();
+      }
+
+
+      updateWebinar(webinar: NgForm) {
+        const webinarUpdate: Webinar = webinar.value;
+        console.log(webinarUpdate);
+        console.log(webinarUpdate.id);
+          this.webinarServ.updateWebinar(webinarUpdate, webinarUpdate.id).subscribe(
+            data => {
+              console.log('webinar was updated')
+              this.selected = this.webinarToEdit;
+              this.webinarToEdit = null;
+              this.loadWebinars();
+            },
+            err => {
+              console.error('webinar was not updated');
+            }
+          )
+          webinar.reset();
+      }
+
+      cancelWebinar(webinarId: number) {
+        this.webinarServ.deleteWebinar(webinarId).subscribe(
+          data => {
+            console.log('webinar delete success');
+            this.loadWebinars();
+          },
+          err => {
+            console.error('webinar deletion failure');
+
+          }
+        )
+        this.selected = null;
+      }
+
+
+
+    }
+
+
+
+
