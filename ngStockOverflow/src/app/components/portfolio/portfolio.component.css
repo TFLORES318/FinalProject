@@ -1,8 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
 
 main {
-  /* background-image: url('src/images/portfoliobg2.jpg'); */
-  background-image: url('https://wallpaperaccess.com/full/396602.jpg');
+  background-image: url('src/images/portfoliobg2.jpg');
   background-color: black;
   background-position: center center;
 	background-repeat: no-repeat;
