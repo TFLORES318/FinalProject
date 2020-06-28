@@ -6,9 +6,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.stockoverflow.entities.Post;
 import com.skilldistillery.stockoverflow.entities.Stock;
 import com.skilldistillery.stockoverflow.entities.User;
 import com.skilldistillery.stockoverflow.entities.Webinar;
+import com.skilldistillery.stockoverflow.repositories.PostRepository;
 import com.skilldistillery.stockoverflow.repositories.UserRepository;
 import com.skilldistillery.stockoverflow.repositories.WebinarRepository;
 
@@ -23,6 +25,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private WebinarRepository webRepo;
+	
+	@Autowired
+	private PostRepository postRepo;
 	
 	@Override
 	public User findById(int userId) {
@@ -114,4 +119,11 @@ public class UserServiceImpl implements UserService {
 	public List<Webinar> findWebinarsUserIsGoingTo(String username) {
 		return webRepo.findByUsersAttendingUsername(username);
 	}
-}
+	
+	public List<Post> findPostsByUser(int userId) {
+		return postRepo.findByUserId(userId);
+	}
+	
+
+	
+ }

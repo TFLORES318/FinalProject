@@ -12,6 +12,7 @@ public interface WebinarRepository extends JpaRepository<Webinar, Integer> {
 	
 	List<Webinar> findByUsersAttendingUsername(String username);
 	
+	
 	List<Webinar> findByUserCreatorUsername(String username);
 	
 	Webinar findByIdAndUsersAttendingUsername(int webinarId, String username);
