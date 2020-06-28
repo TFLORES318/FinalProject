@@ -96,6 +96,12 @@
           <p>View all of {{resources.companyName}}'s <a href="https://www.sec.gov/cgi-bin/browse-edgar?CIK={{resources.symbol}}&Find=Search&owner=exclude&action=getcompany" target="_blank">SEC Filings</a></p>
         </ng-template>
       </li>
+      <li [ngbNavItem]="5">
+        <a ngbNavLink><b>Reddit</b></a>
+        <ng-template ngbNavContent>
+          <p>Check out what people are saying about {{resources.companyName}} on <a href="https://www.reddit.com/search/?q={{resources.symbol}}" target="_blank">Reddit</a></p>
+        </ng-template>
+      </li>
     </ul>
 
     <div [ngbNavOutlet]="nav" class="mt-2"></div>
@@ -103,7 +109,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class=".col-sm-6" id="widget">
-        <iframe height="500" width="500" src="https://ssltvc.forexprostools.com/?pair_ID=6408&height=480&width=1600&interval=300&plotStyle=candles&domain_ID=1&lang_ID=1&timezone_ID=5"></iframe>
+        <iframe height="500" width="500" src="https://ssltvc.forexprostools.com/?pair_ID=166&height=480&width=1600&interval=300&plotStyle=candles&domain_ID=1&lang_ID=1&timezone_ID=5"></iframe>
       </div>
       <div class=".col-sm-3" id="widget">
         <iframe frameborder="0" scrolling="no" height="450" width="420" allowtransparency="true" marginwidth="0" marginheight="0" src="https://ssltools.forexprostools.com/profit-calculator/index.php?force_lang=1&acc=12&pair=1"></iframe>

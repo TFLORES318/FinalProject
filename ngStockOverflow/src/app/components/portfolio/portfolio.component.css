@@ -9,10 +9,12 @@ main {
   font-family: 'Playfair Display', serif;
   color: whitesmoke;
 }
-
+a {
+  color: #aff4ff;
+  text-decoration: underline;
+}
 p {
-  opacity: .9;
-  color: white;
+  color:#aff4ff;
   font-size: 19px;
   font-weight: bolder;
 }
@@ -72,7 +74,7 @@ p {
   background-color: white;
 }
 
-#ngb-nav-0, #ngb-nav-1, #ngb-nav-2, #ngb-nav-3 {
+#ngb-nav-0, #ngb-nav-1, #ngb-nav-2, #ngb-nav-3, #ngb-nav-4 {
   border: thin solid black;
   color: white;
   background-color: #17a2b8;
@@ -83,7 +85,7 @@ p {
   background-color: white;
 } */
 
-#ngb-nav-0:hover, #ngb-nav-1:hover, #ngb-nav-2:hover, #ngb-nav-3:hover {
+#ngb-nav-0:hover, #ngb-nav-1:hover, #ngb-nav-2:hover, #ngb-nav-3:hover, #ngb-nav-4:hover {
   color: black;
 }
 
