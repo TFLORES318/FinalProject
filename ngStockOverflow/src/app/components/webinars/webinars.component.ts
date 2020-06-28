@@ -132,19 +132,21 @@ export class WebinarsComponent implements OnInit {
               console.log('webinar was updated')
               this.selected = this.webinarToEdit;
               this.webinarToEdit = null;
+              window.alert('Your webinar has successfully been updated.')
               this.loadWebinars();
             },
             err => {
               console.error('webinar was not updated');
             }
           )
-          webinar.reset();
+          // webinar.reset();
       }
 
       cancelWebinar(webinarId: number) {
         this.webinarServ.deleteWebinar(webinarId).subscribe(
           data => {
             console.log('webinar delete success');
+            window.alert('Your webinar has been cancelled.')
             this.loadWebinars();
           },
           err => {
