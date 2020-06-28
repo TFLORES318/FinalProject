@@ -2,6 +2,7 @@ package com.skilldistillery.stockoverflow.controllers;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,11 +17,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.stockoverflow.entities.Post;
 import com.skilldistillery.stockoverflow.entities.Role;
 import com.skilldistillery.stockoverflow.entities.Stock;
 import com.skilldistillery.stockoverflow.entities.User;
 import com.skilldistillery.stockoverflow.entities.Webinar;
 import com.skilldistillery.stockoverflow.services.AuthService;
+import com.skilldistillery.stockoverflow.services.PostService;
 import com.skilldistillery.stockoverflow.services.UserService;
 
 @RestController
@@ -30,6 +33,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService userServ;
+	
+	@Autowired
+	private PostService postServ;
 	
 	@GetMapping("webinar/{webinarId}/users")
 	public List<User> findUsersAttendingWebinar(@PathVariable int webinarId){
@@ -131,5 +137,17 @@ public class UserController {
 	@GetMapping("users/webinars")
 	public List<Webinar> findAllWebinars(Principal principal) {
 		return userServ.findWebinarsUserIsGoingTo(principal.getName());
+	}
+	
+	@GetMapping("users/{userId}/posts")
+	public List<Post> displayPostsByUser(@PathVariable int userId){
+		System.err.print("**********************************************"+userId);
+		return userServ.findPostsByUser(userId);
+	}
+	
+	@GetMapping("users/{userId}/webinars")
+	public List<Webinar> displayWebinarsByUser(@PathVariable int userId) {
+		User user = userServ.findById(userId);
+		return user.getWebinarsAttending();
 	}
 }
