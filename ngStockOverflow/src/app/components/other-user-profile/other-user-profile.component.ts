@@ -26,6 +26,10 @@ export class OtherUserProfileComponent implements OnInit {
 
   enabledWebinars: Webinar[] = [];
 
+  webinarsHosting: Webinar[] = [];
+
+  enabledWebinarsHosting: Webinar[] = [];
+
   constructor(
     private userService: UserService,
     private authService: AuthService,
@@ -44,6 +48,7 @@ export class OtherUserProfileComponent implements OnInit {
     this.getSpecificUser();
     this.loadPosts();
     this.loadWebinars();
+    this.loadWebinarsHosting();
   }
 
   getSpecificUser() {
@@ -74,6 +79,23 @@ export class OtherUserProfileComponent implements OnInit {
         console.error('could not retrieve user webinars from profile view component');
       }
     );
+  }
+
+  loadWebinarsHosting() {
+    return this.userService.allWebinarsHostingForOtherUser(this.userId).subscribe(
+      data => {
+        this.webinarsHosting = data;
+        for (let i = 0; i < this.webinarsHosting.length; i++) {
+          if (this.webinarsHosting[i].enabled) {
+            this.enabledWebinarsHosting.push(this.webinarsHosting[i]);
+          }
+        }
+        console.log('webinars hosted by user retrieved in other profile component');
+      },
+      fail => {
+        console.error ('could not retrieve webinars this user is hosting in other profile component');
+      }
+    )
   }
 
   loadPosts() {

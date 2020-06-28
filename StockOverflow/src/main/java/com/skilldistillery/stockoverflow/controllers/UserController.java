@@ -150,4 +150,16 @@ public class UserController {
 		User user = userServ.findById(userId);
 		return user.getWebinarsAttending();
 	}
+	
+	@GetMapping("users/{userId}/webinarshostedbyuser")
+	public List<Webinar> displayWebinarsUserHosting(@PathVariable int userId) {
+		User user = userServ.findById(userId);
+		return user.getWebinarsUserIsHosting();
+	}
+	
+	@GetMapping("users/webinarshosting")
+	public List<Webinar> displayWebinarsUserIsHosting(Principal principal) {
+		User user = userServ.findByUsername(principal.getName());
+		return user.getWebinarsUserIsHosting();
+	}
 }

@@ -28,6 +28,10 @@ export class ProfileViewComponent implements OnInit {
 
   enabledWebinars: Webinar[] = [];
 
+  webinarsHosting: Webinar[] = [];
+
+  enabledHostingWebinars: Webinar[] = [];
+
   selected = null;
 
   userLookUp= null;
@@ -43,6 +47,7 @@ export class ProfileViewComponent implements OnInit {
   ngOnInit(): void {
     this.loadPosts();
     this.loadWebinars();
+    this.loadWebinarsHosted();
     this.getUser();
 
   }
@@ -99,6 +104,23 @@ export class ProfileViewComponent implements OnInit {
         console.error('could not retrieve user webinars from profile view component');
       }
     );
+  }
+
+  loadWebinarsHosted() {
+    return this.userService.webinarsUserIsHosting().subscribe(
+      webinarsHosting => {
+        this.webinarsHosting = webinarsHosting;
+        for (let i=0; i < webinarsHosting.length; i++) {
+          if (webinarsHosting[i].enabled) {
+            this.enabledHostingWebinars.push(webinarsHosting[i]);
+          }
+        }
+        console.log('webinars user is hosting retrieved');
+      },
+      fail => {
+        console.error('could not retrieve webinars user is hosting in profile component')
+      }
+    )
   }
 
   getSpecificUser(userId: number) {

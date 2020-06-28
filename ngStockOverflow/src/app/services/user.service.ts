@@ -127,14 +127,14 @@ export class UserService {
  }
 
  getAnotherUser(userId: number) {
-  const credentials = this.auth.getCredentials();
-  const httpOptions = {
-    headers: new HttpHeaders({
-      'Authorization': `Basic ${credentials}`,
-      'X-Requested-With': 'XMLHttpRequest'
-    })
-  };
-   return this.http.get<User>(this.url + '/' + userId, httpOptions)
+  // const credentials = this.auth.getCredentials();
+  // const httpOptions = {
+  //   headers: new HttpHeaders({
+  //     'Authorization': `Basic ${credentials}`,
+  //     'X-Requested-With': 'XMLHttpRequest'
+  //   })
+  // };
+   return this.http.get<User>(this.url + '/' + userId)
    .pipe(
      catchError((err:any) => {
        console.log('cannot get user');
@@ -159,7 +159,7 @@ export class UserService {
   );
  }
 
- allWebinarsForOtherUser(userId: number){
+ webinarsUserIsHosting() {
   const credentials = this.auth.getCredentials();
   const httpOptions = {
     headers: new HttpHeaders({
@@ -167,7 +167,23 @@ export class UserService {
       'X-Requested-With': 'XMLHttpRequest'
     })
   }
-  return this.http.get<Webinar[]>(this.url +'/'+ userId + '/webinars', httpOptions)
+  return this.http.get<Webinar[]>(this.url + '/webinarshosting', httpOptions).pipe(
+    catchError((err:any) => {
+      console.log('cannot retrieve webinars user is hosting');
+      return throwError('error in getting webinars user is hosting');
+    })
+  );
+ }
+
+ allWebinarsForOtherUser(userId: number){
+  // const credentials = this.auth.getCredentials();
+  // const httpOptions = {
+  //   headers: new HttpHeaders({
+  //     'Authorization': `Basic ${credentials}`,
+  //     'X-Requested-With': 'XMLHttpRequest'
+  //   })
+  // }
+  return this.http.get<Webinar[]>(this.url +'/'+ userId + '/webinars')
   .pipe(
     catchError((err:any) => {
       console.log('cannot retrieve other user webinars');
@@ -177,20 +193,30 @@ export class UserService {
  }
 
  allPostsForOtherUser(userId: number){
-  const credentials = this.auth.getCredentials();
-  const httpOptions = {
-    headers: new HttpHeaders({
-      'Authorization': `Basic ${credentials}`,
-      'X-Requested-With': 'XMLHttpRequest'
-    })
-  }
-  return this.http.get<Post[]>(this.url +'/'+userId+'/posts', httpOptions)
+  // const credentials = this.auth.getCredentials();
+  // const httpOptions = {
+  //   headers: new HttpHeaders({
+  //     'Authorization': `Basic ${credentials}`,
+  //     'X-Requested-With': 'XMLHttpRequest'
+  //   })
+  // }
+  return this.http.get<Post[]>(this.url +'/'+userId+'/posts')
   .pipe(
     catchError((err:any) => {
       console.log('cannot retrieve other user posts');
       return throwError('cannot retireve other users posts');
     })
   )
+ }
+
+ allWebinarsHostingForOtherUser(userId: number) {
+   return this.http.get<Webinar[]>(this.url +'/' +userId+ '/webinarshostedbyuser')
+   .pipe(
+     catchError((err:any) => {
+       console.log('cannot retrieve other user webinars');
+       return throwError('cannot retrieve other users webinars');
+     })
+   )
  }
 
 
