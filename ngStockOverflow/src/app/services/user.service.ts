@@ -159,6 +159,40 @@ export class UserService {
   );
  }
 
+ allWebinarsForOtherUser(userId: number){
+  const credentials = this.auth.getCredentials();
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': `Basic ${credentials}`,
+      'X-Requested-With': 'XMLHttpRequest'
+    })
+  }
+  return this.http.get<Webinar[]>(this.url +'/'+ userId + '/webinars', httpOptions)
+  .pipe(
+    catchError((err:any) => {
+      console.log('cannot retrieve other user webinars');
+      return throwError('cannot retireve other users webinars');
+    })
+  )
+ }
+
+ allPostsForOtherUser(userId: number){
+  const credentials = this.auth.getCredentials();
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': `Basic ${credentials}`,
+      'X-Requested-With': 'XMLHttpRequest'
+    })
+  }
+  return this.http.get<Post[]>(this.url +'/'+userId+'/posts', httpOptions)
+  .pipe(
+    catchError((err:any) => {
+      console.log('cannot retrieve other user posts');
+      return throwError('cannot retireve other users posts');
+    })
+  )
+ }
+
 
 
 }
