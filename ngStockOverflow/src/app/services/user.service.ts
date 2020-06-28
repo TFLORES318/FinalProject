@@ -209,6 +209,16 @@ export class UserService {
   )
  }
 
+ allWebinarsHostingForOtherUser(userId: number) {
+   return this.http.get<Webinar[]>(this.url +'/' +userId+ '/webinarshostedbyuser')
+   .pipe(
+     catchError((err:any) => {
+       console.log('cannot retrieve other user webinars');
+       return throwError('cannot retrieve other users webinars');
+     })
+   )
+ }
+
 
 
 }

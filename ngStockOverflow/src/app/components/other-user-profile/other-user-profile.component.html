@@ -12,16 +12,16 @@
   </div>
 
   <div id="posts">
-    <h3>{{user.username}}'s Posts</h3>
+    <h3>{{user.firstName}}'s Posts</h3>
     <h5 *ngIf="enabledPosts.length === 0">No posts to show!</h5>
-    <table *ngIf="enabledPosts.length>0">
+    <table class="table table-sm" *ngIf="enabledPosts.length>0">
       <tr>
         <th>Title</th>
         <th>Description</th>
         <th>Date</th>
       </tr>
       <tr *ngFor="let post of enabledPosts">
-      <td>{{post.title}}</td>
+      <a [routerLink]="['/forum/']"><td>{{post.title}}</td></a>
       <td>{{post.description}}</td>
       <td>{{post.createdAt}}</td>
   </tr>
@@ -29,28 +29,38 @@
   </div>
 
   <div id="webinarsAttending">
-    <h3>Webinars {{user.username}} is attending</h3>
+    <!-- <h3>Webinars {{user.username}} is attending</h3> -->
     <h6 *ngIf="enabledWebinars.length===0">No webinars to show!</h6>
-  <table *ngIf="enabledWebinars.length>0">
+  <table *ngIf="enabledWebinars.length>0" class="table table-sm">
     <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Date</th>
-      <th>Meeting Link</th>
+      <th scope="col">Webinars {{user.firstName}} is attending</th>
+      <!-- <th scope="col">Description</th> -->
+      <th scope="col">Date</th>
+      <th scope="col">Meeting Link</th>
     </tr>
     <tr *ngFor="let webinar of enabledWebinars">
-      <td>{{webinar.title}}</td>
-      <td>{{webinar.description}}</td>
+      <a [routerLink]="['/webinars/']"><th>{{webinar.title}}</th></a>
+      <!-- <td>{{webinar.description}}</td> -->
       <td>{{webinar.dateTime}}</td>
-      <td>{{webinar.meetingLink}}</td>
+      <a href={{webinar.meetingLink}} target="_blank"><td>Zoom Meeting</td></a>
     </tr>
   </table>
+ </div>
 
-
-
-
-
-  </div>
+ <div id="webinarsHosting" *ngIf="user.role === 'VERIFIED'">
+  <table class="table table-sm">
+    <thead>
+      <th scope="col">Webinars {{user.firstName}} is Hosting</th>
+      <th scope="col">Date</th>
+      <th scope="col">Meeting Link</th>
+      </thead>
+      <tr *ngFor="let webinar of enabledWebinarsHosting">
+        <a [routerLink]="['/webinars/']"><th scope="row">{{webinar.title}}</th></a>
+        <td>{{webinar.dateTime}}</td>
+        <a href={{webinar.meetingLink}} target="_blank"><td>Zoom Meeting</td></a>
+      </tr>
+  </table>
+ </div>
 
 
 
