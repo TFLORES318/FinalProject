@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'resources', component: ResourcesComponent },
   { path: 'webinars', component: WebinarsComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'register', component: RegisterComponent} ,
   { path: 'admin', component: AdminComponent },
   { path: '**', component: NotFoundComponent }
 ];
