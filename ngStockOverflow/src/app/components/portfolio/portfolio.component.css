@@ -16,15 +16,21 @@ main {
   text-align: center;
 }
 
+.row {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ID's */
+/* #addStock {
+
+} */
+
 #portfolioTitle {
   font-size: 120px;
   color: white;
   text-shadow: #454343 3px 2px;
-}
-
-#widgets {
-  align-items: center;
-  align-content: center;
 }
 
 #tablehead {
