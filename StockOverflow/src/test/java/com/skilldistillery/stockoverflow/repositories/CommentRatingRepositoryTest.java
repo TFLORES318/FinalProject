@@ -38,4 +38,13 @@ public class CommentRatingRepositoryTest {
 		assertEquals("IDK lol", commentRating.get().getComment().getContent());
 		
 	}
+	
+	@Test
+	@DisplayName("find all rating for user")
+	void test2() {
+		List<CommentRating> commentRatings = commentRatingRepo.findByComment_User_Id(1);
+		assertNotNull(commentRatings);
+		assertEquals("IDK lol", commentRatings.get(0).getComment().getContent());
+		
+	}
 }

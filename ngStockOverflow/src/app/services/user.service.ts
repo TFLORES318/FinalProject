@@ -127,14 +127,14 @@ export class UserService {
  }
 
  getAnotherUser(userId: number) {
-  const credentials = this.auth.getCredentials();
-  const httpOptions = {
-    headers: new HttpHeaders({
-      'Authorization': `Basic ${credentials}`,
-      'X-Requested-With': 'XMLHttpRequest'
-    })
-  };
-   return this.http.get<User>(this.url + '/' + userId, httpOptions)
+  // const credentials = this.auth.getCredentials();
+  // const httpOptions = {
+  //   headers: new HttpHeaders({
+  //     'Authorization': `Basic ${credentials}`,
+  //     'X-Requested-With': 'XMLHttpRequest'
+  //   })
+  // };
+   return this.http.get<User>(this.url + '/' + userId)
    .pipe(
      catchError((err:any) => {
        console.log('cannot get user');
@@ -160,14 +160,14 @@ export class UserService {
  }
 
  allWebinarsForOtherUser(userId: number){
-  const credentials = this.auth.getCredentials();
-  const httpOptions = {
-    headers: new HttpHeaders({
-      'Authorization': `Basic ${credentials}`,
-      'X-Requested-With': 'XMLHttpRequest'
-    })
-  }
-  return this.http.get<Webinar[]>(this.url +'/'+ userId + '/webinars', httpOptions)
+  // const credentials = this.auth.getCredentials();
+  // const httpOptions = {
+  //   headers: new HttpHeaders({
+  //     'Authorization': `Basic ${credentials}`,
+  //     'X-Requested-With': 'XMLHttpRequest'
+  //   })
+  // }
+  return this.http.get<Webinar[]>(this.url +'/'+ userId + '/webinars')
   .pipe(
     catchError((err:any) => {
       console.log('cannot retrieve other user webinars');
@@ -177,14 +177,14 @@ export class UserService {
  }
 
  allPostsForOtherUser(userId: number){
-  const credentials = this.auth.getCredentials();
-  const httpOptions = {
-    headers: new HttpHeaders({
-      'Authorization': `Basic ${credentials}`,
-      'X-Requested-With': 'XMLHttpRequest'
-    })
-  }
-  return this.http.get<Post[]>(this.url +'/'+userId+'/posts', httpOptions)
+  // const credentials = this.auth.getCredentials();
+  // const httpOptions = {
+  //   headers: new HttpHeaders({
+  //     'Authorization': `Basic ${credentials}`,
+  //     'X-Requested-With': 'XMLHttpRequest'
+  //   })
+  // }
+  return this.http.get<Post[]>(this.url +'/'+userId+'/posts')
   .pipe(
     catchError((err:any) => {
       console.log('cannot retrieve other user posts');
