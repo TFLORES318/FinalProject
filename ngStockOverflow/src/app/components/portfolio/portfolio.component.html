@@ -17,7 +17,8 @@
       </thead>
       <tbody>
         <tr *ngFor="let stock of userStocks" (click)="chartSelect=stock" id="portfolioRow">
-          <td>{{stock.symbol}}</td>
+          <ng-template #resourcesTip><b>Click to view more resources on {{stock.companyName}}</b></ng-template>
+          <td><button (click)="resources=stock" class="btn btn-info" [ngbTooltip]="resourcesTip">{{stock.symbol}}</button></td>
           <td>{{stock.companyName}}</td>
           <td id="exchange">{{stock.exchange}}</td>
           <ng-template #editTip><b>Click to Edit {{stock.companyName}}</b></ng-template>
@@ -66,7 +67,10 @@
       </table>
   </form>
   </div>
-  <div class="container-fluid">
+  <div *ngIf="resources" class="container-fluid">
+    <h4>Resources for {{resources.companyName}}</h4>
+  </div>
+  <div *ngIf="resources" class="container-fluid">
     <ul ngbNav #nav="ngbNav" [activeId]="2" class="nav-tabs justify-content-center">
       <li [ngbNavItem]="1">
         <a ngbNavLink>Simple</a>
