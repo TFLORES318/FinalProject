@@ -8,7 +8,7 @@
     <table class="table table-hover">
       <thead class="thead-dark">
         <tr>
-          <th id="tablehead">Symbol</th>
+          <th id="tablehead">Symbol (Click for more Resources)</th>
           <th id="tablehead">Company Name</th>
           <th id="tablehead">Exchange</th>
           <th id="tablehead">Edit</th>
@@ -62,7 +62,7 @@
           <td><input type="text" name="companyName" ngModel></td>
           <td><input type="text" name="exchange" ngModel></td>
           <ng-template #addTip><b>Click to add a new Stock!</b></ng-template>
-          <td><button class="btn btn-info" (click)='addNewStock(newStock)' [ngbTooltip]="addTip">Add</button></td>
+          <td><button class="btn btn-info" (click)='addNewStock(newStock)' [ngbTooltip]="addTip">Submit</button></td>
         </tr>
       </table>
   </form>
@@ -103,19 +103,25 @@
         </ng-template>
       </li>
     </ul>
-
     <div [ngbNavOutlet]="nav" class="mt-2"></div>
   </div>
-  <div class="container-fluid">
+  <div class="container-fluid" id="widgetInfo">
     <div class="row">
-      <div class=".col-sm-6" id="widget">
-        <iframe height="500" width="500" src="https://ssltvc.forexprostools.com/?pair_ID=166&height=480&width=1600&interval=300&plotStyle=candles&domain_ID=1&lang_ID=1&timezone_ID=5"></iframe>
+
+      <div class=".col-sm-4" id="widget">
+        <h4 id="resourceTabs">Profit Calculator</h4>
+        <p>Use this profit calculator to plan out your Trades!</p>
+        <iframe frameborder="0" scrolling="no" height="460" width="420" allowtransparency="true" marginwidth="0" marginheight="0" src="https://ssltools.forexprostools.com/profit-calculator/index.php?force_lang=1&acc=12&pair=1"></iframe>
       </div>
-      <div class=".col-sm-3" id="widget">
-        <iframe frameborder="0" scrolling="no" height="450" width="420" allowtransparency="true" marginwidth="0" marginheight="0" src="https://ssltools.forexprostools.com/profit-calculator/index.php?force_lang=1&acc=12&pair=1"></iframe>
+      <div class=".col-sm-4" id="widget">
+        <h4 id="resourceTabs">Technical Chart</h4>
+        <p>Enter a Ticker Symbol to use an the interactive charting tools!</p>
+        <iframe height="460" width="500" src="https://ssltvc.forexprostools.com/?pair_ID=166&height=480&width=1600&interval=300&plotStyle=candles&domain_ID=1&lang_ID=1&timezone_ID=5"></iframe>
       </div>
-      <div class=".col-sm-3" id="widget">
-        <iframe frameborder="0" scrolling="no" height="450" width="420" allowtransparency="true" marginwidth="0" marginheight="0" src="https://ssltools.forexprostools.com/margin-calculator/index.php?force_lang=1&acc=12&pair=1"></iframe>
+      <div class=".col-sm-4" id="widget">
+        <h4 id="resourceTabs">Margin Calculator</h4>
+        <p>Use this calculator to to prevent Margin Calls!</p>
+        <iframe frameborder="0" scrolling="no" height="460" width="420" allowtransparency="true" marginwidth="0" marginheight="0" src="https://ssltools.forexprostools.com/margin-calculator/index.php?force_lang=1&acc=12&pair=1"></iframe>
       </div>
     </div>
   </div>
