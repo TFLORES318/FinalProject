@@ -5,7 +5,7 @@
       <td>
         {{post.title}}
       </td>
-      <td>posted by {{post.user.username}}</td>
+      <td>posted by <a [routerLink]="['/profile/', post.user.id]">{{post.user.username}}</a></td>
       <td>{{post.createdAt}}</td>
     </tr>
   </table>
@@ -30,7 +30,7 @@
 
 <div *ngIf="selectedPost">
   <h4>{{selectedPost.title}}</h4>
-  <h6>posted by {{selectedPost.user.username}}  {{selectedPost.createdAt}}</h6>
+  <h6>posted by <a [routerLink]="['/profile/', selectedPost.user.id]"> {{selectedPost.user.username}} </a> {{selectedPost.createdAt}}</h6>
   <h6>{{selectedPost.description}}</h6>
   <button *ngIf="userCheck.username === selectedPost.user.username" (click)="setEditPost()">Edit</button>
   <button *ngIf="userCheck.username === selectedPost.user.username" (click)="deletePost(selectedPost.id)">Delete</button>
@@ -39,7 +39,7 @@
     <div *ngIf="selectedPost && selectedPost.comments">
     <table *ngFor="let comment of selectedPost.comments" (click)="commentDetails(comment)">
     <tr>
-    <td>{{comment.user.username}}</td>
+    <td><a [routerLink]="['/profile/', comment.user.id]">{{comment.user.username}}</a></td>
     <td>{{comment.user.flair}}</td>
     <td>posted on {{comment.createDate}}</td>
     </tr>

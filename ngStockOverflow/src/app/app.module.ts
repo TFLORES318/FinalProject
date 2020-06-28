@@ -31,6 +31,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { OtherUserProfileComponent } from './components/other-user-profile/other-user-profile.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { AdminComponent } from './components/admin/admin.component';
     RegisterComponent,
     LoginComponent,
     LogoutComponent,
-    AdminComponent
+    AdminComponent,
+    OtherUserProfileComponent
   ],
   imports: [
     NgbModule,

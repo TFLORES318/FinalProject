@@ -1,0 +1,65 @@
+<div class="container-fluid">
+  <h1>{{user.username}}'s Profile</h1>
+
+  <div id="profilePic">
+    <img src={{user.profilePicture}}>
+  </div>
+
+
+  <div id="proinfo">
+  <h2>{{user.firstName}} {{user.lastName}}</h2>
+  <p>{{user.flair}}</p>
+  </div>
+
+  <div id="posts">
+    <h3>{{user.username}}'s Posts</h3>
+    <table>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Date</th>
+      </tr>
+      <tr *ngFor="let post of enabledPosts">
+      <td>{{post.title}}</td>
+      <td>{{post.description}}</td>
+      <td>{{post.createdAt}}</td>
+  </tr>
+    </table>
+  </div>
+
+  <div id="webinarsAttending">
+    <h3>Webinars {{user.username}} is attending</h3>
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Date</th>
+      <th>Meeting Link</th>
+    </tr>
+    <tr *ngFor="let webinar of enabledWebinars">
+      <td>{{webinar.title}}</td>
+      <td>{{webinar.description}}</td>
+      <td>{{webinar.dateTime}}</td>
+      <td>{{webinar.meetingLink}}</td>
+    </tr>
+  </table>
+
+
+
+
+
+  </div>
+
+
+
+
+
+  </div>
+
+
+
+
+
+
+
+
