@@ -122,6 +122,7 @@ export class ForumComponent implements OnInit, AfterViewInit{
     this.postService.disable(postId).subscribe(
       data => {
         console.log('post delete success');
+        window.alert('Your post has been deleted.')
         this.loadAllPosts();
       },
       err => {
@@ -199,6 +200,7 @@ export class ForumComponent implements OnInit, AfterViewInit{
       this.commentService.destroyComment(comment.id, comment, postId).subscribe(
         data => {
           console.log('comment deleted');
+          window.alert('Your comment has been deleted.')
           this.loadComments(post);
         },
         err => {
