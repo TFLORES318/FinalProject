@@ -159,6 +159,22 @@ export class UserService {
   );
  }
 
+ webinarsUserIsHosting() {
+  const credentials = this.auth.getCredentials();
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': `Basic ${credentials}`,
+      'X-Requested-With': 'XMLHttpRequest'
+    })
+  }
+  return this.http.get<Webinar[]>(this.url + '/webinarshosting', httpOptions).pipe(
+    catchError((err:any) => {
+      console.log('cannot retrieve webinars user is hosting');
+      return throwError('error in getting webinars user is hosting');
+    })
+  );
+ }
+
  allWebinarsForOtherUser(userId: number){
   // const credentials = this.auth.getCredentials();
   // const httpOptions = {

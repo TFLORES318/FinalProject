@@ -1,5 +1,5 @@
 <div class="container-fluid">
-<h1>Profile</h1>
+<h1>Your Profile</h1>
 
 <div id="profilePic">
   <img src={{user.profilePicture}}>
@@ -16,37 +16,55 @@
 </div>
 
 <div id="posts">
-  <h3>Your Posts</h3>
-  <table>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Date</th>
-    </tr>
+  <!-- <h3>Your Posts</h3> -->
+  <table class="table table-sm">
+    <thead>
+      <th scope="col">Your Posts</th>
+      <th scope="col">Description</th>
+      <th scope="col">Date</th>
+    </thead>
+    <tbody>
     <tr *ngFor="let post of enabledPosts">
-    <td>{{post.title}}</td>
+    <a [routerLink]="['/forum/']"><th scope="row">{{post.title}}</th></a>
     <td>{{post.description}}</td>
     <td>{{post.createdAt}}</td>
 </tr>
+</tbody>
   </table>
 </div>
 
 <div id="webinarsAttending">
-  <h3>Webinars You Are Attending</h3>
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Date</th>
-    <th>Meeting Link</th>
-  </tr>
+  <!-- <h3>Webinars You Are Attending</h3> -->
+<table class="table table-sm">
+  <thead>
+    <th scope="col">Webinars You're Attending</th>
+    <!-- <th>Description</th> -->
+    <th scope="col">Date</th>
+    <th scope="col">Meeting Link</th>
+  </thead>
   <tr *ngFor="let webinar of enabledWebinars">
-    <td>{{webinar.title}}</td>
-    <td>{{webinar.description}}</td>
+    <a [routerLink]="['/webinars/']"><th scope="row">{{webinar.title}}</th></a>
+    <!-- <td>{{webinar.description}}</td> -->
     <td>{{webinar.dateTime}}</td>
-    <td>{{webinar.meetingLink}}</td>
+    <a href={{webinar.meetingLink}} target="_blank"><td>Join Zoom Meeting</td></a>
   </tr>
 </table>
+
+
+<div id="webinarsHosting">
+  <table class="table table-sm">
+    <thead>
+      <th scope="col">Webinars You're Hosting</th>
+      <th scope="col">Date</th>
+      <th scope="col">Meeting Link</th>
+      </thead>
+      <tr *ngFor="let webinar of webinarsHosting">
+        <a [routerLink]="['/webinars/']"><th scope="row">{{webinar.title}}</th></a>
+        <td>{{webinar.dateTime}}</td>
+        <a href={{webinar.meetingLink}} target="_blank"><td>Zoom Meeting</td></a>
+      </tr>
+  </table>
+</div>
 
 
 
