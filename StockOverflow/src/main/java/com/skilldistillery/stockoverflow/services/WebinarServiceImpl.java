@@ -38,6 +38,7 @@ public class WebinarServiceImpl implements WebinarService {
 	public Webinar create(String username, Webinar webinar) {
 		User user = userRepo.findByUsername(username);
 		if (user != null) {
+			webinar.setEnabled(true);
 			webinar.setUserCreator(user);
 			webinarRepo.saveAndFlush(webinar);
 			return webinar;
@@ -55,7 +56,7 @@ public class WebinarServiceImpl implements WebinarService {
 			updatedWebinar.setPicture(webinar.getPicture());
 			updatedWebinar.setMeetingLink(webinar.getMeetingLink());
 			updatedWebinar.setMaxAttendees(webinar.getMaxAttendees());
-			updatedWebinar.setEnabled(webinar.getEnabled());
+			updatedWebinar.setEnabled(true);
 
 			webinarRepo.saveAndFlush(updatedWebinar);
 			return updatedWebinar;
