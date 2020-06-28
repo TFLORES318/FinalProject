@@ -1,31 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
 
 main {
-  background-image: url('https://cdn.wallpapersafari.com/9/50/m2XPkq.jpg');
+  background-image: url('src/images/portfoliobg2.jpg');
   background-position: center center;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-size: cover;
   font-family: 'Playfair Display', serif;
+  color: whitesmoke;
+}
+a {
+  color: #aff4ff;
+  text-decoration: underline;
+}
+p {
+  color:#aff4ff;
+  font-size: 19px;
+  font-weight: bolder;
 }
 
 /* Classes */
 .jumbotron-fluid {
-  background-image: url('https://lh3.googleusercontent.com/proxy/pR0VtuuBdEuNGY6UzmlEC9teiuRmoWBZXs45AQrMZSfwfbbtDoIroisSKzyD6jP7lYaQ0CyvOSKX4xTOkCks4f8BkxrVaGr0URPNomhwjCcs');
   font-family: 'Playfair Display', serif;
   text-align: center;
 }
 
-.row {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 /* ID's */
-/* #addStock {
 
-} */
+#widget {
+  margin: auto;
+}
 
 #portfolioTitle {
   font-size: 120px;
@@ -34,5 +38,59 @@ main {
 }
 
 #tablehead {
-  color: rgba(67, 222, 67, 0.927);
+  color: #17a2b8;
 }
+
+#addStock {
+  text-align: center;
+  padding-bottom: 70px;
+}
+
+#editStock {
+  text-align: center;
+  padding-bottom: 70px;
+}
+
+#addEditForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#portfolioRow {
+  background-color: whitesmoke;
+}
+#portfolioRow:hover {
+  background-color: #EBF1E8;
+}
+
+#exchange {
+  color: black;
+  font-weight: bolder;
+}
+
+#resourceTab {
+  color:black;
+  background-color: white;
+}
+
+#ngb-nav-0, #ngb-nav-1, #ngb-nav-2, #ngb-nav-3, #ngb-nav-4 {
+  border: thin solid black;
+  color: white;
+  background-color: #17a2b8;
+}
+
+/* #ngb-nav-1 {
+  color: black;
+  background-color: white;
+} */
+
+#ngb-nav-0:hover, #ngb-nav-1:hover, #ngb-nav-2:hover, #ngb-nav-3:hover, #ngb-nav-4:hover {
+  color: black;
+}
+
+#resourceTabs {
+  text-align: center;
+  text-shadow: black 2px 2px;
+}
+
