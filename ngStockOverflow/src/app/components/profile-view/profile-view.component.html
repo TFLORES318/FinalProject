@@ -58,7 +58,7 @@
       <th scope="col">Date</th>
       <th scope="col">Meeting Link</th>
       </thead>
-      <tr *ngFor="let webinar of webinarsHosting">
+      <tr *ngFor="let webinar of enabledHostingWebinars">
         <a [routerLink]="['/webinars/']"><th scope="row">{{webinar.title}}</th></a>
         <td>{{webinar.dateTime}}</td>
         <a href={{webinar.meetingLink}} target="_blank"><td>Zoom Meeting</td></a>
