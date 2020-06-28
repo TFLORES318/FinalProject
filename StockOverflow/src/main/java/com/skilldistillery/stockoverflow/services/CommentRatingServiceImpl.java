@@ -23,7 +23,8 @@ public class CommentRatingServiceImpl implements CommentRatingService {
 
 	@Override
 	public List<CommentRating> findByUser_Id(int userId) {
-		return null;
+		List<CommentRating> ratings = repo.queryForRatingsForUser(userId);
+		return ratings;
 	}
 
 	@Override
