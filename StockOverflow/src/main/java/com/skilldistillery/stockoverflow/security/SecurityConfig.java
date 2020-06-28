@@ -35,6 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers(HttpMethod.GET, "/api/posts/{pId}/comments").permitAll() // For CORS, the preflight request for Public post data
         .antMatchers(HttpMethod.GET, "/api/webinars").permitAll() // For CORS, the preflight request for Public post data
         .antMatchers(HttpMethod.GET, "/api/users/**").permitAll() // For CORS, the preflight request for Public post data
+        .antMatchers(HttpMethod.GET, "/api/comments/ratings/**").permitAll() // For CORS, the preflight request for Public post data
         .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()     // will hit the OPTIONS on the route
         .antMatchers("/api/**").authenticated() // Requests for our REST API must be authorized.
         .anyRequest().permitAll()               // All other requests are allowed without authorization.

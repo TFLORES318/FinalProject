@@ -14,6 +14,6 @@ import com.skilldistillery.stockoverflow.entities.CommentRatingId;
 public interface CommentRatingRepository extends JpaRepository<CommentRating, CommentRatingId> {
 //	List<CommentRating> findByComment_User_Id(int userId);
 	
-	@Query("select cr from CommentRating cr where cr.user.id = :userId")
+	@Query("select cr from CommentRating cr where cr.comment.user.id = :userId")
 	List<CommentRating> queryForRatingsForUser(@Param ("userId") int userId);
 }
