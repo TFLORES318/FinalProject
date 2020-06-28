@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `stock` (
   `symbol` VARCHAR(45) NOT NULL,
   `company_name` VARCHAR(200) NOT NULL,
   `exchange` VARCHAR(45) NOT NULL,
-  `pair_id` VARCHAR(45) NULL,
+  `pair_id` VARCHAR(450) NULL,
   PRIMARY KEY (`symbol`))
 ENGINE = InnoDB;
 
@@ -307,7 +307,7 @@ START TRANSACTION;
 USE `stockoverflowdb`;
 INSERT INTO `stock` (`symbol`, `company_name`, `exchange`, `pair_id`) VALUES ('AA', 'Arthur Aardvark Inc.', 'NASDAQ', NULL);
 INSERT INTO `stock` (`symbol`, `company_name`, `exchange`, `pair_id`) VALUES ('BB', 'Bullet Bill Ltd.', 'NYSE', NULL);
-INSERT INTO `stock` (`symbol`, `company_name`, `exchange`, `pair_id`) VALUES ('MSFT', 'Microsoft', 'NASDAQ', '252');
+INSERT INTO `stock` (`symbol`, `company_name`, `exchange`, `pair_id`) VALUES ('MSFT', 'Microsoft', 'NASDAQ', 'https://ssltvc.forexprostools.com/?pair_ID=252&height=480&width=650&interval=300&plotStyle=candles&domain_ID=1&lang_ID=1&timezone_ID=7\n');
 INSERT INTO `stock` (`symbol`, `company_name`, `exchange`, `pair_id`) VALUES ('RTX', 'Raytheon', 'NYSE', '8235');
 INSERT INTO `stock` (`symbol`, `company_name`, `exchange`, `pair_id`) VALUES ('FSLY', 'Fastly', 'NYSE', '1130931');
 INSERT INTO `stock` (`symbol`, `company_name`, `exchange`, `pair_id`) VALUES ('SPOT', 'Spotify', 'NYSE', '1072316');

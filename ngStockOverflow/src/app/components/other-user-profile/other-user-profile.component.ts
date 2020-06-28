@@ -60,7 +60,7 @@ export class OtherUserProfileComponent implements OnInit {
   }
 
   loadWebinars() {
-    return this.userService.allWebinarsForUser(this.user.id).subscribe(
+    return this.userService.allWebinarsForUser(this.userId).subscribe(
       data => {
         this.webinars = data;
         for (let i = 0; i < this.webinars.length; i++) {
@@ -77,7 +77,7 @@ export class OtherUserProfileComponent implements OnInit {
   }
 
   loadPosts() {
-    return this.postService.allPostsForUser(this.user.id).subscribe(
+    return this.postService.allPostsForUser(this.userId).subscribe(
       data => {
         this.posts = data;
        for (let index = 0; index < this.posts.length; index++) {
