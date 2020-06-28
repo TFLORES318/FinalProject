@@ -2,6 +2,7 @@
 
 main {
   background-image: url('src/images/portfoliobg2.jpg');
+  background-color: black;
   background-position: center center;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
@@ -17,6 +18,7 @@ p {
   color:#aff4ff;
   font-size: 19px;
   font-weight: bolder;
+  text-align: center;
 }
 
 /* Classes */
@@ -69,28 +71,13 @@ p {
   font-weight: bolder;
 }
 
-#resourceTab {
-  color:black;
-  background-color: white;
-}
-
-#ngb-nav-0, #ngb-nav-1, #ngb-nav-2, #ngb-nav-3, #ngb-nav-4 {
-  border: thin solid black;
-  color: white;
-  background-color: #17a2b8;
-}
-
-/* #ngb-nav-1 {
-  color: black;
-  background-color: white;
-} */
-
-#ngb-nav-0:hover, #ngb-nav-1:hover, #ngb-nav-2:hover, #ngb-nav-3:hover, #ngb-nav-4:hover {
-  color: black;
-}
-
 #resourceTabs {
   text-align: center;
   text-shadow: black 2px 2px;
+}
+
+#widgetInfo {
+  padding-top: 40px;
+  text-align: center;
 }
 
