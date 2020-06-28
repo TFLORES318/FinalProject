@@ -358,6 +358,16 @@ INSERT INTO `comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `po
 INSERT INTO `comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `post_id`) VALUES (2, 'There\'s a form you need to fill out. Try sending a message through the Message Center!', '2020-06-05T09:26', 1, 3, 2);
 INSERT INTO `comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `post_id`) VALUES (3, 'OMG yes that\'s great that your company has that and you should start saving up for retirment ASAP! Goes for anyone.', '2020-06-05T09:26', 1, 4, 3);
 INSERT INTO `comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `post_id`) VALUES (4, 'I do not love this post!', '2020-06-05T09:26', 1, 1, 1);
+INSERT INTO `comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `post_id`) VALUES (5, 'I\'m gluten free now Ma!', '2020-06-05T09:26', 1, 2, 2);
+INSERT INTO `comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `post_id`) VALUES (6, 'Buy buy buy!', '2020-06-05T09:26', 1, 2, 3);
+INSERT INTO `comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `post_id`) VALUES (7, 'Sell sell sell!', '2020-06-05T09:26', 1, 2, 4);
+INSERT INTO `comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `post_id`) VALUES (8, 'Pay attenion to market forecasting and you should be fine.', '2020-06-05T09:26', 1, 2, 5);
+INSERT INTO `comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `post_id`) VALUES (9, 'Sigma Alpha Market Beat!!!', '2020-06-05T09:26', 1, 2, 6);
+INSERT INTO `comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `post_id`) VALUES (10, 'Invest in tech funds.', '2020-06-05T09:26', 1, 2, 7);
+INSERT INTO `comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `post_id`) VALUES (11, 'I think you should do more research.', '2020-06-05T09:26', 1, 2, 8);
+INSERT INTO `comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `post_id`) VALUES (12, 'Sorry that wasn\'t helpful --- you\'ll have to pay closer attention to trends and gather info that way.', '2020-06-05T09:26', 1, 2, 1);
+INSERT INTO `comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `post_id`) VALUES (13, 'I think this could be worth your time.', '2020-06-05T09:26', 1, 2, 2);
+INSERT INTO `comment` (`id`, `content`, `create_date`, `enabled`, `user_id`, `post_id`) VALUES (14, 'If the market\'s right!', '2020-06-05T09:26', 1, 2, 3);
 
 COMMIT;
 
@@ -492,6 +502,16 @@ USE `stockoverflowdb`;
 INSERT INTO `comment_rating` (`user_id`, `comment_id`, `rating`, `note`, `created_at`) VALUES (1, 1, 2, 'Not very helpful Rich', '2020-06-05T09:26');
 INSERT INTO `comment_rating` (`user_id`, `comment_id`, `rating`, `note`, `created_at`) VALUES (5, 2, 5, 'Thank you - that helped me out!', '2020-06-05T09:26');
 INSERT INTO `comment_rating` (`user_id`, `comment_id`, `rating`, `note`, `created_at`) VALUES (3, 3, 4, 'Got it, thanks!', '2020-06-05T09:26');
+INSERT INTO `comment_rating` (`user_id`, `comment_id`, `rating`, `note`, `created_at`) VALUES (4, 5, 5, 'Thank you!', '2020-06-05T09:26');
+INSERT INTO `comment_rating` (`user_id`, `comment_id`, `rating`, `note`, `created_at`) VALUES (5, 6, 5, 'Thanks!', '2020-06-05T09:26');
+INSERT INTO `comment_rating` (`user_id`, `comment_id`, `rating`, `note`, `created_at`) VALUES (6, 7, 5, 'Great!', '2020-06-05T09:26');
+INSERT INTO `comment_rating` (`user_id`, `comment_id`, `rating`, `note`, `created_at`) VALUES (7, 8, 5, 'Woo!', '2020-06-05T09:26');
+INSERT INTO `comment_rating` (`user_id`, `comment_id`, `rating`, `note`, `created_at`) VALUES (8, 9, 5, 'Awesome!', '2020-06-05T09:26');
+INSERT INTO `comment_rating` (`user_id`, `comment_id`, `rating`, `note`, `created_at`) VALUES (9, 10, 5, 'Yay!', '2020-06-05T09:26');
+INSERT INTO `comment_rating` (`user_id`, `comment_id`, `rating`, `note`, `created_at`) VALUES (10, 11, 5, 'Wow!', '2020-06-05T09:26');
+INSERT INTO `comment_rating` (`user_id`, `comment_id`, `rating`, `note`, `created_at`) VALUES (11, 12, 5, 'Yippee!', '2020-06-05T09:26');
+INSERT INTO `comment_rating` (`user_id`, `comment_id`, `rating`, `note`, `created_at`) VALUES (4, 13, 5, 'Hooray!', '2020-06-05T09:26');
+INSERT INTO `comment_rating` (`user_id`, `comment_id`, `rating`, `note`, `created_at`) VALUES (8, 14, 5, 'Will do Rich!', '2020-06-05T09:26');
 
 COMMIT;
 

@@ -6,6 +6,8 @@ import { PostService } from 'src/app/services/post.service';
 import { User } from 'src/app/models/user';
 import { Post } from 'src/app/models/post';
 import { Webinar } from 'src/app/models/webinar';
+import { CommentRating } from 'src/app/models/comment-rating';
+import { CommentRatingService } from 'src/app/services/comment-rating.service';
 
 @Component({
   selector: 'app-other-user-profile',
@@ -30,12 +32,19 @@ export class OtherUserProfileComponent implements OnInit {
 
   enabledWebinarsHosting: Webinar[] = [];
 
+  commentRatings: CommentRating[];
+
+  counter: number = 0;
+
+  userFlakeFlair: string = null;
+
   constructor(
     private userService: UserService,
     private authService: AuthService,
     private currentRoute: ActivatedRoute,
     private router: Router,
-    private postService: PostService) { }
+    private postService: PostService,
+    private commentRatingServ: CommentRatingService) { }
 
   ngOnInit(): void {
     this.currentRoute.paramMap.subscribe(
@@ -49,6 +58,7 @@ export class OtherUserProfileComponent implements OnInit {
     this.loadPosts();
     this.loadWebinars();
     this.loadWebinarsHosting();
+    this.getOtherUsersCommentRatings();
   }
 
   getSpecificUser() {
@@ -115,5 +125,34 @@ export class OtherUserProfileComponent implements OnInit {
     );
   }
 
+  getOtherUsersCommentRatings(){
+    return this.commentRatingServ.getCommentRatingsForAUser(this.userId).subscribe(
+      data => {
+        this.commentRatings = data;
+        for(let i = 0; i < this.commentRatings.length ; i++){
+          if(this.commentRatings[i].rating >= 3){
+            this.counter++;
+          }
+        }
+        console.log(this.counter);
+        this.setUserFlair();
+      },
+      err =>{
+        console.log('you think you can do these things but you just cant Nemo!');
+      }
+    )
+  }
+//beginner  ---->   intermediate      ------> expert
+  setUserFlair(){
+    if(this.counter >= 10 && this.counter < 25){
+      this.userFlakeFlair = "Intermediate";
+    }
+    else if(this.counter >= 25){
+      this.userFlakeFlair = "Expert";
+    }
+    else{
+      this.userFlakeFlair = "Beginner";
+    }
+  }
 
 }
