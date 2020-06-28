@@ -17,8 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.stockoverflow.entities.Comment;
+import com.skilldistillery.stockoverflow.entities.CommentRating;
 import com.skilldistillery.stockoverflow.entities.Post;
-import com.skilldistillery.stockoverflow.entities.User;
+import com.skilldistillery.stockoverflow.services.CommentRatingService;
 import com.skilldistillery.stockoverflow.services.CommentService;
 import com.skilldistillery.stockoverflow.services.UserService;
 
@@ -31,6 +32,8 @@ public class CommentController {
 	private CommentService commSvc;
 	@Autowired
 	private UserService userSvc;
+	@Autowired
+	private CommentRatingService commentRatingServ;
 
 	@GetMapping("posts/{pId}/comments")
 	public List<Comment> index(@PathVariable int pId) {
@@ -103,5 +106,13 @@ public class CommentController {
 		}
 	}
 	
+	@GetMapping("comments/ratings/{userId}")
+	public List<CommentRating> findRatingsForUser(@PathVariable int userId, HttpServletResponse res){
+		List<CommentRating> ratings = commentRatingServ.findByUser_Id(userId);
+		if (ratings == null) {
+			res.setStatus(404);
+		}
+		return ratings;
+	}
 	
 }
