@@ -1,5 +1,6 @@
 package com.skilldistillery.stockoverflow.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +22,15 @@ public class WebinarServiceImpl implements WebinarService {
 
 	@Override
 	public List<Webinar> allWebinars() {
-		return webinarRepo.findAll();
+		List<Webinar> allWebinars = webinarRepo.findAll();
+		List<Webinar> activeWebinars = new ArrayList<>();
+		for (Webinar webinar : allWebinars) {
+			if (webinar.getEnabled()) {
+				activeWebinars.add(webinar);
+			}
+			else activeWebinars.remove(webinar);
+		}
+		return activeWebinars;
 	}
 
 	@Override
