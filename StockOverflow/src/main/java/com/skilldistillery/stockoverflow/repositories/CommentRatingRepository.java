@@ -10,4 +10,5 @@ import com.skilldistillery.stockoverflow.entities.CommentRatingId;
 
 @Repository
 public interface CommentRatingRepository extends JpaRepository<CommentRating, CommentRatingId> {
+	List<CommentRating> findByComment_User_Id(int userId);
 }
