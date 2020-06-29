@@ -1,48 +1,69 @@
 <div class="container-fluid" id="main-content">
-  <div id='allWebinars' class='container-fluid'>
+<div id='allWebinars' class='container-fluid'>
     <h1>Webinars</h1>
     <h5>Browse through our online events hosted by StockOverflow verified experts.</h5>
-    <table>
+    <table class="table table-hover" *ngIf="!selected && !webinarToEdit">
+      <tbody>
+
       <tr *ngFor='let webinar of allWebinars'>
-        <td (click)="selected=webinar">{{webinar.title}}</td>
+        <th (click)="selected=webinar">{{webinar.title}} </th>
       </tr>
+    </tbody>
     </table>
   </div>
   <div id='selectedWebinar' class='container-fluid' *ngIf='selected'>
-    <table>
+    <table class="table borderless">
       <tr>
-        <td><img src={{selected.picture}}/></td>
+        <th><img src={{selected.picture}}/></th>
+        <th><div>{{selected.dateTime | date:'fullDate'}}</div></th>
+        <th>Hosted by: <a [routerLink]="['/profile/', selected.userCreator.id]"> {{selected.userCreator.username}}</a></th>
+        <th>{{selected.usersAttending.length}} / {{selected.maxAttendees}} capacity</th>
       </tr>
+      <div class="moveDetails">
       <tr>
-        <td>Date and Time: {{selected.dateTime}}</td>
-        <td>Hosted by: <a [routerLink]="['/profile/', selected.userCreator.id]"> {{selected.userCreator.username}}</a></td>
       </tr>
       <tr>
         <td>{{selected.description}}</td>
-        <td>{{selected.usersAttending.length}} / {{selected.maxAttendees}}</td>
       </tr>
       <tr>
         <td>
-          <button *ngIf='checkLogin() && !checkIfUserAlreadyAttending(selected) && !checkIfUserIsHosting(selected)' (click)="signUpUser(selected.id)">Sign Up</button>
-          <button *ngIf='checkLogin() && checkIfUserAlreadyAttending(selected) && !checkIfUserIsHosting(selected)' (click)="withdrawUser(selected.id)">Withdraw</button>
-          <button *ngIf='checkLogin() && checkIfUserIsHosting(selected)' (click)="webinarToEdit = selected">Update Your Webinar</button>
-          <button *ngIf='checkLogin() && checkIfUserIsHosting(selected)' (click)="cancelWebinar(selected.id)">Cancel Webinar</button>
+          <button class="btn btn-info mr-1" (click)="displayWebinars()">Back To Webinars</button>
+          <button class="btn btn-info mr-1" *ngIf='checkLogin() && !checkIfUserAlreadyAttending(selected) && !checkIfUserIsHosting(selected)' (click)="signUpUser(selected.id)">Sign Up</button>
+          <button class="btn btn-info mr-1" *ngIf='checkLogin() && checkIfUserAlreadyAttending(selected) && !checkIfUserIsHosting(selected)' (click)="withdrawUser(selected.id)">Withdraw</button>
+          <button class="btn btn-info mr-1" *ngIf='checkLogin() && checkIfUserIsHosting(selected)' (click)="webinarToEdit = selected">Update Your Webinar</button>
+          <button class="btn btn-info mr-1" *ngIf='checkLogin() && checkIfUserIsHosting(selected)' (click)="cancelWebinar(selected.id)">Cancel Webinar</button>
         </td>
       </tr>
+    </div>
     </table>
   </div>
 
 
-  <div id="editWebinar" class="container-fluid" *ngIf="webinarToEdit">
+  <div id="editWebinar" class="container-fluid" *ngIf="webinarToEdit && selected">
     <form #webinarBeingEdited="ngForm">
-      <input type="hidden" name="id" [(ngModel)]="webinarToEdit.id"/>
-      <input type="text" name="title" [(ngModel)]="webinarToEdit.title"/>
-      <input type="text" name="description" [(ngModel)]="webinarToEdit.description"/>
-      <input type="datetime-local" name="dateTime" [(ngModel)]="webinarToEdit.dateTime"/>
-      <input type="text" name="picture" [(ngModel)]="webinarToEdit.picture"/>
-      <input type="text" name="meetingLink" [(ngModel)]="webinarToEdit.meetingLink"/>
-      <input type="number" name="maxAttendees" [(ngModel)]="webinarToEdit.maxAttendees"/>
+      <div class="form-group">
+      <input type="hidden" class="form-control" name="id" [(ngModel)]="webinarToEdit.id"/>
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" name="title" id="labelForTitle" [(ngModel)]="webinarToEdit.title"/>
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" name="description" rows="5" [(ngModel)]="webinarToEdit.description"/>
+      </div>
+      <div class="form-group">
+      <input type="datetime-local" class="form-control" name="dateTime" [(ngModel)]="webinarToEdit.dateTime"/>
+      </div>
+      <div class="form-group">
+      <input type="text" class="form-control" name="picture" [(ngModel)]="webinarToEdit.picture"/>
+      </div>
+      <div class="form-group">
+      <input type="text" class="form-control" name="meetingLink" [(ngModel)]="webinarToEdit.meetingLink"/>
+      </div>
+      <div class="form-group">
+      <input type="number "class="form-control" name="maxAttendees" [(ngModel)]="webinarToEdit.maxAttendees"/>
+      </div>
       <button type="button" class="btn btn-info mr-1" (click)="updateWebinar(webinarBeingEdited)">Update</button>
+      <button type="button" class="btn btn-info mr-1" (click)="webinarToEdit = null">Back</button>
     </form>
   </div>
 
@@ -71,6 +92,8 @@
   <br>
   </form>
   <br>
+  </div>
+
   </div>
 
 

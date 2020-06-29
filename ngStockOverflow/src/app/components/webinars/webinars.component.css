@@ -3,7 +3,8 @@ img {
 	border: 1px solid #6B7A8F;
   	padding: 5px;
  	width: 300px;
- 	height:200px;
+   height:200px;
+   left: 0;
  	object-fit: cover;
 }
 
@@ -13,3 +14,51 @@ img {
   bottom: 0;
 }
 
+.webinarDetails {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 20;
+  z-index: -1;
+
+  object-fit: cover;
+  /* border: 3px solid green; */
+}
+
+.css-input {
+  padding: 22px;
+  font-size: 16px;
+  border-width: 1px;
+  border-color: #CCCCCC;
+  background-color: #FFFFFF;
+  color: #000000;
+  border-style: solid;
+  border-radius: 0px;
+  box-shadow: 0px 0px 5px rgba(66,66,66,.75);
+  text-shadow: 0px 0px 5px rgba(66,66,66,.75);
+}
+.css-input:focus {
+  outline:none;
+}
+
+h1 {
+  font-size: 100px;
+  font-style: bold;
+}
+
+h5 {
+  color: lightgrey;
+  font-style: italic;
+}
+
+h3 {
+  color: 393e46;
+}
+
+moveDetails {
+  right: 0;
+}
+
+.borderless td, .borderless th {
+  border: none;
+}
