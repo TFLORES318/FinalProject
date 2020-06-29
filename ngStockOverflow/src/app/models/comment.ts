@@ -1,4 +1,4 @@
-import { Post } from './post';
+import { CommentRating } from './comment-rating';
 
 export class Comment {
 
@@ -6,13 +6,14 @@ export class Comment {
   content: string;
   enabled: boolean;
   createDate: Date;
-  // post: Post;
+  commentRatings: CommentRating[];
 
-  constructor(id?:number, content?:string, enabled?:boolean, createDate?:Date) {
+  constructor(id?:number, content?:string, enabled?:boolean, createDate?:Date, commentRatings?:CommentRating[]) {
     this.id = id;
     this.content = content;
     this.enabled = enabled;
     this.createDate = createDate;
+    this.commentRatings = commentRatings;
   }
 
 

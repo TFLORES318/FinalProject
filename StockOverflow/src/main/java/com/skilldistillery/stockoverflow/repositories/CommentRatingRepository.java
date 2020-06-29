@@ -16,4 +16,6 @@ public interface CommentRatingRepository extends JpaRepository<CommentRating, Co
 	
 	@Query("select cr from CommentRating cr where cr.comment.user.id = :userId")
 	List<CommentRating> queryForRatingsForUser(@Param ("userId") int userId);
+	
+	List<CommentRating> findByUser_id(int userId);
 }

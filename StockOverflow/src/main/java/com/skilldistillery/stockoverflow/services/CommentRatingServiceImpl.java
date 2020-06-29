@@ -20,7 +20,8 @@ public class CommentRatingServiceImpl implements CommentRatingService {
 	public List<CommentRating> findAll() {
 		return repo.findAll();
 	}
-
+	
+	//find for a different user (not the logged in user)
 	@Override
 	public List<CommentRating> findByUser_Id(int userId) {
 		List<CommentRating> ratings = repo.queryForRatingsForUser(userId);
@@ -43,6 +44,12 @@ public class CommentRatingServiceImpl implements CommentRatingService {
 		repo.saveAndFlush(commentRating);
 		return commentRating;
 	}
+
+	@Override
+	public List<CommentRating> findForLoggedInuser(int userId) {
+		return repo.findByUser_id(userId);
+	}
+	
 	
 	
 }

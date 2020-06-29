@@ -10,5 +10,6 @@ public interface CommentRatingService {
 	List<CommentRating> findAll();
 	List<CommentRating> findByUser_Id(int userId);
 	CommentRating createCommentRating(CommentRating commentRating);
+	List<CommentRating> findForLoggedInuser(int userId);
 
 }
