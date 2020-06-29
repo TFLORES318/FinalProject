@@ -1,0 +1,9 @@
+/* IDs */
+html {
+  min-height: 100%;
+}
+#mainContent {
+  min-height: 100vh;
+  position: relative;
+  bottom: 0;
+}

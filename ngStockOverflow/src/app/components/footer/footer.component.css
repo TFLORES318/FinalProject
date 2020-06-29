@@ -1,0 +1,19 @@
+.footerContent {
+  height: 100%;
+  text-align: center;
+  margin: 0;
+}
+
+#foot {
+  /* left: 0;
+  bottom: 0; */
+  width: 100vw;
+  height: 60px;
+  margin: 0;
+  padding: 0;
+  flex-shrink: none;
+  position: absolute;
+  background-color: silver;
+  color: white !important;
+
+}

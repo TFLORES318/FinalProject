@@ -9,6 +9,9 @@ main {
 	background-size: cover;
   font-family: 'Playfair Display', serif;
   color: whitesmoke;
+  min-height: 100vh;
+  position: relative;
+  bottom: 0;
 }
 a {
   color: #aff4ff;
