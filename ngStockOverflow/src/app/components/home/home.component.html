@@ -60,15 +60,38 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
-
-
-
-
+  <div class="container-fluid">
+    <ul ngbNav #nav="ngbNav" [activeId]="2" class="nav-tabs justify-content-center">
+      <li [ngbNavItem]="1">
+        <a ngbNavLink>Live Cryptocurrency</a>
+        <ng-template ngbNavContent>
+          <iframe src="https://www.widgets.investing.com/top-cryptocurrencies?theme=darkTheme&roundedCorners=true" width="100%" height="600" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0">
+          </iframe>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="2">
+        <a ngbNavLink><b>Technical Widgets</b></a>
+        <ng-template ngbNavContent>
+          <div class="row">
+            <div class=".col-sm-4" id="widget">
+              <h4 id="resourceTabs">Technical Summary Box</h4>
+              <iframe src="https://ssltsw.forexprostools.com?lang=1&forex=1,2,3,5,7,9,10&commodities=8830,8836,8831,8849,8833,8862,8832&indices=175,166,172,27,179,170,174&stocks=334,345,346,348,349,350,23343&tabs=4,3,2,1" width="500" height="460"></iframe>
+            </div>
+            <div class=".col-sm-4" id="widget">
+              <h4 id="resourceTabs">Global Economic Calendar</h4>
+              <iframe src="https://sslecal2.forexprostools.com?columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&features=datepicker,timezone&countries=25,32,6,37,72,22,17,39,14,10,35,43,56,36,110,11,26,12,4,5&calType=week&timeZone=6&lang=1" width="460" height="460" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0"></iframe>
+            </div>
+            <div class=".col-sm-4" id="widget">
+              <h4 id="resourceTabs">Technical Charting Tool</h4>
+              <iframe height="460" width="460" src="https://ssltvc.forexprostools.com/?pair_ID=8849&height=480&width=650&interval=300&plotStyle=area&domain_ID=1&lang_ID=1&timezone_ID=7"></iframe>
+            </div>
+          </div>
+        </ng-template>
+      </li>
+    </ul>
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+  </div>
   <br>
-  <br>
-  <br>
-  <br>
-
   <div class="container-fluid">
     <h3>Happy Stock Overflow Members</h3>
     <div class="card-deck">
@@ -78,7 +101,6 @@
           <h5 class="card-title">Chad Michael Murray</h5>
           <blockquote>Actor</blockquote>
           <p class="card-text">StockOverflow has helped me get my finances back in order. I recommend it to all my friends!</p>
-
         </div>
       </div>
       <div class="card">

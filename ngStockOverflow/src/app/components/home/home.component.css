@@ -20,6 +20,15 @@ img {
   text-align:center;
 }
 
+#widget {
+  margin: auto;
+}
+
 #mainContent {
   bottom: 0;
+}
+
+#resourceTabs {
+  text-align: center;
+  text-shadow: white 2px 2px;
 }
