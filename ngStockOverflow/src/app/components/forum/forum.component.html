@@ -1,71 +1,85 @@
 <div class="container-fluid" id="mainContent">
-  <h1>Forum</h1>
-  <div id="all-posts" *ngIf="!postSearch">
-    <table>
+  <div class="header" *ngIf="!selectedPost">
+    <strong>Forum</strong>
+  </div>
+
+  <div *ngIf="checkLogin() && !selectedPost && !postToEdit">
+    <form #newPost="ngForm">
+      <div class="form-row">
+        <div class="col">
+          <input type="text" class="form-control" placeholder="New Post Title" name="title" ngModel/>
+        </div>
+      <div class="col">
+          <input type="description" class="form-control" placeholder="New Post Description" name="description" ngModel/>
+      </div>
+        <input type="hidden" value="true" name="enabled" ngModel/>
+        <button class="btn btn-info" (click)="createPost(newPost)">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="all-posts" *ngIf="!postSearch && !selectedPost && !postToEdit">
+    <table class="table table-hover">
+      <tbody>
       <tr *ngFor="let post of allPosts" (click)="postDetails(post)">
-        <td>
-          {{post.title}}
-        </td>
-        <td>posted by <a [routerLink]="['/profile/', post.user.id]">{{post.user.username}}</a></td>
-        <td>{{post.createdAt}}</td>
+        <td>{{post.title}}</td>
+        <td>posted by <a class="routerLink" [routerLink]="['/profile/', post.user.id]">{{post.user.username}}</a></td>
+        <td>{{post.createdAt | date:'fullDate'}}</td>
       </tr>
+      </tbody>
     </table>
   </div>
+
   <div id="searchPosts" *ngIf="postSearch">
     <table>
       <tr *ngFor="let post of postSearch" (click)="postDetails(post)">
-        <td>
-          {{post.title}}
-        </td>
+        <td>{{post.title}}</td>
         <td>posted by <a [routerLink]="['/profile/', post.user.id]">{{post.user.username}}</a></td>
-        <td>{{post.createdAt}}</td>
+        <td>{{post.createdAt | date:'fullDate'}}</td>
       </tr>
     </table>
   </div>
 
+  <div *ngIf="selectedPost">
+    <button class="btn btn-info mr-1" (click)="displayPosts()">Back to Posts</button>
+    <h5>Posted by <a class="routerLink" [routerLink]="['/profile/', selectedPost.user.id]"> {{selectedPost.user.username}} </a> {{selectedPost.createdAt | date:'fullDate'}}</h5>
+    <blockquote class="blockquote blockquote-reverse"><h1><p class="mb-0">{{selectedPost.title}}</p></h1>
+    <h3><footer class="blockquote-footer">{{selectedPost.description}}</footer></h3>
+    </blockquote>
+    <button class="btn btn-info" *ngIf="userCheck.username === selectedPost.user.username" (click)="setEditPost()">Edit</button>
+    <button class="btn btn-info" *ngIf="userCheck.username === selectedPost.user.username" (click)="deletePost(selectedPost.id)">Delete</button>
 
-
-
-
-
-  <div *ngIf="checkLogin()">
-    <form #newPost="ngForm"><label>New Post</label>
-    <input type="text" placeholder="title" name="title" ngModel/>
-    <input type="description" placeholder="description" name="description" ngModel/>
-    <input type="hidden" value="true" name="enabled" ngModel/>
-    <button class="button" (click)="createPost(newPost)">Submit</button>
-    </form>
+    <div>
+      <form *ngIf="postToEdit && selectedPost">
+        <label>Post Title</label><input type="text" class="form-control" placeholder="Post Title" name="title" [(ngModel)]="postToEdit.title">
+        <label>Post Description</label><input type="text" class="form-control" placeholder="Post Description" name="description" [(ngModel)]="postToEdit.description">
+        <button class="btn btn-info" (click)="updatePost(postToEdit)">Save</button>
+        <button class="btn btn-info" (click)= "postToEdit=null">Cancel</button>
+      </form>
     </div>
 
+    <div>
+      <form #newComment="ngForm" *ngIf="!commentToEdit && checkLogin()">
+      <textarea id="content" rows="7" cols="50" input type="text" placeholder="Write a comment..." name="content" ngModel></textarea>
+      <br>
+      <button class="btn btn-info mr-1" (click)="postComment(newComment, selectedPost.id, selectedPost)">Comment</button>
+      </form>
+    </div>
 
-
-
-
-  <div *ngIf="selectedPost">
-    <h4>{{selectedPost.title}}</h4>
-    <h6>posted by <a [routerLink]="['/profile/', selectedPost.user.id]"> {{selectedPost.user.username}} </a> {{selectedPost.createdAt}}</h6>
-    <h6>{{selectedPost.description}}</h6>
-    <button *ngIf="userCheck.username === selectedPost.user.username" (click)="setEditPost()">Edit</button>
-    <button *ngIf="userCheck.username === selectedPost.user.username" (click)="deletePost(selectedPost.id)">Delete</button>
-    <h5>Replies</h5>
-
-      <div *ngIf="selectedPost && selectedPost.comments">
+    <div *ngIf="selectedPost && selectedPost.comments">
       <table *ngFor="let comment of selectedPost.comments" (click)="commentDetails(comment)">
       <tr>
-      <td><a [routerLink]="['/profile/', comment.user.id]">{{comment.user.username}}</a></td>
-      <td>{{comment.user.flair}}</td>
-      <td>posted on {{comment.createDate}}</td>
+      <td><a class="routerLink" [routerLink]="['/profile/', comment.user.id]">{{comment.user.username}}</a>
+      {{comment.user.flair}} - {{comment.createDate | date:'fullDate'}}</td>
       </tr>
       <p>{{comment.content}}</p>
       <div *ngIf="userCheck.username !== comment.user.username && checkLogin() && !checkUserHasNotRatedComment(comment)">
-
-        <button (click)="selectedRating = comment">Rate this Comment</button>
-
-
+        <button class="btn btn-info btn-sm" (click)="selectedRating = comment">Rate Comment</button>
       </div>
+
       <div *ngIf="userCheck.username === comment.user.username">
-        <button type="button" (click)="commentToEdit = comment">Edit</button>
-        <button type="button" (click)="deleteComment(comment, selectedPost.id, selectedPost)">Delete</button>
+        <button class="btn btn-info" type="button" (click)="commentToEdit = comment">Edit</button>
+        <button class="btn btn-info" type="button" (click)="deleteComment(comment, selectedPost.id, selectedPost)">Delete</button>
       </div>
     </table>
   </div>
@@ -73,43 +87,23 @@
                         <form #commentRating="ngForm">
                           <label for="rating">Rating (between 1 and 5):</label>
                           <input type="number" id="rating" name="rating" min="1" max="5" ngModel>
-                          <button (click)="createCommentRating(commentRating, selectedRating.id, selectedRating)">Submit</button>
-                          <button (click)="selectedRating=null">Cancel</button>
+                          <button class="btn btn-info btn-sm" (click)="createCommentRating(commentRating, selectedRating.id, selectedRating)">Submit</button>
+                          <button class="btn btn-info btn-sm" (click)="selectedRating=null">Cancel</button>
                         </form>
                       </div>
 
 
 
 
-  <div>
+    <div>
       <form #editCommentForm="ngForm" *ngIf="commentToEdit && selectedComment && selectedPost">
         <input type="hidden" name="id" [(ngModel)]="commentToEdit.id"/>
         <input type="text" name="content" [(ngModel)]="commentToEdit.content"/>
-        <button type="button" (click)="updateComment(editCommentForm, selectedPost.id, selectedPost)">Save</button>
-        <button type="button" (click)= "commentToEdit=null">Cancel</button>
+        <button class="btn btn-info" (click)="updateComment(editCommentForm, selectedPost.id, selectedPost)">Save</button>
+        <button class="btn btn-info" (click)= "commentToEdit=null">Cancel</button>
       </form>
     </div>
 
-
-
-
-      <div>
-        <form #newComment="ngForm" *ngIf="!commentToEdit && checkLogin()">
-        <input type="text" placeholder="Write a Comment" name="content" ngModel/>
-        <button class="button" (click)="postComment(newComment, selectedPost.id, selectedPost)">Post</button>
-        </form>
-      </div>
-
-
-
-  </div>
-
-  <div>
-    <form *ngIf="postToEdit && selectedPost">
-      <input type="text" placeholder="title" name="title" [(ngModel)]="postToEdit.title">
-      <button type="button" (click)="updatePost(postToEdit)">Save</button>
-      <button type="button" (click)= "postToEdit=null">Cancel</button>
-    </form>
   </div>
 </div>
 
