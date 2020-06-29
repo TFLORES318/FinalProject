@@ -44,6 +44,17 @@
     <td>posted on {{comment.createDate}}</td>
     </tr>
     <p>{{comment.content}}</p>
+    <div *ngIf="userCheck.username !== comment.user.username && checkLogin()">
+      <button *ngIf="!rate" (click)="rate=true">Rate this Comment</button>
+      <div id="commentRatingForm" *ngIf="rate">
+        <form #commentRating="ngForm">
+          <label for="rating">Rating (between 1 and 5):</label>
+          <input type="number" id="rating" name="rating" min="1" max="5" ngModel>
+          <button (click)="createCommentRating(commentRating, comment.id, comment)">Submit</button>
+          <button (click)="rate=null">Cancel</button>
+        </form>
+      </div>
+    </div>
     <div *ngIf="userCheck.username === comment.user.username">
     <button type="button" (click)="commentToEdit = comment">Edit</button>
     <button type="button" (click)="deleteComment(comment, selectedPost.id, selectedPost)">Delete</button>
