@@ -33,6 +33,12 @@ public class PostController {
 		return postSvc.index();
 	}
 	
+	// Get all Posts by title search
+	@GetMapping("posts/search/{title}")
+	public List<Post> displayByTitleSearch(@PathVariable String title){
+		return postSvc.showByTitle(title);
+	}
+	
 	// Get all Posts by Logged-In User:
 	@GetMapping("users/posts")
 	public List<Post> displayPostsByUser(Principal principal){

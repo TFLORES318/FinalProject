@@ -1,6 +1,6 @@
 <div class="container-fluid" id="mainContent">
   <h1>Forum</h1>
-  <div id="all-posts">
+  <div id="all-posts" *ngIf="!postSearch">
     <table>
       <tr *ngFor="let post of allPosts" (click)="postDetails(post)">
         <td>
@@ -11,6 +11,18 @@
       </tr>
     </table>
   </div>
+  <div id="searchPosts" *ngIf="postSearch">
+    <table>
+      <tr *ngFor="let post of postSearch" (click)="postDetails(post)">
+        <td>
+          {{post.title}}
+        </td>
+        <td>posted by <a [routerLink]="['/profile/', post.user.id]">{{post.user.username}}</a></td>
+        <td>{{post.createdAt}}</td>
+      </tr>
+    </table>
+  </div>
+
 
 
 

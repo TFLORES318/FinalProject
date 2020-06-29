@@ -81,4 +81,10 @@ public class PostServiceImpl implements PostService {
 		return deletedDisable;
 	}
 
+	@Override
+	public List<Post> showByTitle(String title) {
+		String titleContain = "%" + title + "%";
+		return postRepo.findByTitleLike(titleContain);
+	}
+
 }

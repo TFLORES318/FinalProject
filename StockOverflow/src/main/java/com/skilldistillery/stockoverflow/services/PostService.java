@@ -17,5 +17,7 @@ public interface PostService {
 	public Post update(String username, int postId, Post post);
 	
 	public Boolean disable(String username, int postId);
+	
+	public List<Post> showByTitle(String title);
 
 }

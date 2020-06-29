@@ -45,6 +45,15 @@ export class PostService {
     )
   }
 
+  allPostsByTitleSearch(title: string){
+    return this.http.get<Post[]>(this.url + '/search/' + title).pipe(
+      catchError((err: any) => {
+        console.log('error in postsByTitleSearch() in post svc');
+        return throwError('error in postsByTitleSearch() in post svc');
+      })
+    );
+  }
+
   getPostById(postId: number){
     const credentials = this.auth.getCredentials();
     const httpOptions = {
