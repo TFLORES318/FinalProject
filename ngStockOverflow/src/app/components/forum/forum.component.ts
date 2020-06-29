@@ -87,6 +87,7 @@ export class ForumComponent implements OnInit, AfterViewInit{
   }
 
 
+
   loadAllPosts(){
     this.postService.index().subscribe(
       data => {
