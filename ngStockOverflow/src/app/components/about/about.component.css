@@ -16,3 +16,9 @@ h6{
   text-align: center;
 }
 
+#main{
+  min-height: 100vh;
+  position: relative;
+  bottom: 0;
+}
+

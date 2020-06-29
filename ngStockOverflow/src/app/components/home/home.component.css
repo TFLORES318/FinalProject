@@ -1,45 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
-
 img {
+	/* border-radius: 50%; */
 	border: 1px solid #6B7A8F;
   padding: 5px;
+ 	width: 250px;
  	height:300px;
- 	object-fit: cover;
+  object-fit: cover;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
+
+
+.card-group {
+  text-align:center;
+}
 
 #flagship{
   text-align:center;
-  font-size: 25px;
 }
 
-main {
-  background-position: center center;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-size: cover;
-  font-family: 'Playfair Display', serif;
-  color: 222831;
-}
-
-#carouselFont {
-  color: 393e46;
-}
-
-.stockoverflow {
-  font-size: 100px;
-}
-
-h3 {
-  text-align: center;
-  font-size: 50px;
-}
-
-h5 {
-  text-align: center;
-}
-
-blockquote {
-  color: lightgrey;
-  text-align: center;
+#mainContent {
+  bottom: 0;
 }

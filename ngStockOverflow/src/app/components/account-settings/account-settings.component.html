@@ -1,66 +1,68 @@
-<h1>Account Settings</h1>
+<div class="container-fluid" id="mainContent">
+  <h1>Account Settings</h1>
 
-<div id="userInfo" class="contianer-fluid">
-  <img [src]="userUpdate.profilePicture" width="200" height="200"/>
-  <table>
-    <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Email</th>
-    </tr>
-    <tr>
-      <td>{{userUpdate.firstName}}</td>
-      <td>{{userUpdate.lastName}}</td>
-      <td>{{userUpdate.email}}</td>
-    </tr>
-  </table>
-</div>
-
-<div class="container-fluid">
-  <form #updatedUser='ngForm'>
-    <input type="hidden" name="enabled" [(ngModel)]="userUpdate.enabled">
-    <input type="hidden" name="role" [(ngModel)]="userUpdate.role">
+  <div id="userInfo" class="contianer-fluid">
+    <img [src]="userUpdate.profilePicture" width="200" height="200"/>
     <table>
       <tr>
-        <input type="text" placeholder="Change first name" name="firstName" [(ngModel)]="userUpdate.firstName">
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
       </tr>
       <tr>
-        <input type="text" placeholder="Change last name" name="lastName" [(ngModel)]="userUpdate.lastName">
+        <td>{{userUpdate.firstName}}</td>
+        <td>{{userUpdate.lastName}}</td>
+        <td>{{userUpdate.email}}</td>
       </tr>
-      <tr>
-        <input type="text" placeholder="Change profile pic URL" name="profilePicture" [(ngModel)]="userUpdate.profilePicture">
-      </tr>
-      <tr>
-        <input type="text" placeholder="Change email" name="email" [(ngModel)]="userUpdate.email">
-      </tr>
-      <!-- <tr>
-        <input type="text" placeholder="Change flair" name="flair" ngModel>
-      </tr> -->
     </table>
-    <button (click)="updateUser(updatedUser)">Submit</button>
-  </form>
-</div>
+  </div>
 
-<div id="verifyOrDelete" class="container-fluid" >
-  <!-- <div id="verifyForm">
-    <form>
-    <table>
-      <tr>
-        <p>
-          Please explain why you should be a verified user.
-          Feel free to include credentials such as your degree or relevant work background.
-          Your application will be reviewed by our admin team shortly.
-        </p>
-       </tr>
-       <tr>
-        <textarea name = "description" rows = "4" cols = "30"></textarea>
-      </tr>
-      <tr>
-        <button (click)="storeApplication()">Submit</button>
-      </tr>
-    </table>
+  <div class="container-fluid">
+    <form #updatedUser='ngForm'>
+      <input type="hidden" name="enabled" [(ngModel)]="userUpdate.enabled">
+      <input type="hidden" name="role" [(ngModel)]="userUpdate.role">
+      <table>
+        <tr>
+          <input type="text" placeholder="Change first name" name="firstName" [(ngModel)]="userUpdate.firstName">
+        </tr>
+        <tr>
+          <input type="text" placeholder="Change last name" name="lastName" [(ngModel)]="userUpdate.lastName">
+        </tr>
+        <tr>
+          <input type="text" placeholder="Change profile pic URL" name="profilePicture" [(ngModel)]="userUpdate.profilePicture">
+        </tr>
+        <tr>
+          <input type="text" placeholder="Change email" name="email" [(ngModel)]="userUpdate.email">
+        </tr>
+        <!-- <tr>
+          <input type="text" placeholder="Change flair" name="flair" ngModel>
+        </tr> -->
+      </table>
+      <button (click)="updateUser(updatedUser)">Submit</button>
     </form>
-  </div> -->
-  <button *ngIf="userUpdate.role == 'STANDARD'" (click)="applyForVerification(userUpdate)">Apply for Verification</button>
-  <button (click)="disableUser(userUpdate)">Delete account</button>
+  </div>
+
+  <div id="verifyOrDelete" class="container-fluid" >
+    <!-- <div id="verifyForm">
+      <form>
+      <table>
+        <tr>
+          <p>
+            Please explain why you should be a verified user.
+            Feel free to include credentials such as your degree or relevant work background.
+            Your application will be reviewed by our admin team shortly.
+          </p>
+        </tr>
+        <tr>
+          <textarea name = "description" rows = "4" cols = "30"></textarea>
+        </tr>
+        <tr>
+          <button (click)="storeApplication()">Submit</button>
+        </tr>
+      </table>
+      </form>
+    </div> -->
+    <button *ngIf="userUpdate.role == 'STANDARD'" (click)="applyForVerification(userUpdate)">Apply for Verification</button>
+    <button (click)="disableUser(userUpdate)">Delete account</button>
+  </div>
 </div>
