@@ -43,6 +43,8 @@ export class ForumComponent implements OnInit, AfterViewInit{
 
   selectedRating = null;
 
+  postSearch: Post[] = null;
+
 
   constructor(
     private postService: PostService,
@@ -50,8 +52,11 @@ export class ForumComponent implements OnInit, AfterViewInit{
     private auth: AuthService,
     private commentService: CommentService,
     private userService: UserService,
-    private commentRatingServ: CommentRatingService
-    ) { }
+    private commentRatingServ: CommentRatingService,
+  ) {
+    this.postSearch = this.router.getCurrentNavigation().extras.state as Post[];
+    console.log(this.postSearch);
+  }
 
     ngOnInit(): void {
       this.loadAllPosts();
