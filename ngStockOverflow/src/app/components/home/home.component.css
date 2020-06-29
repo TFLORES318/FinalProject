@@ -10,16 +10,72 @@ img {
   margin-right: auto;
 }
 
+blockquote {
+  font-style: italic;
+}
 
+.homeTitle {
+  font-size: 120px;
+  color: black;
+  text-shadow: #17A2B8 2px 2px;;
+  text-align: center;
+}
+
+.testimonialTitle {
+  text-align: center;
+  color: black;
+  text-shadow: #17A2B8 .5px .5px;
+}
 
 .card-group {
   text-align:center;
 }
 
+.card-text {
+  font-size: 16px;
+  font: italic;
+}
+
+.card-img-top {
+  height: 220px;
+  width: 200px;
+
+}
+
+#homeWidgetTabs {
+  padding-top: 60px;
+}
+
 #flagship{
-  text-align:center;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bolder;
+  color: black;
+}
+
+#widget {
+  margin: auto;
 }
 
 #mainContent {
   bottom: 0;
 }
+
+#resourceTabs {
+  text-align: center;
+  text-shadow: white 2px 2px;
+}
+
+#welcome {
+  font-style: italic;
+  font-size: 24px;
+  text-shadow: #17A2B8 .5px .5px;
+}
+
+#ngb-nav-0, #ngb-nav-1 {
+  color: black;
+  font-size: 24px;
+  text-shadow: #17A2B8 .5px .5px;
+}
+
+

@@ -1,24 +1,16 @@
 <div class="container-fluid" id="mainContent">
-  <div class="stockoverflow">
-  StockOverflow
+  <div class="jumbotron-fluid">
+    <h1 class="homeTitle">StockOverflow</h1>
+    <hr>
   </div>
-
-
-
   <div id="flagship" class="container-fluid">
-
     <p>We know what it’s like to be overwhelmed by the world of stocks.
-    Everyone wants to be financially savvy, but how?</p><br>
-    The StockOverflow community is here to lead, educate,
+    Everyone wants to be financially savvy, but how?</p>
+    <p>The StockOverflow community is here to lead, educate,
     and guide you on your path to stock expertise. The founders of StockOverflow moderate and participate
-    in discussions daily and invite you too as well!
-    <p><br>Welcome to StockOverflow!<br></p>
-    </div>
-
-
-
-
-
+    in discussions daily and invite you too as well!</p>
+    <p id="welcome">Welcome to StockOverflow!<br></p>
+  </div>
   <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
@@ -27,25 +19,28 @@
     </ol>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="https://i.imgur.com/GlMD6eh.jpg" class="d-block w-100" alt="..." [routerLink]="['/forum']" >
+        <a [routerLink]="['/forum']">
+        <img src="https://i.imgur.com/GlMD6eh.jpg" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
           <div id="carouselFont"><h3 style="color:#eeeeee; font-size:100px; text-shadow: 2px 2px 4px #000000">FORUM</h3></div>
-          <p></p>
         </div>
+        </a>
       </div>
       <div class="carousel-item">
-        <img src="https://i.imgur.com/aGsupNX.jpg" class="d-block w-100" alt="..." [routerLink]="['/webinars']">
+        <a [routerLink]="['/webinars']">
+        <img src="https://i.imgur.com/aGsupNX.jpg" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <div class="carouselFont"><h3 style="color:#eeeeee; font-size:100px; text-shadow: 2px 2px 4px #000000">WEBINARS</h3></div>
-          <p></p>
+          <div id="carouselFont"><h3 style="color:#eeeeee; font-size:100px; text-shadow: 2px 2px 4px #000000">WEBINARS</h3></div>
         </div>
+        </a>
       </div>
       <div class="carousel-item">
-        <img src="https://i.imgur.com/6CiDzrB.jpg" class="d-block w-100" alt="..." [routerLink]="['/resources']">
+        <a [routerLink]="['/resources']">
+        <img src="https://i.imgur.com/6CiDzrB.jpg" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
           <div id="carouselFont"><h3 style="color:#eeeeee; font-size:100px; text-shadow: 2px 2px 4px #000000">RESOURCES</h3></div>
-          <p></p>
         </div>
+        </a>
       </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
@@ -57,33 +52,58 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
-
-
-
-
+  <div class="container-fluid" id="homeWidgetTabs">
+    <ul ngbNav #nav="ngbNav" [activeId]="1" class="nav-tabs justify-content-center">
+      <li [ngbNavItem]="1">
+        <a ngbNavLink>Live Cryptocurrency</a>
+        <ng-template ngbNavContent>
+          <iframe src="https://www.widgets.investing.com/top-cryptocurrencies?theme=darkTheme&roundedCorners=true" width="100%" height="450" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0">
+          </iframe>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="2">
+        <a ngbNavLink><b>Technical Widgets</b></a>
+        <ng-template ngbNavContent>
+          <div class="row">
+            <div class=".col-sm-4" id="widget">
+              <h4 id="resourceTabs">Technical Summary Box</h4>
+              <iframe src="https://ssltsw.forexprostools.com?lang=1&forex=1,2,3,5,7,9,10&commodities=8830,8836,8831,8849,8833,8862,8832&indices=175,166,172,27,179,170,174&stocks=334,345,346,348,349,350,23343&tabs=4,3,2,1" width="500" height="460"></iframe>
+            </div>
+            <div class=".col-sm-4" id="widget">
+              <h4 id="resourceTabs">Global Economic Calendar</h4>
+              <iframe src="https://sslecal2.forexprostools.com?columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&features=datepicker,timezone&countries=25,32,6,37,72,22,17,39,14,10,35,43,56,36,110,11,26,12,4,5&calType=week&timeZone=6&lang=1" width="460" height="460" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0"></iframe>
+            </div>
+            <div class=".col-sm-4" id="widget">
+              <h4 id="resourceTabs">Technical Charting Tool</h4>
+              <iframe height="460" width="460" src="https://ssltvc.forexprostools.com/?pair_ID=8849&height=480&width=650&interval=300&plotStyle=area&domain_ID=1&lang_ID=1&timezone_ID=7"></iframe>
+            </div>
+          </div>
+        </ng-template>
+      </li>
+    </ul>
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+  </div>
   <br>
-  <br>
-  <br>
-  <br>
-
-  <div class="container-fluid">
-    <h3>Happy Stock Overflow Members</h3>
+  <div class="container-fluid" id="testimonialDiv">
+    <h2 class="testimonialTitle">Happy StockOverflow Members</h2>
+    <hr>
+    <h5 class="testimonialTitle">~ <i>Testimonials from some of our most active users!</i> ~</h5>
+    <br>
     <div class="card-deck">
       <div class="card">
         <img src="https://i.imgur.com/dzbpUJ1.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Chad Michael Murray</h5>
           <blockquote>Actor</blockquote>
-          <p class="card-text">StockOverflow has helped me get my finances back in order. I recommend it to all my friends!</p>
-
+          <p class="card-text">"StockOverflow has helped me get my finances back in order. I recommend it to all my friends! I connected with Michael Burry on here in 2007, and together we were able to short the housing market and purchase a few properties with our gains! I couldn't be more grateful for this site!"</p>
         </div>
       </div>
       <div class="card">
         <img src="https://i.imgur.com/qk2eEyI.png?1" class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title">Steve Sharpe</h5>
+          <h5 class="card-title">Steve Sharp</h5>
           <blockquote>Software Engineer</blockquote>
-          <p class="card-text">I didn't know what to do next with the stocks I was rewarded. Now I know exactly how to track them and how to determine when to sell them. I learned so much.</p>
+          <p class="card-text">"After losing my $40,000 inheritance to a Greek dry-bulk shipping penny stock scam, I didn't know what to do next. Thanks to StockOverflow I found some better plays and made all my money back buying calls when the market crashed in March! Now my family will talk to me again, thanks StockOverflow!"</p>
         </div>
       </div>
       <div class="card">
@@ -91,7 +111,15 @@
         <div class="card-body">
           <h5 class="card-title">Lauren Jopson</h5>
           <blockquote>HR Administrator</blockquote>
-          <p class="card-text">My stocks from ZYXI were driving me crazy. After connecting to some StockOverflow experts, it's all become clear to me. Now, I sold them. Yay!</p>
+          <p class="card-text">"My large position in $ZYXI was keeping me up at night. After connecting to some StockOverflow experts, it's all become clear to me that I shouldn't marry any one stock and diversify more. I sold all my shares and rolled the money into mutual funds that I don't plan on looking at for another 30+ years. Cheers to expoential growth!"</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://i.imgflip.com/1256cf.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Dave Chappelle</h5>
+          <blockquote>Comedian</blockquote>
+          <p class="card-text">"StockOverflow helped me triple my wealth within months, but then I found out about Short Term capital gains tax from an article on here. Now that I know the IRS wants a chunk of my gains, I can swiftly move to Belize before tax season hits and never worry about it again! Thanks StockOverflow!"</p>
         </div>
       </div>
     </div>
