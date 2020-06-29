@@ -8,6 +8,8 @@ import { CommentService } from 'src/app/services/comment.service';
 import { NgForm } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user';
+import { CommentRatingService } from 'src/app/services/comment-rating.service';
+import { CommentRatingId } from 'src/app/models/comment-rating-id';
 
 @Component({
   selector: 'app-forum',
@@ -34,13 +36,16 @@ export class ForumComponent implements OnInit, AfterViewInit{
 
   selectedComment = null;
 
+  rate=null;
+
 
   constructor(
     private postService: PostService,
     private router: Router,
     private auth: AuthService,
     private commentService: CommentService,
-    private userService: UserService
+    private userService: UserService,
+    private commentRatingServ: CommentRatingService
   ) { }
 
   ngOnInit(): void {
@@ -205,6 +210,28 @@ export class ForumComponent implements OnInit, AfterViewInit{
         },
         err => {
           console.error('this is not working wah');
+        }
+      )
+    }
+
+    createCommentRating(form:NgForm, commentId, comment){
+      const commentRating = form.value;
+      const commentRatingId = new CommentRatingId(commentId, this.userCheck.id);
+      console.log(commentId);
+      console.log(this.userCheck.id);
+      console.log(commentRating.rating);
+
+      commentRating.user = this.userCheck;
+      commentRating.comment = comment;
+      commentRating.id = commentRatingId;
+      console.log(commentRating);
+      this.commentRatingServ.createCommentRating(commentRating).subscribe(
+        data => {
+          console.log('comment rating created');
+          window.alert('Your comment rating has been submitted. Thanks for the feed back!');
+        },
+        err => {
+          console.error('cannot create comment rating');
         }
       )
     }
