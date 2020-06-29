@@ -1,69 +1,85 @@
 <div class="container-fluid" id="mainContent">
   <h1>{{user.username}}'s Profile</h1>
 
-  <div id="profilePic">
-    <img src={{user.profilePicture}}>
-  </div>
-
-
-  <div id="proinfo">
-  <h2>{{user.firstName}} {{user.lastName}}</h2>
-  <p>{{userFlakeFlair}}</p>
-    <div id="flairExplanation">
-      <p *ngIf="userFlakeFlair==='Beginner'"> {{user.firstName}} is just getting started.</p>
-      <p *ngIf="userFlakeFlair==='Intermediate'"> People find {{user.firstName}}'s answers helpful.</p>
-      <p *ngIf="userFlakeFlair==='Expert'"> {{user.firstName}} is a strong contributor and advisor.</p>
+  <div class="container">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col">
+        <img id="profilePic" src={{user.profilePicture}}>
+      </div>
+      <div class="col"  id="verified">
+        <img *ngIf="user.role==='VERIFIED'" src="https://i.imgur.com/2VWo1Fl.png" width="35" height="50"   ngbTooltip="Verified">
+          <p *ngIf="userFlakeFlair==='Beginner'">{{userFlakeFlair}} <br>  {{user.firstName}} is just getting started.</p>
+          <p *ngIf="userFlakeFlair==='Intermediate'">{{userFlakeFlair}}: People find {{user.firstName}}'s answers helpful.</p>
+          <p *ngIf="userFlakeFlair==='Expert'">{{userFlakeFlair}}: {{user.firstName}} is a strong contributor and advisor.</p>
+        <p>{{user.firstName}} {{user.lastName}}</p>
+        <p>Username: {{user.username}}</p>
+        <p>{{user.email}}</p>
+        <p>Member since: {{user.createDate | date:'shortDate'}}</p>
+      </div>
+      <div class="col"></div>
     </div>
   </div>
 
-  <div id="posts">
-    <h3>{{user.firstName}}'s Posts</h3>
+ <br>
+
+  <div class = "container-fluid" id="posts">
     <h5 *ngIf="enabledPosts.length === 0">No posts to show!</h5>
-    <table class="table table-sm" *ngIf="enabledPosts.length>0">
-      <tr>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Date</th>
-      </tr>
-      <tr *ngFor="let post of enabledPosts">
-      <a [routerLink]="['/forum/']"><td>{{post.title}}</td></a>
-      <td>{{post.description}}</td>
-      <td>{{post.createdAt}}</td>
-  </tr>
+    <table class="table table-hover" *ngIf="enabledPosts.length>0">
+      <thead class="thead-dark">
+        <tr>
+          <th>{{user.firstName}}'s Posts</th>
+          <th>Description</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let post of enabledPosts">
+          <a class="routerLink"  [routerLink]="['/forum/']"><td>{{post.title}}</td></a>
+          <td>{{post.description}}</td>
+          <td>{{post.createdAt | date:'shortDate'}}</td>
+        </tr>
+      </tbody>
     </table>
   </div>
 
-  <div id="webinarsAttending">
-    <!-- <h3>Webinars {{user.username}} is attending</h3> -->
+  <div class = "container-fluid" id="webinarsAttending">
     <h6 *ngIf="enabledWebinars.length===0">No webinars to show!</h6>
-  <table *ngIf="enabledWebinars.length>0" class="table table-sm">
-    <tr>
-      <th scope="col">Webinars {{user.firstName}} is attending</th>
-      <!-- <th scope="col">Description</th> -->
-      <th scope="col">Date</th>
-      <th scope="col">Meeting Link</th>
-    </tr>
-    <tr *ngFor="let webinar of enabledWebinars">
-      <a [routerLink]="['/webinars/']"><th>{{webinar.title}}</th></a>
-      <!-- <td>{{webinar.description}}</td> -->
-      <td>{{webinar.dateTime}}</td>
-      <a href={{webinar.meetingLink}} target="_blank"><td>Zoom Meeting</td></a>
-    </tr>
-  </table>
+    <table *ngIf="enabledWebinars.length>0" class="table table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th>Webinars {{user.firstName}} is attending</th>
+          <th>Date</th>
+          <th>Attendees</th>
+          <!-- <th>Meeting Link</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let webinar of enabledWebinars">
+          <td><a class="routerLink" [routerLink]="['/webinars/']">{{webinar.title}}</a></td>
+          <td>{{webinar.dateTime | date:'short'}}</td>
+          <td>{{webinar.usersAttending.length}} / {{webinar.maxAttendees}}</td>
+        </tr>
+      </tbody>
+    </table>
  </div>
 
- <div id="webinarsHosting" *ngIf="user.role === 'VERIFIED'">
-  <table class="table table-sm">
-    <thead>
-      <th scope="col">Webinars {{user.firstName}} is Hosting</th>
-      <th scope="col">Date</th>
-      <th scope="col">Meeting Link</th>
-      </thead>
-      <tr *ngFor="let webinar of enabledWebinarsHosting">
-        <a [routerLink]="['/webinars/']"><th scope="row">{{webinar.title}}</th></a>
-        <td>{{webinar.dateTime}}</td>
-        <a href={{webinar.meetingLink}} target="_blank"><td>Zoom Meeting</td></a>
+ <div class="container-fluid" id="webinarsHosting" *ngIf="user.role === 'VERIFIED'">
+  <table class="table table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>Webinars {{user.firstName}} is Hosting</th>
+        <th>Date</th>
+        <th>Attendees</th>
       </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let webinar of enabledWebinarsHosting">
+        <td><a class="routerLink" [routerLink]="['/webinars/']">{{webinar.title}}</a></td>
+        <td>{{webinar.dateTime | date:'short'}}</td>
+        <td>{{webinar.usersAttending.length}} / {{webinar.maxAttendees}}</td>
+      </tr>
+    </tbody>
   </table>
  </div>
 

@@ -1,4 +1,4 @@
-img {
+#profilePic {
 	/* border-radius: 50%; */
 	border: 1px solid #6B7A8F;
   	padding: 5px;
@@ -11,4 +11,8 @@ img {
   min-height: 100vh;
   position: relative;
   bottom: 0;
+}
+
+.routerLink{
+  color: #17a2b8;
 }
