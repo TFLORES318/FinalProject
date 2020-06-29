@@ -2,8 +2,8 @@
   <div class="header" *ngIf="!selectedPost">
     <strong>Forum</strong>
   </div>
-
-  <div *ngIf="checkLogin() && !selectedPost && !postToEdit">
+<br>
+  <div *ngIf="checkLogin() && !selectedPost && !postToEdit" class="newFormy">
     <form #newPost="ngForm">
       <div class="form-row">
         <div class="col">
@@ -17,7 +17,7 @@
       </div>
     </form>
   </div>
-
+  <br>
   <div id="all-posts" *ngIf="!postSearch && !selectedPost && !postToEdit">
     <table class="table table-hover">
       <tbody>
@@ -41,7 +41,7 @@
   </div>
 
   <div *ngIf="selectedPost">
-    <button class="btn btn-info mr-1" (click)="displayPosts()">Back to Posts</button>
+    <button class="btn btn-info" *ngIf="selectedPost" (click)="displayPosts()">Back to Posts</button>
     <h5>Posted by <a class="routerLink" [routerLink]="['/profile/', selectedPost.user.id]"> {{selectedPost.user.username}} </a> {{selectedPost.createdAt | date:'fullDate'}}</h5>
     <blockquote class="blockquote blockquote-reverse"><h1><p class="mb-0">{{selectedPost.title}}</p></h1>
     <h3><footer class="blockquote-footer">{{selectedPost.description}}</footer></h3>
