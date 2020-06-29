@@ -37,6 +37,12 @@ public class CommentRatingServiceImpl implements CommentRatingService {
 		}
 		return commentRating;
 	}
+
+	@Override
+	public CommentRating createCommentRating(CommentRating commentRating) {
+		repo.saveAndFlush(commentRating);
+		return commentRating;
+	}
 	
 	
 }

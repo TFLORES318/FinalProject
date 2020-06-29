@@ -115,4 +115,24 @@ public class CommentController {
 		return ratings;
 	}
 	
+	@PostMapping("comments/ratings")
+	public CommentRating createNewCommentRating(@RequestBody CommentRating commentRating, HttpServletRequest req, HttpServletResponse res) {
+		try {
+			commentRating = commentRatingServ.createCommentRating(commentRating);
+			if (commentRating == null) {
+				res.setStatus(404);
+			} else {
+				res.setStatus(201);
+				StringBuffer url = req.getRequestURL();
+				url.append("/").append(commentRating.getId().getCommentId()).append(commentRating.getId().getUserId());
+				res.addHeader("Location", url.toString());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			commentRating = null;
+		}
+		return commentRating;
+	}
+	
 }
