@@ -1,24 +1,16 @@
 <div class="container-fluid" id="mainContent">
-  <div class="stockoverflow">
-  StockOverflow
+  <div class="jumbotron-fluid">
+    <h1 class="homeTitle">StockOverflow</h1>
+    <hr>
   </div>
-
-
-
   <div id="flagship" class="container-fluid">
-
     <p>We know what it’s like to be overwhelmed by the world of stocks.
-    Everyone wants to be financially savvy, but how?</p><br>
-    The StockOverflow community is here to lead, educate,
+    Everyone wants to be financially savvy, but how?</p>
+    <p>The StockOverflow community is here to lead, educate,
     and guide you on your path to stock expertise. The founders of StockOverflow moderate and participate
-    in discussions daily and invite you too as well!
-    <p><br>Welcome to StockOverflow!<br></p>
-    </div>
-
-
-
-
-
+    in discussions daily and invite you too as well!</p>
+    <p id="welcome">Welcome to StockOverflow!<br></p>
+  </div>
   <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
@@ -60,12 +52,12 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
-  <div class="container-fluid">
-    <ul ngbNav #nav="ngbNav" [activeId]="2" class="nav-tabs justify-content-center">
+  <div class="container-fluid" id="homeWidgetTabs">
+    <ul ngbNav #nav="ngbNav" [activeId]="1" class="nav-tabs justify-content-center">
       <li [ngbNavItem]="1">
         <a ngbNavLink>Live Cryptocurrency</a>
         <ng-template ngbNavContent>
-          <iframe src="https://www.widgets.investing.com/top-cryptocurrencies?theme=darkTheme&roundedCorners=true" width="100%" height="600" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0">
+          <iframe src="https://www.widgets.investing.com/top-cryptocurrencies?theme=darkTheme&roundedCorners=true" width="100%" height="450" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0">
           </iframe>
         </ng-template>
       </li>
@@ -92,23 +84,26 @@
     <div [ngbNavOutlet]="nav" class="mt-2"></div>
   </div>
   <br>
-  <div class="container-fluid">
-    <h3>Happy Stock Overflow Members</h3>
+  <div class="container-fluid" id="testimonialDiv">
+    <h2 class="testimonialTitle">Happy StockOverflow Members</h2>
+    <hr>
+    <h5 class="testimonialTitle">~ <i>Testimonials from some of our most active users!</i> ~</h5>
+    <br>
     <div class="card-deck">
       <div class="card">
         <img src="https://i.imgur.com/dzbpUJ1.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Chad Michael Murray</h5>
           <blockquote>Actor</blockquote>
-          <p class="card-text">StockOverflow has helped me get my finances back in order. I recommend it to all my friends!</p>
+          <p class="card-text">"StockOverflow has helped me get my finances back in order. I recommend it to all my friends! I connected with Michael Burry on here in 2007, and together we were able to short the housing market and purchase a few properties with our gains! I couldn't be more grateful for this site!"</p>
         </div>
       </div>
       <div class="card">
         <img src="https://i.imgur.com/qk2eEyI.png?1" class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title">Steve Sharpe</h5>
+          <h5 class="card-title">Steve Sharp</h5>
           <blockquote>Software Engineer</blockquote>
-          <p class="card-text">I didn't know what to do next with the stocks I was rewarded. Now I know exactly how to track them and how to determine when to sell them. I learned so much.</p>
+          <p class="card-text">"After losing my $40,000 inheritance to a Greek dry-bulk shipping penny stock scam, I didn't know what to do next. Thanks to StockOverflow I found some better plays and made all my money back buying calls when the market crashed in March! Now my family will talk to me again, thanks StockOverflow!"</p>
         </div>
       </div>
       <div class="card">
@@ -116,7 +111,15 @@
         <div class="card-body">
           <h5 class="card-title">Lauren Jopson</h5>
           <blockquote>HR Administrator</blockquote>
-          <p class="card-text">My stocks from ZYXI were driving me crazy. After connecting to some StockOverflow experts, it's all become clear to me. Now, I sold them. Yay!</p>
+          <p class="card-text">"My large position in $ZYXI was keeping me up at night. After connecting to some StockOverflow experts, it's all become clear to me that I shouldn't marry any one stock and diversify more. I sold all my shares and rolled the money into mutual funds that I don't plan on looking at for another 30+ years. Cheers to expoential growth!"</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://i.imgflip.com/1256cf.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Dave Chappelle</h5>
+          <blockquote>Comedian</blockquote>
+          <p class="card-text">"StockOverflow helped me triple my wealth within months, but then I found out about Short Term capital gains tax from an article on here. Now that I know the IRS wants a chunk of my gains, I can swiftly move to Belize before tax season hits and never worry about it again! Thanks StockOverflow!"</p>
         </div>
       </div>
     </div>
