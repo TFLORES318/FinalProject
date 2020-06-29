@@ -2,67 +2,54 @@
   <h1>Account Settings</h1>
 
   <div id="userInfo" class="contianer-fluid">
-    <img [src]="userUpdate.profilePicture" width="200" height="200"/>
-    <table>
-      <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-      </tr>
-      <tr>
-        <td>{{userUpdate.firstName}}</td>
-        <td>{{userUpdate.lastName}}</td>
-        <td>{{userUpdate.email}}</td>
-      </tr>
-    </table>
+    <div class="row">
+      <div class="col">
+        <img id="profilePic" [src]="userUpdate.profilePicture"/>
+        <br>
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Verified</th>
+              <th>Delete Account</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{userUpdate.firstName}}</td>
+              <td>{{userUpdate.lastName}}</td>
+              <td>{{userUpdate.email}}</td>
+              <td *ngIf="userUpdate.role !== 'VERIFIED'"><button class="btn btn-info mr-1" *ngIf="userUpdate.role == 'STANDARD'" (click)="applyForVerification(userUpdate)">Apply for Verification</button></td>
+              <td *ngIf="userUpdate.role === 'VERIFIED'">You are verified</td>
+              <td><button class="btn btn-danger mr-1" (click)="disableUser(userUpdate)">X</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
-
+<br>
   <div class="container-fluid">
+    <h4>Update your information:</h4>
     <form #updatedUser='ngForm'>
       <input type="hidden" name="enabled" [(ngModel)]="userUpdate.enabled">
       <input type="hidden" name="role" [(ngModel)]="userUpdate.role">
-      <table>
-        <tr>
-          <input type="text" placeholder="Change first name" name="firstName" [(ngModel)]="userUpdate.firstName">
-        </tr>
-        <tr>
-          <input type="text" placeholder="Change last name" name="lastName" [(ngModel)]="userUpdate.lastName">
-        </tr>
-        <tr>
-          <input type="text" placeholder="Change profile pic URL" name="profilePicture" [(ngModel)]="userUpdate.profilePicture">
-        </tr>
-        <tr>
-          <input type="text" placeholder="Change email" name="email" [(ngModel)]="userUpdate.email">
-        </tr>
-        <!-- <tr>
-          <input type="text" placeholder="Change flair" name="flair" ngModel>
-        </tr> -->
-      </table>
-      <button (click)="updateUser(updatedUser)">Submit</button>
+          <div class="form-group">
+            <input type="text" placeholder="Change first name" name="firstName" [(ngModel)]="userUpdate.firstName">
+          </div>
+          <div class="form-group">
+            <input type="text" placeholder="Change last name" name="lastName" [(ngModel)]="userUpdate.lastName">
+          </div>
+          <div class="form-group">
+            <input type="text" placeholder="Change profile pic URL" name="profilePicture" [(ngModel)]="userUpdate.profilePicture">
+          </div>
+          <div class="form-group">
+            <input type="text" placeholder="Change email" name="email" [(ngModel)]="userUpdate.email">
+          </div>
+      <button class="btn btn-info mr-1" (click)="updateUser(updatedUser)">Submit</button>
     </form>
-  </div>
-
-  <div id="verifyOrDelete" class="container-fluid" >
-    <!-- <div id="verifyForm">
-      <form>
-      <table>
-        <tr>
-          <p>
-            Please explain why you should be a verified user.
-            Feel free to include credentials such as your degree or relevant work background.
-            Your application will be reviewed by our admin team shortly.
-          </p>
-        </tr>
-        <tr>
-          <textarea name = "description" rows = "4" cols = "30"></textarea>
-        </tr>
-        <tr>
-          <button (click)="storeApplication()">Submit</button>
-        </tr>
-      </table>
-      </form>
-    </div> -->
-    <button *ngIf="userUpdate.role == 'STANDARD'" (click)="applyForVerification(userUpdate)">Apply for Verification</button>
-    <button (click)="disableUser(userUpdate)">Delete account</button>
+    <br>
   </div>
 </div>
