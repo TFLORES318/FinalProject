@@ -1,65 +1,80 @@
 <div class="container-fluid" id="main-content">
-<div id='allWebinars' class='container-fluid'>
-  <h1>Webinars</h1>
-  <h5>Browse through our online events hosted by StockOverflow verified experts.</h5>
-  <table>
-    <tr *ngFor='let webinar of allWebinars'>
-      <td (click)="selected=webinar">{{webinar.title}}</td>
-    </tr>
-  </table>
-</div>
+  <div id='allWebinars' class='container-fluid'>
+    <h1>Webinars</h1>
+    <h5>Browse through our online events hosted by StockOverflow verified experts.</h5>
+    <table>
+      <tr *ngFor='let webinar of allWebinars'>
+        <td (click)="selected=webinar">{{webinar.title}}</td>
+      </tr>
+    </table>
+  </div>
+  <div id='selectedWebinar' class='container-fluid' *ngIf='selected'>
+    <table>
+      <tr>
+        <td><img src={{selected.picture}}/></td>
+      </tr>
+      <tr>
+        <td>Date and Time: {{selected.dateTime}}</td>
+        <td>Hosted by: <a [routerLink]="['/profile/', selected.userCreator.id]"> {{selected.userCreator.username}}</a></td>
+      </tr>
+      <tr>
+        <td>{{selected.description}}</td>
+        <td>{{selected.usersAttending.length}} / {{selected.maxAttendees}}</td>
+      </tr>
+      <tr>
+        <td>
+          <button *ngIf='checkLogin() && !checkIfUserAlreadyAttending(selected) && !checkIfUserIsHosting(selected)' (click)="signUpUser(selected.id)">Sign Up</button>
+          <button *ngIf='checkLogin() && checkIfUserAlreadyAttending(selected) && !checkIfUserIsHosting(selected)' (click)="withdrawUser(selected.id)">Withdraw</button>
+          <button *ngIf='checkLogin() && checkIfUserIsHosting(selected)' (click)="webinarToEdit = selected">Update Your Webinar</button>
+          <button *ngIf='checkLogin() && checkIfUserIsHosting(selected)' (click)="cancelWebinar(selected.id)">Cancel Webinar</button>
+        </td>
+      </tr>
+    </table>
+  </div>
 
-<div id='selectedWebinar' class='container-fluid' *ngIf='selected'>
-  <table>
-    <tr>
-      <td><img src={{selected.picture}}/></td>
-    </tr>
-    <tr>
-      <td>Date and Time: {{selected.dateTime}}</td>
-      <td>Hosted by: <a [routerLink]="['/profile/', selected.userCreator.id]"> {{selected.userCreator.username}}</a></td>
-    </tr>
-    <tr>
-      <td>{{selected.description}}</td>
-      <td>{{selected.usersAttending.length}} / {{selected.maxAttendees}}</td>
-    </tr>
-    <tr>
-      <td>
-        <button *ngIf='checkLogin() && !checkIfUserAlreadyAttending(selected) && !checkIfUserIsHosting(selected)' (click)="signUpUser(selected.id)">Sign Up</button>
-        <button *ngIf='checkLogin() && checkIfUserAlreadyAttending(selected) && !checkIfUserIsHosting(selected)' (click)="withdrawUser(selected.id)">Withdraw</button>
-        <button *ngIf='checkLogin() && checkIfUserIsHosting(selected)' (click)="webinarToEdit = selected">Update Your Webinar</button>
-        <button *ngIf='checkLogin() && checkIfUserIsHosting(selected)' (click)="cancelWebinar(selected.id)">Cancel Webinar</button>
-      </td>
-    </tr>
-  </table>
-</div>
 
-<div id="editWebinar" class="container-fluid" *ngIf="webinarToEdit">
-  <form #webinarBeingEdited="ngForm">
-    <input type="hidden" name="id" [(ngModel)]="webinarToEdit.id"/>
-    <input type="text" name="title" [(ngModel)]="webinarToEdit.title"/>
-    <input type="text" name="description" [(ngModel)]="webinarToEdit.description"/>
-    <input type="datetime-local" name="dateTime" [(ngModel)]="webinarToEdit.dateTime"/>
-    <input type="text" name="picture" [(ngModel)]="webinarToEdit.picture"/>
-    <input type="text" name="meetingLink" [(ngModel)]="webinarToEdit.meetingLink"/>
-    <input type="number" name="maxAttendees" [(ngModel)]="webinarToEdit.maxAttendees"/>
-    <button type="button" (click)="updateWebinar(webinarBeingEdited)">Update</button>
+  <div id="editWebinar" class="container-fluid" *ngIf="webinarToEdit">
+    <form #webinarBeingEdited="ngForm">
+      <input type="hidden" name="id" [(ngModel)]="webinarToEdit.id"/>
+      <input type="text" name="title" [(ngModel)]="webinarToEdit.title"/>
+      <input type="text" name="description" [(ngModel)]="webinarToEdit.description"/>
+      <input type="datetime-local" name="dateTime" [(ngModel)]="webinarToEdit.dateTime"/>
+      <input type="text" name="picture" [(ngModel)]="webinarToEdit.picture"/>
+      <input type="text" name="meetingLink" [(ngModel)]="webinarToEdit.meetingLink"/>
+      <input type="number" name="maxAttendees" [(ngModel)]="webinarToEdit.maxAttendees"/>
+      <button type="button" class="btn btn-info mr-1" (click)="updateWebinar(webinarBeingEdited)">Update</button>
+    </form>
+  </div>
 
+  <div id="hostWebinar" class="container-fluid" *ngIf="loggedInUser.role === 'VERIFIED'">
+  <h3>{{loggedInUser.firstName}}, host your next Webinar!</h3>
+  <form #newWebinar=ngForm>
+  <div class="form-group">
+  <input type="text" class="form-control" placeholder="Title" name="title" ngModel/>
+  </div>
+  <div class="form-group">
+  <input type="text" class="form-control" placeholder="Description" name="description" ngModel/>
+  </div>
+  <div class="form-group">
+  <input type="datetime-local" class="form-control" name="dateTime" ngModel>
+  </div>
+  <div class="form-group">
+  <input type="text" class="form-control" placeholder="Event Image" name="picture" ngModel>
+  </div>
+  <div class="form-group">
+  <input type="text" class="form-control" placeholder="Meeting Link" name="meetingLink" ngModel>
+  </div>
+  <div class="form-group">
+  <input type="number" class="form-control" placeholder="Max Attendees" name="maxAttendees" ngModel>
+  </div>
+  <button type="button" class="btn btn-info mr-1" (click)="createWebinar(newWebinar)">Submit</button>
+  <br>
   </form>
-</div>
-
-<div id="hostWebinar" class="container-fluid" *ngIf="loggedInUser.role === 'VERIFIED'">
-<h3>{{loggedInUser.firstName}}, host your next Webinar!</h3>
-<form #newWebinar=ngForm>
-<input type="text" placeholder="Title" name="title" ngModel/><br>
-<input type="text" placeholder="Description" name="description" ngModel/><br>
-<input type="datetime-local" name="dateTime" ngModel><br>
-<input type="text" placeholder="Event Image" name="picture" ngModel><br>
-<input type="text" placeholder="Meeting Link" name="meetingLink" ngModel><br>
-<input type="number" placeholder="Max Attendees" name="maxAttendees" ngModel><br>
-<button type="button" (click)="createWebinar(newWebinar)">Submit</button>
+  <br>
+  </div>
 
 
-</form>
 
-</div>
-</div>
+
+
+
