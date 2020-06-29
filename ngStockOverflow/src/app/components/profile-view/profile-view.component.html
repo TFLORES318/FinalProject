@@ -1,72 +1,108 @@
 <div class="container-fluid" id="mainContent">
 <h1>Your Profile</h1>
+<div class="container">
+  <div class="row">
+    <div class="col"></div>
+  <div id="profilePicDiv" class="col">
+    <img id="profilePic"src={{user.profilePicture}}>
+  </div>
 
-<div id="profilePic">
-  <img src={{user.profilePicture}}>
+  <div class="col"  id="verified">
+    <img *ngIf="user.role==='VERIFIED'" src="https://i.imgur.com/2VWo1Fl.png" width="35" height="50"   ngbTooltip="Verified">
+    <p>{{user.flair}}</p>
+    <p>{{user.firstName}} {{user.lastName}}</p>
+    <p>Username: {{user.username}}</p>
+    <p>{{user.email}}</p>
+    <p>Member since: {{user.createDate | date:'shortDate'}}</p>
+  </div>
+  <div class="col"></div>
 </div>
-
+</div>
+<br>
 
 <div id="proinfo">
-<!-- <h2>{{user.firstName}} {{user.lastName}}</h2> -->
-<p>{{user.flair}}</p>
+<div class="container-fluid" >
+  <button class="btn btn-info mr-1" [routerLink]="['/portfolio']">View Your Portfolio</button>
+  <button class="btn btn-info mr-1" [routerLink]="['/settings']">Manage Account Settings</button>
 </div>
-<button [routerLink]="['/portfolio']">View Your Portfolio</button>
-<div *ngIf="user.role === 'ADMIN'">
-<button [routerLink]="['/admin']">Admin Page</button>
+<div class="container-fluid"  *ngIf="user.role === 'ADMIN'">
+  <button class="btn btn-info" [routerLink]="['/admin']">Admin Page</button>
 </div>
 
-<div id="posts">
-  <!-- <h3>Your Posts</h3> -->
-  <table class="table table-sm">
-    <thead>
-      <th scope="col">Your Posts</th>
-      <th scope="col">Description</th>
-      <th scope="col">Date</th>
+<br>
+
+<div class="container-fluid" id="posts" *ngIf="enabledPosts.length > 0">
+  <table class="table table-hover">
+    <thead class="thead-dark">
+      <th>Your Posts</th>
+      <th>Description</th>
+      <th>Date</th>
     </thead>
     <tbody>
-    <tr *ngFor="let post of enabledPosts">
-    <a [routerLink]="['/forum/']"><th scope="row">{{post.title}}</th></a>
-    <td>{{post.description}}</td>
-    <td>{{post.createdAt}}</td>
-</tr>
-</tbody>
-  </table>
-</div>
-
-<div id="webinarsAttending">
-  <!-- <h3>Webinars You Are Attending</h3> -->
-<table class="table table-sm">
-  <thead>
-    <th scope="col">Webinars You're Attending</th>
-    <!-- <th>Description</th> -->
-    <th scope="col">Date</th>
-    <th scope="col">Meeting Link</th>
-  </thead>
-  <tr *ngFor="let webinar of enabledWebinars">
-    <a [routerLink]="['/webinars/']"><th scope="row">{{webinar.title}}</th></a>
-    <!-- <td>{{webinar.description}}</td> -->
-    <td>{{webinar.dateTime}}</td>
-    <a href={{webinar.meetingLink}} target="_blank"><td>Join Zoom Meeting</td></a>
-  </tr>
-</table>
-
-
-<div id="webinarsHosting">
-  <table class="table table-sm">
-    <thead>
-      <th scope="col">Webinars You're Hosting</th>
-      <th scope="col">Date</th>
-      <th scope="col">Meeting Link</th>
-      </thead>
-      <tr *ngFor="let webinar of enabledHostingWebinars">
-        <a [routerLink]="['/webinars/']"><th scope="row">{{webinar.title}}</th></a>
-        <td>{{webinar.dateTime}}</td>
-        <a href={{webinar.meetingLink}} target="_blank"><td>Zoom Meeting</td></a>
+      <tr *ngFor="let post of enabledPosts">
+        <td scope="row"><a class="routerLink" [routerLink]="['/forum/']">{{post.title}}</a></td>
+        <td>{{post.description}}</td>
+        <td>{{post.createdAt | date:'shortDate'}}</td>
       </tr>
+    </tbody>
   </table>
 </div>
 
+<div id="noPosts" *ngIf="enabledPosts.length === 0">
+  <h5>Your Posts</h5>
+    <p>No posts. Try making one in the <a class="routerLink" [routerLink]="['/forum']">forum</a>!</p>
+</div>
 
+<div class="container-fluid" id="webinarsAttending" *ngIf="enabledWebinars.length > 0">
+  <table class="table table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>Webinars You're Attending</th>
+        <!-- <th>Description</th> -->
+        <th>Date</th>
+        <th>Meeting Link</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let webinar of enabledWebinars">
+      <td scope="row"><a class="routerLink" [routerLink]="['/webinars/']">{{webinar.title}}</a></td>
+      <!-- <td>{{webinar.description}}</td> -->
+      <td>{{webinar.dateTime | date:'short'}}</td>
+      <td><a class="routerLink" href={{webinar.meetingLink}} target="_blank">Join Zoom Meeting</a></td>
+    </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div id="noWebinars" *ngIf="enabledWebinars.length === 0" >
+    <h3>Webinars You're Attending</h3>
+      <p>You're not attending any webinars. Why not <a class="routerLink" [routerLink]="['/webinars/']">check them out</a>?</p>
+  </div>
+
+
+<div class="container-fluid" id="webinarsHosting" *ngIf="user.role === 'VERIFIED' && enabledHostingWebinars.length > 0">
+  <table class="table table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>Webinars You're Hosting</th>
+        <th>Date</th>
+        <th>Meeting Link</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let webinar of enabledHostingWebinars">
+        <td scope="row"><a class="routerLink" [routerLink]="['/webinars/']">{{webinar.title}}</a></td>
+        <td>{{webinar.dateTime | date:'short'}}</td>
+        <td><a class="routerLink" href={{webinar.meetingLink}} target="_blank">Join Zoom Meeting</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="enabledHostingWebinars.length === 0">
+  <h3>Webinars You're Hosting</h3>
+  <p>You're not hosting one yet! As a verified member, we value your insight. Why not try <a class="routerLink" [routerLink]="['/webinars/']">hosting </a> one?</p>
+</div>
 
 
 
@@ -76,7 +112,6 @@
 
 
 
-</div>
 
 
 
