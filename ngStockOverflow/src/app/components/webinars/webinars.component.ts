@@ -41,6 +41,10 @@ export class WebinarsComponent implements OnInit {
     )
   }
 
+  displayWebinars() {
+    this.selected = null;
+  }
+
   loadWebinars(){
     this.webinarServ.getWebinars().subscribe(
       data => {
@@ -57,9 +61,11 @@ export class WebinarsComponent implements OnInit {
     console.log(this.selected.usersAttending.includes(this.loggedInUser));
     this.webinarServ.signUpUser(webinarId).subscribe(
       data => {
+        window.alert('You are going to this webinar!')
         this.attendees = data;
         this.selected = null;
         this.loadWebinars();
+
 
       },
       error => {
@@ -71,6 +77,7 @@ export class WebinarsComponent implements OnInit {
     withdrawUser(webinarId: number){
       this.webinarServ.withdrawUser(webinarId).subscribe(
         data => {
+          window.alert('You are no longer going to this webinar.')
           this.attendees = data;
           this.selected = null;
           this.loadWebinars();
