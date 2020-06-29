@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.skilldistillery.stockoverflow.entities.Comment;
 import com.skilldistillery.stockoverflow.entities.CommentRating;
 import com.skilldistillery.stockoverflow.entities.Post;
+import com.skilldistillery.stockoverflow.entities.User;
 import com.skilldistillery.stockoverflow.services.CommentRatingService;
 import com.skilldistillery.stockoverflow.services.CommentService;
 import com.skilldistillery.stockoverflow.services.UserService;
@@ -133,6 +134,12 @@ public class CommentController {
 			commentRating = null;
 		}
 		return commentRating;
+	}
+	
+	@GetMapping("comments/ratings/user")
+	public List<CommentRating> findLoggedInUserCommentRatings(Principal principal){
+		User user = userSvc.findByUsername(principal.getName());
+		return commentRatingServ.findForLoggedInuser(user.getId());
 	}
 	
 }

@@ -10,6 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user';
 import { CommentRatingService } from 'src/app/services/comment-rating.service';
 import { CommentRatingId } from 'src/app/models/comment-rating-id';
+import { CommentRating } from 'src/app/models/comment-rating';
 
 @Component({
   selector: 'app-forum',
@@ -38,6 +39,10 @@ export class ForumComponent implements OnInit, AfterViewInit{
 
   rate=null;
 
+  loggedInUserCommentRatings: CommentRating[] = [];
+
+  selectedRating = null;
+
 
   constructor(
     private postService: PostService,
@@ -46,11 +51,13 @@ export class ForumComponent implements OnInit, AfterViewInit{
     private commentService: CommentService,
     private userService: UserService,
     private commentRatingServ: CommentRatingService
-  ) { }
+    ) { }
 
-  ngOnInit(): void {
-    this.loadAllPosts();
-  }
+    ngOnInit(): void {
+      this.loadAllPosts();
+      this.checkLoggedInUserCommentRating();
+      // this.checkUserHasNotRatedComment();
+    }
 
 
   ngAfterViewInit(){
@@ -228,7 +235,9 @@ export class ForumComponent implements OnInit, AfterViewInit{
       this.commentRatingServ.createCommentRating(commentRating).subscribe(
         data => {
           console.log('comment rating created');
+          this.checkLoggedInUserCommentRating();
           window.alert('Your comment rating has been submitted. Thanks for the feed back!');
+          this.selectedRating=null;
         },
         err => {
           console.error('cannot create comment rating');
@@ -236,6 +245,27 @@ export class ForumComponent implements OnInit, AfterViewInit{
       )
     }
 
+    checkLoggedInUserCommentRating(){
+      this.commentRatingServ.getCommentRatingsForLoggedInUser().subscribe(
+        data => {
+          this.loggedInUserCommentRatings = data;
+        },
+        err => {
+          console.error('cannot get logged in user comment rating');
+
+        }
+        )
+      }
+
+      checkUserHasNotRatedComment(comment){
+        for(let i = 0; i < this.loggedInUserCommentRatings.length ; i++){
+          if(this.loggedInUserCommentRatings[i].comment.id === comment.id){
+            console.log('******true');
+          return true;
+        }
+      }
+      return false;
+    }
   }
 
 

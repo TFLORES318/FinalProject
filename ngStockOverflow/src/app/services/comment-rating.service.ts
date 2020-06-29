@@ -46,4 +46,24 @@ export class CommentRatingService {
     )
 
   }
+
+  getCommentRatingsForLoggedInUser(){
+    const credentials = this.auth.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Basic ${credentials}`,
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    }
+    return this.http.get<CommentRating[]>(this.url+'/user', httpOptions)
+    .pipe(
+      catchError((err:any)=> {
+        console.log('cannot retrieve logged in user comment rating');
+        return throwError('cannot retrieve logged in user comment ratings')
+      })
+    )
+  }
+
+
+
 }
