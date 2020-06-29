@@ -22,3 +22,16 @@ h6{
   bottom: 0;
 }
 
+.header {
+  padding: 60px;
+  text-align: center;
+  background: #eeeeee;
+  color: #17a2b8;;
+  font-size: 30px;
+}
+
+h3 {
+  text-align: center;
+  color: 393e46;
+}
+
