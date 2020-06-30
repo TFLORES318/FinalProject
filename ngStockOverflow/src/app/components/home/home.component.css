@@ -14,6 +14,8 @@ blockquote {
   font-style: italic;
 }
 
+/* Class selectors: */
+
 .homeTitle {
   font-size: 100px;
   color: black;
@@ -39,7 +41,17 @@ blockquote {
 .card-img-top {
   height: 220px;
   width: 200px;
+}
 
+/* ID selectors */
+
+#stacklogo {
+  border: none;
+  padding: 0px;
+ 	width: 150px;
+ 	height:175px;
+  object-fit: fill;
+  display: auto;
 }
 
 #homeWidgetTabs {
@@ -76,6 +88,11 @@ blockquote {
   color: black;
   font-size: 24px;
   text-shadow: #17A2B8 .5px .5px;
+}
+
+#headerRow {
+  align-items: center;
+  justify-content: center;
 }
 
 
