@@ -2,13 +2,12 @@
   <div class="container-fluid" *ngIf="!selectedPost">
     <h1>Forum</h1>
     <h5>Q&A with StockOverflow members.</h5>
+    <br>
   </div>
   <div *ngIf="selectedPost">
     <br>
     <button class="btn btn-info" (click)="displayPosts()">Back to Posts</button>
   </div>
-
-
 
   <div *ngIf="checkLogin() && !selectedPost && !postToEdit" class="newFormy">
     <form #newPost="ngForm">

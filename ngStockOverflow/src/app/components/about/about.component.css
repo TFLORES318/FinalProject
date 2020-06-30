@@ -35,3 +35,14 @@ h3 {
   color: 393e46;
 }
 
+h1 {
+  font-size: 100px;
+  font-style: bold;
+}
+
+
+#team {
+  color: lightgrey;
+  font-style: italic;
+}
+
