@@ -50,7 +50,7 @@
 </div>
 
 <div id="noPosts" *ngIf="enabledPosts.length === 0">
-  <h5>Your Posts</h5>
+  <h3>Your Posts</h3>
     <p>No posts. Try making one in the <a class="routerLink" [routerLink]="['/forum']">forum</a>!</p>
 </div>
 
@@ -100,7 +100,7 @@
   </table>
 </div>
 
-<div *ngIf="enabledHostingWebinars.length === 0">
+<div *ngIf="enabledHostingWebinars.length === 0 && user.role === 'VERIFIED'">
   <h3>Webinars You're Hosting</h3>
   <p>You're not hosting one yet! As a verified member, we value your insight. Why not try <a class="routerLink" [routerLink]="['/webinars/']">hosting </a> one?</p>
 </div>
