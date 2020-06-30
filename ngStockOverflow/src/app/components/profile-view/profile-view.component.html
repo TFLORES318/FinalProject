@@ -24,9 +24,10 @@
 <div class="container-fluid" id="profileButtons">
   <button class="btn btn-info mr-1" [routerLink]="['/portfolio']">View Your Portfolio</button>
   <button class="btn btn-info mr-1" [routerLink]="['/settings']">Manage Account Settings</button>
-</div>
-<div class="container-fluid"  *ngIf="user.role === 'ADMIN'">
-  <button class="btn btn-info" [routerLink]="['/admin']">Admin Page</button>
+<!-- </div> -->
+<!-- <div class="container-fluid"  *ngIf="user.role === 'ADMIN'"> -->
+  <button *ngIf="user.role === 'ADMIN'" class="btn btn-info" [routerLink]="['/admin']">Admin Page</button>
+<!-- </div> -->
 </div>
 
 <br>
