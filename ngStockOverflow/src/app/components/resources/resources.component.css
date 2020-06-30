@@ -255,10 +255,13 @@ h1, h2, h3, h4, h5, h6 {
 
 /*-------------------------------------Title------------*/
 #resourceTitle {
-  font-size: 120px;
-  color: black;
-  text-shadow: #17A2B8 2px 2px;;
-  text-align: center;
+  font-size: 100px;
+  font-style: bold;
+}
+
+#resourceDescription {
+  color: lightgrey;
+  font-style: italic;
 }
 
 /*--------------------------------------------------------------
