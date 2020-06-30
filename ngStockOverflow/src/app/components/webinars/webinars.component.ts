@@ -28,6 +28,7 @@ export class WebinarsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    window.scroll(0,0);
     this.loadWebinars();
     this.authServ.showUser().subscribe(
       data => {

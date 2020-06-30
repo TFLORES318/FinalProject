@@ -47,6 +47,7 @@ export class OtherUserProfileComponent implements OnInit {
     private commentRatingServ: CommentRatingService) { }
 
   ngOnInit(): void {
+    window.scroll(0,0);
     this.currentRoute.paramMap.subscribe(
       params => {
         console.log(params.get('id'))

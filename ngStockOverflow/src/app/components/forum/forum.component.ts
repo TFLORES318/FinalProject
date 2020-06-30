@@ -59,6 +59,7 @@ export class ForumComponent implements OnInit, AfterViewInit{
   }
 
     ngOnInit(): void {
+      window.scroll(0,0);
       this.loadAllPosts();
       this.checkLoggedInUserCommentRating();
       // this.checkUserHasNotRatedComment();

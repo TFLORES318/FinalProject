@@ -45,6 +45,7 @@ export class ProfileViewComponent implements OnInit {
 
 
   ngOnInit(): void {
+    window.scroll(0,0);
     this.loadPosts();
     this.loadWebinars();
     this.loadWebinarsHosted();
