@@ -2,6 +2,11 @@ a {
   color: #17A2B8;
 }
 
+a:hover {
+  color: #1fcde8fc;
+  text-decoration: none;
+}
+
 .footerContent {
   height: 100%;
   text-align: center;
