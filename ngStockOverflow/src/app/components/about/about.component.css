@@ -12,7 +12,7 @@
 h6{
   color: gray;
 }
-.buttons{
+#buttons{
   text-align: center;
 }
 
@@ -46,3 +46,10 @@ h1 {
   font-style: italic;
 }
 
+#robchu {
+  text-align: center;
+}
+
+.accordion {
+  text-align: center;
+}
