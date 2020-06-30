@@ -3,3 +3,17 @@
   position: relative;
   bottom: 0;
 }
+#quote{
+  color: gray;
+}
+
+#columns{
+  margin: auto;
+  text-align: center;
+}
+
+img{
+  width: 100vw;
+  height: 270px;
+  object-fit: cover;
+}
