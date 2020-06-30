@@ -4,6 +4,7 @@ import { WebinarService } from 'src/app/services/webinar.service';
 import { Webinar } from 'src/app/models/webinar';
 import { User } from 'src/app/models/user';
 import { NgForm } from '@angular/forms';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-webinars',
@@ -22,9 +23,12 @@ export class WebinarsComponent implements OnInit {
 
   webinarToEdit: Webinar = null;
 
+  closeResult = '';
+
   constructor(
     private authServ: AuthService,
-    private webinarServ: WebinarService
+    private webinarServ: WebinarService,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
@@ -165,9 +169,26 @@ export class WebinarsComponent implements OnInit {
         this.selected = null;
       }
 
+      open(content) {
+        this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', size: 'sm'}).result.then((result) => {
+          this.closeResult = `Closed with: ${result}`;
+        }, (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        });
+      }
 
-
+      private getDismissReason(reason: any): string {
+        if (reason === ModalDismissReasons.ESC) {
+          return 'by pressing ESC';
+        } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+          return 'by clicking on a backdrop';
+        } else {
+          return `with: ${reason}`;
+        }
+      }
     }
+
+
 
 
 
