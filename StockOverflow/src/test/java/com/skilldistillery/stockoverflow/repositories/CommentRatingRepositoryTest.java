@@ -42,7 +42,7 @@ public class CommentRatingRepositoryTest {
 	@Test
 	@DisplayName("find all rating for user")
 	void test2() {
-		List<CommentRating> commentRatings = commentRatingRepo.queryForRatingsForUser(1);
+		List<CommentRating> commentRatings = commentRatingRepo.queryForRatingsForUser(2);
 		assertNotNull(commentRatings);
 		assertEquals("IDK lol", commentRatings.get(0).getComment().getContent());
 		
