@@ -1,7 +1,12 @@
+a {
+  color: #17A2B8;
+}
+
 .footerContent {
   height: 100%;
   text-align: center;
   margin: 0;
+  padding-top: 15px;
 }
 
 #foot {
@@ -13,7 +18,5 @@
   padding: 0;
   flex-shrink: none;
   position: absolute;
-  background-color: silver;
-  color: white !important;
-
+  background-color: #343a40;
 }

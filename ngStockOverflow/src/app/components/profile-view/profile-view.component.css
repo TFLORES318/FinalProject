@@ -1,9 +1,26 @@
+h6 {
+  font-size: 12px;
+}
+
+/* Class Selectors */
+
+.routerLink{
+  color: #17a2b8;
+}
+
+/* ID Selectors */
+
+/* #proInfo {
+  align-content: center;
+} */
+
 #profilePic {
 	/* border-radius: 50%; */
 	border: 1px solid #6B7A8F;
-  	padding: 5px;
+  padding: 5px;
+  margin: 20px;
  	width: 250px;
- 	height:300px;
+ 	height: 300px;
  	object-fit: cover;
 }
 
@@ -13,15 +30,12 @@
   bottom: 0;
 }
 
-#verified{
-  position: relative;
-
+#profileRow {
+  justify-content: center;
 }
 
-.routerLink{
-  color: #17a2b8;
+#profileButtons {
+  text-align: center;
 }
 
-h6 {
-  font-size: 12px;
-}
+
