@@ -1,11 +1,15 @@
 <div class="container-fluid" id="mainContent">
-  <div class="header" *ngIf="!selectedPost">
-    <strong>Forum</strong>
+  <div class="container-fluid" *ngIf="!selectedPost">
+    <h1>Forum</h1>
+    <h5>Q&A with StockOverflow members.</h5>
   </div>
-<br>
-<button class="btn btn-info" *ngIf="selectedPost" (click)="displayPosts()">Back to Posts</button>
+  <div *ngIf="selectedPost">
+    <br>
+    <button class="btn btn-info" (click)="displayPosts()">Back to Posts</button>
+  </div>
 
-<br>
+
+
   <div *ngIf="checkLogin() && !selectedPost && !postToEdit" class="newFormy">
     <form #newPost="ngForm">
       <div class="form-row">
@@ -47,7 +51,7 @@
 
   <div *ngIf="selectedPost">
     <h5>Posted by <a class="routerLink" [routerLink]="['/profile/', selectedPost.user.id]"> {{selectedPost.user.username}} </a> {{selectedPost.createdAt | date:'fullDate'}}</h5>
-    <blockquote class="blockquote blockquote-reverse"><h1><p class="mb-0">{{selectedPost.title}}</p></h1>
+    <blockquote class="blockquote blockquote-reverse"><h2><p class="mb-0">{{selectedPost.title}}</p></h2>
     <h3><footer class="blockquote-footer">{{selectedPost.description}}</footer></h3>
     </blockquote>
     <button class="btn btn-info" *ngIf="userCheck.username === selectedPost.user.username" (click)="setEditPost()">Edit</button>
