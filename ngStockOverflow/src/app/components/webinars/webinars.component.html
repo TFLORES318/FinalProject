@@ -28,7 +28,8 @@
       <tr>
         <td>
           <button class="btn btn-info mr-1" (click)="displayWebinars()">Back To Webinars</button>
-          <button class="btn btn-info mr-1" *ngIf='checkLogin() && !checkIfUserAlreadyAttending(selected) && !checkIfUserIsHosting(selected)' (click)="signUpUser(selected.id)">Sign Up</button>
+          <button class="btn btn-info mr-1" *ngIf='checkLogin() && !checkIfUserAlreadyAttending(selected) && !checkIfUserIsHosting(selected) && selected.usersAttending.length < selected.maxAttendees' (click)="signUpUser(selected.id)">Sign Up</button>
+          <button *ngIf="selected.usersAttending.length >= selected.maxAttendees" type="button" class="btn btn-info" disabled>Meeting at capacity</button>
           <button class="btn btn-info mr-1" *ngIf='checkLogin() && checkIfUserAlreadyAttending(selected) && !checkIfUserIsHosting(selected)' (click)="withdrawUser(selected.id)">Withdraw</button>
           <button class="btn btn-info mr-1" *ngIf='checkLogin() && checkIfUserIsHosting(selected)' (click)="webinarToEdit = selected">Update Your Webinar</button>
           <button class="btn btn-info mr-1" *ngIf='checkLogin() && checkIfUserIsHosting(selected)' (click)="cancelWebinar(selected.id)">Cancel Webinar</button>
