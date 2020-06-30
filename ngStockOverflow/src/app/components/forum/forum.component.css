@@ -40,3 +40,8 @@ h5 {
   color: lightgrey;
   font-style: italic;
 }
+
+#verified{
+  height:20px;
+  width: 10px;
+}
