@@ -11,3 +11,11 @@
 #navLinkMain {
   color: whitesmoke
 }
+
+#loginBtn {
+  text-align: center;
+}
+
+#pwLabel {
+  margin-right: 5px;
+}
