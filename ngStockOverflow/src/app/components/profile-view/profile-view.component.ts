@@ -59,7 +59,7 @@ export class ProfileViewComponent implements OnInit {
         this.user = data;
       },
       fail => {
-        console.error('nope');
+        console.error('error in obtaining user information in profile component');
       }
     );
   }
@@ -85,7 +85,7 @@ export class ProfileViewComponent implements OnInit {
         console.log(localStorage.getItem('credentials'));
       },
       fail => {
-        console.error('ERRORRRR');
+        console.error('error in obtaining users posts in profile view component');
       }
     );
   }

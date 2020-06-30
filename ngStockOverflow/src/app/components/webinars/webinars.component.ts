@@ -52,7 +52,7 @@ export class WebinarsComponent implements OnInit {
         this.allWebinars = data;
       },
       err => {
-        console.error('webinars goofed up in component');
+        console.error('error in obtaining webinars in webinar component');
       }
     )
   }
@@ -70,7 +70,7 @@ export class WebinarsComponent implements OnInit {
 
       },
       error => {
-        console.error('webinar component sign up broken');
+        console.error('error in webinar component sign up');
       }
       )
     }
