@@ -21,8 +21,8 @@
       <li *ngIf='! loggedIn()' class="nav-item">
         <a class="nav-link" [routerLink]="['/register']" id="navLink">Register</a>
       </li>
-      <li *ngIf='! loggedIn()' class="nav-item active" id="navLink">
-        <a class="nav-link" [routerLink]="['/login']">Log In</a>
+      <li *ngIf='! loggedIn()' class="nav-item">
+        <app-login></app-login>
       </li>
       <li *ngIf='loggedIn()' class="nav-item">
         <app-logout></app-logout>

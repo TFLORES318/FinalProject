@@ -1,4 +1,31 @@
-<div class="container-fluid" id="mainContent">
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Log In</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #userLogin='ngForm'>
+      <div class="row">
+        <div class="formGroup .col-sm-4" id="loginForm">
+        <label for="username" id="usernameLabel">User Name</label>
+        <input type="text" name="username" ngModel><br/>
+        <label for="password" id="pwLabel">Password</label>
+        <input type="password" name="password" ngModel><br/>
+        <span id="loginButton"><button class="btn btn-info" id="loginBtn" (click)="login(userLogin); modal.close('Save click')">Log In</button></span>
+        </div>
+        <div class=".col-sm-4" id="bullImg">
+          <img src="https://i.ya-webdesign.com/images/wall-street-bull-png-1.png" alt="" width="150" height="150">
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
+<button class="btn btn-info" (click)="open(content)">Login</button>
+
+<!-- Form code pre-modal: -->
+<!-- <div class="container-fluid" id="mainContent">
   <form #userLogin='ngForm'>
     <div class="formGroup">
     <label for="username">User Name</label>
@@ -8,4 +35,6 @@
     <button class="btn btn-info" (click)='login(userLogin)'>Log In</button>
     </div>
   </form>
-</div>
+</div> -->
+
+
