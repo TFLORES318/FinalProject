@@ -9,9 +9,11 @@
       </div>
       <div class="col"  id="verified">
         <img *ngIf="user.role==='VERIFIED'" src="https://i.imgur.com/2VWo1Fl.png" width="35" height="50"   ngbTooltip="Verified">
-          <p *ngIf="userFlakeFlair==='Beginner'">{{userFlakeFlair}} <br>  {{user.firstName}} is just getting started.</p>
+          <p *ngIf="userFlakeFlair==='Beginner'">{{userFlakeFlair}}:  {{user.firstName}} is just getting started.</p>
           <p *ngIf="userFlakeFlair==='Intermediate'">{{userFlakeFlair}}: People find {{user.firstName}}'s answers helpful.</p>
           <p *ngIf="userFlakeFlair==='Expert'">{{userFlakeFlair}}: {{user.firstName}} is a strong contributor and advisor.</p>
+          <p *ngIf="counter > 0">{{counter}} of {{user.firstName}}'s comments have been rated.</p>
+          <p *ngIf="counter === 0">None of {{user.firstName}}'s comments have been rated.</p>
         <p>{{user.firstName}} {{user.lastName}}</p>
         <p>Username: {{user.username}}</p>
         <p>{{user.email}}</p>
