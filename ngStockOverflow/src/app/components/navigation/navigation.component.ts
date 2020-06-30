@@ -35,7 +35,7 @@ export class NavigationComponent implements OnInit, AfterViewInit {
         console.log(this.user);
       },
       err => {
-        console.error('prfile view ng after view broken');
+        console.error('profile view ng after view broken');
       }
     );
   }

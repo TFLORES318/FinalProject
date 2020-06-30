@@ -31,7 +31,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
         console.log(this.user);
       },
       err => {
-        console.error('prfile view ng after view broken');
+        console.error('profile ngAfterViewInit error in admin component');
       }
     );
   }

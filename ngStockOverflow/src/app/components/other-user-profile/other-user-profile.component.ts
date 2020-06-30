@@ -121,7 +121,7 @@ export class OtherUserProfileComponent implements OnInit {
        }
       },
       fail => {
-        console.error('ERRORRRR');
+        console.error('could not retrieve posts in other-user-profile component');
       }
     );
   }
@@ -139,7 +139,7 @@ export class OtherUserProfileComponent implements OnInit {
         this.setUserFlair();
       },
       err =>{
-        console.log('you think you can do these things but you just cant Nemo!');
+        console.log('could not obtain other users comment ratings');
       }
     )
   }

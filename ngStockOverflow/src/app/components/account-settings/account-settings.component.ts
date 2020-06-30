@@ -31,7 +31,7 @@ export class AccountSettingsComponent implements OnInit, AfterViewInit {
         console.log(this.userUpdate);
       },
       err => {
-        console.error('prfile view ng after view broken');
+        console.error('profile view ngAfterViewInit component failure');
 
       }
     )
