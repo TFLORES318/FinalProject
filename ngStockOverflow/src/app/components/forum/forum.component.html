@@ -31,12 +31,14 @@
   </div>
 
   <div id="searchPosts" *ngIf="postSearch">
-    <table>
+    <table class="table table-hover">
+      <tbody>
       <tr *ngFor="let post of postSearch" (click)="postDetails(post)">
         <td>{{post.title}}</td>
-        <td>posted by <a [routerLink]="['/profile/', post.user.id]">{{post.user.username}}</a></td>
+        <td>posted by <a class="routerLink" [routerLink]="['/profile/', post.user.id]">{{post.user.username}}</a></td>
         <td>{{post.createdAt | date:'fullDate'}}</td>
       </tr>
+    </tbody>
     </table>
   </div>
 
