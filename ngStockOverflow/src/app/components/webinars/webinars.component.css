@@ -62,3 +62,7 @@ moveDetails {
 .borderless td, .borderless th {
   border: none;
 }
+
+.routerLink {
+    color: #17a2b8;
+}
