@@ -98,7 +98,7 @@ export class AuthService {
       catchError((err: any) => {
 
         console.log(err);
-        return throwError('ehh')
+        return throwError('error in showUser() in auth service - cannot obtain user')
       })
       );
     }

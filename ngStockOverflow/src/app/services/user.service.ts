@@ -53,7 +53,7 @@ export class UserService {
       catchError((err: any) => {
 
         console.log(err);
-        return throwError('ehh')
+        return throwError('error in showUser in user service')
       })
       );
     }
@@ -120,7 +120,7 @@ export class UserService {
   return this.http.put<User>(this.url + '/delete', user, httpOptions)
   .pipe(
     catchError((err: any) => {
-      console.log('account not deleted');
+      console.log('account not deleted - error in disableUser in user service');
     return throwError('account not deleted')
     })
   )
@@ -138,7 +138,7 @@ export class UserService {
    .pipe(
      catchError((err:any) => {
        console.log('cannot get user');
-       return throwError('error in getting specific user');
+       return throwError('error in getting specific user in user service');
      })
    );
  }
