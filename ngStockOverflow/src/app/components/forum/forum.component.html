@@ -29,7 +29,8 @@
       <tbody>
       <tr *ngFor="let post of allPosts" (click)="postDetails(post)">
         <td>{{post.title}}</td>
-        <td>posted by <a class="routerLink" [routerLink]="['/profile/', post.user.id]">{{post.user.username}}</a></td>
+        <td *ngIf="userCheck.username != post.user.username">posted by <a class="routerLink" [routerLink]="['/profile/', post.user.id]">{{post.user.username}}</a></td>
+        <td *ngIf="userCheck.username === post.user.username">posted by <a class="routerLink" [routerLink]="['/profile/']">{{post.user.username}}</a></td>
         <td>{{post.createdAt | date:'fullDate'}}</td>
       </tr>
       </tbody>
@@ -41,7 +42,8 @@
       <tbody>
       <tr *ngFor="let post of postSearch" (click)="postDetails(post)">
         <td>{{post.title}}</td>
-        <td>posted by <a class="routerLink" [routerLink]="['/profile/', post.user.id]">{{post.user.username}}</a></td>
+        <td *ngIf="userCheck.username != post.user.username">posted by <a class="routerLink" [routerLink]="['/profile/', post.user.id]">{{post.user.username}}</a></td>
+        <td *ngIf="userCheck.username === post.user.username">posted by <a class="routerLink" [routerLink]="['/profile/']">{{post.user.username}}</a></td>
         <td>{{post.createdAt | date:'fullDate'}}</td>
       </tr>
     </tbody>
@@ -49,7 +51,8 @@
   </div>
 
   <div *ngIf="selectedPost">
-    <h5>Posted by <a class="routerLink" [routerLink]="['/profile/', selectedPost.user.id]"> {{selectedPost.user.username}} </a> {{selectedPost.createdAt | date:'fullDate'}}</h5>
+    <h5 *ngIf="userCheck.username != selectedPost.user.username">Posted by <a class="routerLink" [routerLink]="['/profile/', selectedPost.user.id]"> {{selectedPost.user.username}} </a> {{selectedPost.createdAt | date:'fullDate'}}</h5>
+    <h5 *ngIf="userCheck.username === selectedPost.user.username">Posted by <a class="routerLink" [routerLink]="['/profile/']"> {{selectedPost.user.username}} </a> {{selectedPost.createdAt | date:'fullDate'}}</h5>
     <blockquote class="blockquote blockquote-reverse"><h2><p class="mb-0">{{selectedPost.title}}</p></h2>
     <h3><footer class="blockquote-footer">{{selectedPost.description}}</footer></h3>
     </blockquote>
@@ -76,13 +79,10 @@
     <div *ngIf="selectedPost && selectedPost.comments">
       <table *ngFor="let comment of selectedPost.comments" (click)="commentDetails(comment)">
       <tr>
-      <td><a class="routerLink" [routerLink]="['/profile/', comment.user.id]">{{comment.user.username}}</a>
-        <!-- <img id="verified" *ngIf="comment.user.role === 'VERIFIED'" ngbTooltip="Verified" src="https://i.imgur.com/2VWo1Fl.png"> -->
-        {{comment.user.flair}}
-      <svg  *ngIf="comment.user.role === 'VERIFIED'" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-patch-check-fll text-info" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zm.287 5.984a.5.5 0 0 0-.708-.708L7 8.793 5.854 7.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
-      </svg>
-      - {{comment.createDate | date:'fullDate'}}</td>
+      <td *ngIf="userCheck.username != comment.user.username"><a class="routerLink" [routerLink]="['/profile/', comment.user.id]">{{comment.user.username}}</a>
+      {{comment.user.flair}} - {{comment.createDate | date:'fullDate'}}</td>
+      <td *ngIf="userCheck.username === comment.user.username"><a class="routerLink" [routerLink]="['/profile/']">{{comment.user.username}}</a>
+      {{comment.user.flair}} - {{comment.createDate | date:'fullDate'}}</td>
       </tr>
       <p>{{comment.content}}</p>
       <div *ngIf="userCheck.username !== comment.user.username && checkLogin() && !checkUserHasNotRatedComment(comment)">
