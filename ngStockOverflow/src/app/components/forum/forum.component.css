@@ -29,6 +29,13 @@ h6 {
   font-size: 12px;
 }
 
-/* .newFormy {
-  padding-top: 6px;
-} */
+h1 {
+  font-size: 100px;
+  font-style: bold;
+}
+
+
+h5 {
+  color: lightgrey;
+  font-style: italic;
+}
