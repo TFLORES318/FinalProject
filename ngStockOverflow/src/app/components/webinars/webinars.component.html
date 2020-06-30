@@ -16,7 +16,7 @@
       <tr>
         <th><img src={{selected.picture}}/></th>
         <th><div>{{selected.dateTime | date:'short'}}</div></th>
-        <th>Hosted by: <a [routerLink]="['/profile/', selected.userCreator.id]"> {{selected.userCreator.username}}</a></th>
+        <th>Hosted by: <a class="routerLink" [routerLink]="['/profile/', selected.userCreator.id]"> {{selected.userCreator.username}}</a></th>
         <th>{{selected.usersAttending.length}} / {{selected.maxAttendees}} capacity</th>
       </tr>
       <div class="moveDetails">
