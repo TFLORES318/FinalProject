@@ -73,7 +73,7 @@ export class ForumComponent implements OnInit, AfterViewInit{
         console.log(this.userCheck);
       },
       err => {
-        console.error('profile view ng after view broken');
+        console.error('profile view ng after view error');
 
       }
     )
@@ -208,7 +208,7 @@ export class ForumComponent implements OnInit, AfterViewInit{
           this.loadComments(post);
         },
         err => {
-          console.error('dun work it dun wok');
+          console.error('update comment in forum component error');
 
         }
       )
@@ -223,7 +223,7 @@ export class ForumComponent implements OnInit, AfterViewInit{
           this.loadComments(post);
         },
         err => {
-          console.error('this is not working wah');
+          console.error('error in deletion of comment in forum component');
         }
       )
     }
@@ -267,7 +267,6 @@ export class ForumComponent implements OnInit, AfterViewInit{
       checkUserHasNotRatedComment(comment){
         for(let i = 0; i < this.loggedInUserCommentRatings.length ; i++){
           if(this.loggedInUserCommentRatings[i].comment.id === comment.id){
-            console.log('******true');
           return true;
         }
       }

@@ -31,10 +31,10 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/home');
         this.auth.showUser().subscribe(
           data => {
-            console.log('yay you are here')
+            console.log('you have successfully logged in')
           },
           err => {
-            console.error('whyyyyyyYYyy');
+            console.error('error in login - login componenet');
 
           }
         )
