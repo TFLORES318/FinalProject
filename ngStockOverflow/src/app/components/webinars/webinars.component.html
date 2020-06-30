@@ -19,9 +19,15 @@
         <th><div>{{selected.dateTime | date:'short'}}</div></th>
         <th>Hosted by: <a class="routerLink" [routerLink]="['/profile/', selected.userCreator.id]"> {{selected.userCreator.username}}</a></th>
         <th>{{selected.usersAttending.length}} / {{selected.maxAttendees}} capacity</th>
+        <!-- <th><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+          Attendees
+        </button></th> -->
+        <button class="btn btn-info" (click)="open(content)">View Attendees</button>
       </tr>
       <div class="moveDetails">
       <tr>
+        <!-- <td>Attendees</td>
+        <td *ngFor="let user of selected.usersAttending"><img id="userPics" src={{user.profilePicture}}></td> -->
       </tr>
       <tr>
         <td>{{selected.description}}</td>
@@ -97,6 +103,52 @@
   </div>
 
   </div>
+
+  <!-- <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Attendees</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div>
+          <table>
+            <tr *ngFor="let user of selected.usersAttending">
+            <td>{{user.username}}</td>
+            <td><img id="userPics" src={{user.profilePicture}}></td>
+            </tr>
+           </table>
+        </div>
+      </form>
+    </div> -->
+
+    <ng-template #content let-modal>
+      <!-- <div class="modalContent"> -->
+      <div class="modal-header bg-dark">
+        <h4 class="modal-title" id="modal-basic-title">Attendees</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <table>
+            <tr *ngFor="let user of selected.usersAttending">
+              <td><img id="userPics" src={{user.profilePicture}}></td>
+              <td></td>
+              <td><a class="routerLink" (click)="modal.dismiss('Cross click')" [routerLink]="['/profile/', user.id]"> {{user.username}} </a></td>
+            </tr>
+             </table>
+          </div>
+        </form>
+      </div>
+    <!-- </div> -->
+    </ng-template>
+
+    <pre>{{ closeResult }}</pre>
 
 
 
