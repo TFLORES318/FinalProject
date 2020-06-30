@@ -4,6 +4,11 @@
   bottom: 0;
 }
 
+#testimonials2 {
+  padding-top: 0;
+  background-color: white;
+}
+
 /**
 * Template Name: Hidayah - v2.2.0
 * Template URL: https://bootstrapmade.com/hidayah-free-simple-html-template-for-corporate/
@@ -277,7 +282,7 @@ section {
 
 .section-title {
   text-align: left;
-  padding-bottom: 50px;
+  padding-bottom: 0px;
 }
 
 .section-title h2 {

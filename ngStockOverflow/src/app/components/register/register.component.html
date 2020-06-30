@@ -1,7 +1,7 @@
 <img src="https://images.pexels.com/photos/241544/pexels-photo-241544.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="Responsive image">
 <div class="container-fluid" id="mainContent">
-  <div class="row">
-    <div id="columns" class="col-4">
+  <div class="row" id="columnGroup">
+    <div class=".col-sm" id="columns">
       <h1>Get access to</h1>
       <p>Forums</p>
       <p>Webinars hosted by verified users</p>
@@ -11,7 +11,7 @@
       <p>Growing community of stock enthusiasts</p>
       <p>and more!</p>
     </div>
-    <div id="columns" class="col-4">
+    <div class=".col-sm" id="columns">
     <h1>Register</h1>
     <form #newUserForm='ngForm'>
       <div class="form-group">
@@ -38,8 +38,7 @@
       <button (click)='register(newUserForm)' type="submit" class="btn btn-info">Register</button>
     </form>
     </div>
-
-    <div id="columns" class="col-4">
+    <div class=".col-sm" id="columns">
       <h1>What people are saying</h1>
       <p>"I lost tons of money in a pyramid scheme and StockOverflow helped me recoup my losses!"</p>
       <p id="quote">- Michael Scott</p>
@@ -48,8 +47,6 @@
       <p>"I've gotten a wealth of information from these webinars - what a great way to learn virtually during this pandemic!"</p>
       <p id="quote">- Dr. Steve Brule</p>
     </div>
-
-    <div class="col"></div>
 
   </div>
 </div>

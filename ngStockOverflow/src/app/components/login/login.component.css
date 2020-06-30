@@ -23,3 +23,12 @@
 #loginButton {
   padding-right: 20px;
 }
+
+.modal-header {
+  color: whitesmoke;
+  background-color: #343a40;
+}
+
+.closeBtn {
+  color: #1fcde8fc;
+}
