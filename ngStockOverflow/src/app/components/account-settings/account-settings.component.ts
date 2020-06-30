@@ -21,6 +21,7 @@ export class AccountSettingsComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit(): void {
+    window.scroll(0,0);
   }
 
   ngAfterViewInit(){

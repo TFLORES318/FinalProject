@@ -26,6 +26,7 @@ export class PortfolioComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    window.scroll(0,0);
     this.loadUsersStocks();
     this.loggedInUserLoad();
   }
