@@ -54,8 +54,8 @@
     <blockquote class="blockquote blockquote-reverse"><h2><p class="mb-0">{{selectedPost.title}}</p></h2>
     <h3><footer class="blockquote-footer">{{selectedPost.description}}</footer></h3>
     </blockquote>
-    <button class="btn btn-info" *ngIf="userCheck.username === selectedPost.user.username" (click)="setEditPost()">Edit</button>
-    <button class="btn btn-info" *ngIf="userCheck.username === selectedPost.user.username" (click)="deletePost(selectedPost.id)">Delete</button>
+    <button class="btn btn-info mr-1" *ngIf="userCheck.username === selectedPost.user.username" (click)="setEditPost()">Edit</button>
+    <button class="btn btn-info mr-1" *ngIf="userCheck.username === selectedPost.user.username" (click)="deletePost(selectedPost.id)">Delete</button>
 
     <div>
       <form *ngIf="postToEdit && selectedPost">
