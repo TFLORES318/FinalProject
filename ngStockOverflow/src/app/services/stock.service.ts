@@ -41,7 +41,7 @@ export class StockService {
     return this.http.get<Stock>(this.url + '/' + stockSymbol, httpOptions).pipe(
       catchError((err:any) => {
         console.log(err);
-        return throwError('Error with showing stock in service');
+        return throwError('Error with showing stock in stock service');
       })
     );
   }
@@ -56,7 +56,7 @@ export class StockService {
     };
     return this.http.post<Stock>(this.url, newStock, httpOptions).pipe(
       catchError((err:any) => {
-        console.error('error in service for creating stock');
+        console.error('error in stock service for creating stock');
         return throwError('Error with creating stock');
       })
     );

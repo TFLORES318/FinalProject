@@ -82,8 +82,8 @@ export class PostService {
     return this.http.post<Post>(this.url, newPost, httpOptions)
     .pipe(
       catchError((err: any) => {
-        console.log('post service create is broken');
-        return throwError('post service create is broken');
+        console.log('error in create in post service');
+        return throwError('error in create in post service');
       })
     )
   }

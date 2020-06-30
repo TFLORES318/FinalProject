@@ -101,8 +101,8 @@ export class WebinarService {
     return this.http.put<User[]>(this.url+'/'+webinarId+'/signUp', webinarId, httpOptions)
     .pipe(
       catchError((err: any) => {
-        console.log('sign up is broken');
-        return throwError ('sign up is broken')
+        console.log('error in signUpUser() in webinar service');
+        return throwError ('cannot sign up user for webinar')
       })
     )
   }
@@ -118,8 +118,8 @@ export class WebinarService {
     return this.http.put<User[]>(this.url+'/'+webinarId+'/withdraw', webinarId, httpOptions)
     .pipe(
       catchError((err:any) =>{
-        console.log('withdraw user broken');
-        return throwError('withdraw user broken');
+        console.log('error in withdrawUser() in webinar service');
+        return throwError('cannot withdraw user from webinar');
       })
     )
   }
