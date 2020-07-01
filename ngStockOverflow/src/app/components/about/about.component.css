@@ -47,9 +47,13 @@ h1 {
 }
 
 #robchu {
+  color:#6C757D;
   text-align: center;
 }
 
 .accordion {
   text-align: center;
+  color: gray;
 }
+
+
