@@ -13,7 +13,7 @@
               <th>First Name</th>
               <th>Last Name</th>
               <th>Email</th>
-              <th>Verified</th>
+              <th>Verified Status</th>
               <th>Delete Account</th>
             </tr>
           </thead>
@@ -22,7 +22,8 @@
               <td>{{userUpdate.firstName}}</td>
               <td>{{userUpdate.lastName}}</td>
               <td>{{userUpdate.email}}</td>
-              <td *ngIf="userUpdate.role !== 'VERIFIED'"><button class="btn btn-info mr-1" *ngIf="userUpdate.role == 'STANDARD'" (click)="applyForVerification(userUpdate)">Apply for Verification</button></td>
+              <td *ngIf="userUpdate.role !== 'VERIFIED' && userUpdate.role !== 'APPLICANT'"><button class="btn btn-info mr-1" *ngIf="userUpdate.role == 'STANDARD'" (click)="applyForVerification(userUpdate)">Apply for Verification</button></td>
+              <td *ngIf="userUpdate.role === 'APPLICANT'">Your application is being reviewed</td>
               <td *ngIf="userUpdate.role === 'VERIFIED'">You are verified</td>
               <td><button class="btn btn-danger mr-1" (click)="disableUser(userUpdate)">X</button></td>
             </tr>
