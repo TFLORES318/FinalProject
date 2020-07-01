@@ -56,9 +56,10 @@
 
 ### Overview
 
-|Credentials|
-|-----------|---------|
+Credentials to login:
+
 | Username | Password |
+|-----------|---------|
 | `admin` | `admin` |
 | `rwasek` | `admin` |
 
