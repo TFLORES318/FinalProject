@@ -139,7 +139,8 @@
             <tr *ngFor="let user of selected.usersAttending">
               <td><img id="userPics" src={{user.profilePicture}}></td>
               <td></td>
-              <td><a class="routerLink" (click)="modal.dismiss('Cross click')" [routerLink]="['/profile/', user.id]"> {{user.username}} </a></td>
+              <td *ngIf="user.username != loggedInUser.username"><a class="routerLink" (click)="modal.dismiss('Cross click')" [routerLink]="['/profile/', user.id]"> {{user.username}} </a></td>
+              <td *ngIf="user.username === loggedInUser.username"><a class="routerLink" (click)="modal.dismiss('Cross click')" [routerLink]="['/profile/']"> {{user.username}} </a></td>
             </tr>
              </table>
           </div>
@@ -149,9 +150,3 @@
     </ng-template>
 
     <pre>{{ closeResult }}</pre>
-
-
-
-
-
-
