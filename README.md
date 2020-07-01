@@ -57,7 +57,7 @@
 ### Overview
 
 |Credentials|
-|-----------|
+|-----------|---------|
 | Username | Password |
 | `admin` | `admin` |
 | `rwasek` | `admin` |
@@ -72,7 +72,7 @@ In the forum, a user is able to perform all CRUD methods on posts and comments t
 
 On the webinar page, a user can sign up or withdraw from a webinar and view the attendees. Verified users are able to perform all CRUD methods on a webinar.
 
-On the profile page, the user can view their posts, webinars attendings, and the webinars they're hosting if applicable. They can manage their account settings by updating their personal information, applying for verification, or deleting their account. From the profile page, they can view their portfolio. An admin can view the admin page from their profile.
+On the profile page, the user can view their posts, webinars attending, and the webinars they're hosting if applicable. They can manage their account settings by updating their personal information, applying for verification, or deleting their account. From the profile page, they can view their portfolio. An admin can view the admin page from their profile.
 
 ![Image of Portfolio](https://i.imgur.com/zf6dBuN.png)
 
@@ -120,7 +120,7 @@ This project was a good lesson in being able to collaborate remotely. Our team h
 
 This was also a good lesson in building a full stack application using Spring JPA, Spring Boot, Spring RESTful services, and Angular. As our final capstone project, we were able to revisit all methodologies from the ground up in order to produce our final product.
 
-This sprint really helped us to cement our understanding of Angular, specfically service and component typescripts. After designing our database, we realized the amount of functionality we were hoping to implement was daunting. But our group was extreemly dedicated and communciated well. Thanks to this, our team was able to reach minimum viable product in four days. As such, we were able to implement three stretch goals to our final product.
+This sprint really helped us to cement our understanding of Angular, specifically service and component typescripts. After designing our database, we realized the amount of functionality we were hoping to implement was daunting. But our group was extremely dedicated and communicated well. Thanks to this, our team was able to reach minimum viable product in four days. As such, we were able to implement three stretch goals to our final product.
 
 ### Stretch Goals
 
