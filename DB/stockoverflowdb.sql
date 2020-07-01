@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `last_name` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NULL,
   `role` ENUM('STANDARD', 'VERIFIED', 'APPLICANT', 'ADMIN') NOT NULL,
-  `profile_picture` VARCHAR(4500) NULL,
+  `profile_picture` VARCHAR(4500) NULL DEFAULT 'https://i.imgur.com/LIgOfch.png',
   `create_date` DATETIME NOT NULL,
   `enabled` TINYINT NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
