@@ -29,6 +29,7 @@ public class AuthController {
 		if (user == null) {
 			res.setStatus(400);
 		}
+		user.setProfilePicture("https://i.imgur.com/LIgOfch.png");
 		user = authService.register(user);
 		return user;
 	}
