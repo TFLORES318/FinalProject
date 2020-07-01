@@ -63,7 +63,8 @@ export class LoginComponent implements OnInit {
         )
           },
           error => {
-            console.error('RegisterComponent.register(): error logging in.');
+            console.error('login() component: error logging in.');
+            window.alert('Account has been deactivated, please email admin@stockoverflow.com to reactivate it if desired!');
           }
         );
       }
