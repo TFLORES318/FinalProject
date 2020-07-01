@@ -173,7 +173,7 @@ export class WebinarsComponent implements OnInit {
         this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', size: 'sm'}).result.then((result) => {
           this.closeResult = `Closed with: ${result}`;
         }, (reason) => {
-          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+          // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         });
       }
 
