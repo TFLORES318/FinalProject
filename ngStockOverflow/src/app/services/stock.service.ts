@@ -4,13 +4,14 @@ import { Stock } from '../models/stock';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AuthService } from './auth.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StockService {
-  private baseUrl = 'http://localhost:8090/';
-  private url = this.baseUrl + 'api/stocks'
+  // private baseUrl = 'http://localhost:8090/';
+  private url = environment.baseUrl + 'api/stocks';
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 

@@ -47,7 +47,7 @@ class WebinarTest {
 		assertEquals("2020-07-15T08:00", webinar.getDateTime().toString());
 		assertEquals("2020-06-05T09:26", webinar.getCreatedAt().toString());
 		assertEquals("https://us04web.zoom.us/j/78138276632?pwd=K2RKSFFIOHltU0loV1hVRWhuaVcyUT09", webinar.getMeetingLink());
-		assertEquals(30, webinar.getMaxAttendees());
+		assertEquals(6, webinar.getMaxAttendees());
 		assertTrue(webinar.getEnabled());
 		
 	}

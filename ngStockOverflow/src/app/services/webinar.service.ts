@@ -5,14 +5,15 @@ import { Webinar } from '../models/webinar';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { User } from '../models/user';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WebinarService {
 
-  private baseUrl = 'http://localhost:8090/';
-  private url = this.baseUrl + 'api/webinars';
+  // private baseUrl = 'http://localhost:8090/';
+  private url = environment.baseUrl + 'api/webinars';
 
   constructor(
     private http: HttpClient,
@@ -24,7 +25,7 @@ export class WebinarService {
     .pipe(
       catchError((err: any) => {
         console.log('error getting all webinars');
-        return throwError('error getting all webinars')
+        return throwError('error getting all webinars');
       })
     )
   }
@@ -81,7 +82,7 @@ export class WebinarService {
         'X-Requested-With': 'XMLHttpRequest'
       })
     }
-    return this.http.put<Webinar>(this.url+'/delete/'+webinarId, webinarId, httpOptions)
+    return this.http.put<Webinar>(this.url + '/delete/' + webinarId, webinarId, httpOptions)
     .pipe(
       catchError((err: any) => {
         console.log('error deleting webinar');
@@ -98,11 +99,11 @@ export class WebinarService {
         'X-Requested-With': 'XMLHttpRequest'
       })
     }
-    return this.http.put<User[]>(this.url+'/'+webinarId+'/signUp', webinarId, httpOptions)
+    return this.http.put<User[]>(this.url + '/' + webinarId + '/signUp', webinarId, httpOptions)
     .pipe(
       catchError((err: any) => {
         console.log('error in signUpUser() in webinar service');
-        return throwError ('cannot sign up user for webinar')
+        return throwError ('cannot sign up user for webinar');
       })
     )
   }
@@ -115,7 +116,7 @@ export class WebinarService {
         'X-Requested-With': 'XMLHttpRequest'
       })
     }
-    return this.http.put<User[]>(this.url+'/'+webinarId+'/withdraw', webinarId, httpOptions)
+    return this.http.put<User[]>(this.url + '/' + webinarId + '/withdraw', webinarId, httpOptions)
     .pipe(
       catchError((err:any) =>{
         console.log('error in withdrawUser() in webinar service');

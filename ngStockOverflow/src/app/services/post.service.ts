@@ -4,14 +4,16 @@ import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Post } from '../models/post';
 import { AuthService } from './auth.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
 
-  private baseUrl = 'http://localhost:8090/';
-  private url = this.baseUrl + 'api/posts';
+  // private baseUrl = 'http://localhost:8090/';
+  private url = environment.baseUrl + 'api/posts';
+  private urlTwo = environment.baseUrl;
 
   constructor(
     private http: HttpClient,
@@ -36,7 +38,7 @@ export class PostService {
         'X-Requested-With': 'XMLHttpRequest'
       })
     }
-    return this.http.get<Post[]>(this.baseUrl + 'api/users/posts', httpOptions)
+    return this.http.get<Post[]>(this.urlTwo + 'api/users/posts', httpOptions)
     .pipe(
       catchError((err: any) => {
         console.log('error in all posts for user post service');
