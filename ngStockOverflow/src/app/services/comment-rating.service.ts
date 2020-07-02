@@ -5,14 +5,15 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { AuthService } from './auth.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommentRatingService {
 
-  private baseUrl = 'http://localhost:8090/';
-  private url = this.baseUrl + 'api/comments/ratings';
+  // private baseUrl = 'http://localhost:8090/';
+  private url = environment.baseUrl + 'api/comments/ratings';
 
   constructor(
     private http: HttpClient,
@@ -20,7 +21,7 @@ export class CommentRatingService {
   ) { }
 
   getCommentRatingsForAUser(userId: number){
-    return this.http.get<CommentRating[]>(this.url +'/'+userId)
+    return this.http.get<CommentRating[]>(this.url + '/' + userId)
     .pipe(
       catchError((err:any)=>{
         console.log('cannot retrieve comment ratings');
@@ -36,14 +37,14 @@ export class CommentRatingService {
         'Authorization': `Basic ${credentials}`,
         'X-Requested-With': 'XMLHttpRequest'
       })
-    }
+    };
     return this.http.post<CommentRating>(this.url, commentRating, httpOptions)
     .pipe(
       catchError((err: any) => {
         console.log('cannot create comment rating');
         return throwError('cannot create comment rating');
       })
-    )
+    );
 
   }
 
@@ -54,14 +55,14 @@ export class CommentRatingService {
         'Authorization': `Basic ${credentials}`,
         'X-Requested-With': 'XMLHttpRequest'
       })
-    }
-    return this.http.get<CommentRating[]>(this.url+'/user', httpOptions)
+    };
+    return this.http.get<CommentRating[]>(this.url + '/user', httpOptions)
     .pipe(
       catchError((err:any)=> {
         console.log('cannot retrieve logged in user comment rating');
-        return throwError('cannot retrieve logged in user comment ratings')
+        return throwError('cannot retrieve logged in user comment ratings');
       })
-    )
+    );
   }
 
 

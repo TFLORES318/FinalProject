@@ -4,13 +4,14 @@ import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators'
 import { AuthService } from './auth.service';
 import { Comment } from 'src/app/models/comment';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommentService {
-  private url = 'http://localhost:8090'
-  private baseUrl = this.url + '/api/posts'
+  // private url = 'http://localhost:8090'
+  private url = environment.baseUrl + 'api/posts';
 
 
   constructor(private http: HttpClient, private authService: AuthService) { }
@@ -24,7 +25,7 @@ export class CommentService {
     //     'X-Requested-With': 'XMLHttpRequest'
     //   })
     // };
-    return this.http.get<Comment[]>(this.baseUrl + '/' + postId + '/comments')
+    return this.http.get<Comment[]>(this.url + '/' + postId + '/comments')
     .pipe(
       catchError((err : any) => {
         console.log(err);
@@ -41,7 +42,7 @@ export class CommentService {
         'X-Requested-With': 'XMLHttpRequest'
       })
     };
-    return this.http.get<Comment[]>(this.baseUrl + '/' + postId + '/comments')
+    return this.http.get<Comment[]>(this.url + '/' + postId + '/comments')
     .pipe(
       catchError((err : any) => {
         console.log(err);
@@ -60,7 +61,7 @@ export class CommentService {
         'X-Requested-With': 'XMLHttpRequest'
       })
     };
-    return this.http.post<Comment>(this.baseUrl + '/' + postId + '/comments', newComment, httpOptions).pipe(
+    return this.http.post<Comment>(this.url + '/' + postId + '/comments', newComment, httpOptions).pipe(
       catchError((err: any) => {
         console.error('Error in service to create a comment');
         return throwError('Error with creating a comment');
@@ -76,7 +77,7 @@ export class CommentService {
         'X-Requested-With': 'XMLHttpRequest'
       })
     };
-    return this.http.put<Comment>(this.baseUrl + '/' + postId + '/comments/' + commentId, commentToEdit, httpOptions).pipe(
+    return this.http.put<Comment>(this.url + '/' + postId + '/comments/' + commentId, commentToEdit, httpOptions).pipe(
       catchError((err: any) => {
         console.error('error in update comment service');
         return throwError('error in update');
@@ -92,7 +93,7 @@ export class CommentService {
         'X-Requested-With': 'XMLHttpRequest'
       })
     };
-    return this.http.put<Comment>(this.baseUrl + '/' + postId + '/delete/' + commentId, commentToDelete, httpOptions).pipe(
+    return this.http.put<Comment>(this.url + '/' + postId + '/delete/' + commentId, commentToDelete, httpOptions).pipe(
       catchError((err:any) => {
         console.error('error in delete comment');
         return throwError('destroy comment for comment service not working');

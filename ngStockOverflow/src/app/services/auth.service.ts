@@ -11,8 +11,8 @@ import { User } from '../models/user';
 })
 
 export class AuthService {
-  private baseUrl = 'http://localhost:8090/';
-  // private baseUrl = environment.baseUrl;
+  // private baseUrl = 'http://localhost:8090/';
+  private url = environment.baseUrl;
 
   loggedInUser: User = null;
   constructor(private http: HttpClient) { }
@@ -30,7 +30,7 @@ export class AuthService {
 
     // create request to authenticate credentials
     return this.http
-      .get(this.baseUrl + 'authenticate', httpOptions)
+      .get(this.url + 'authenticate', httpOptions)
       .pipe(
         tap((res) => {
           localStorage.setItem('credentials' , credentials);
@@ -46,7 +46,7 @@ export class AuthService {
 
   register(user) {
     // create request to register a new account
-    return this.http.post(this.baseUrl + 'register', user)
+    return this.http.post(this.url + 'register', user)
     .pipe(
       catchError((err: any) => {
         console.log(err);
@@ -88,7 +88,7 @@ export class AuthService {
         'X-Requested-With': 'XMLHttpRequest'
       })
     }
-    return this.http.get<User>(this.baseUrl + 'api/users/userpro', httpOptions).pipe(
+    return this.http.get<User>(this.url + 'api/users/userpro', httpOptions).pipe(
       tap((res) => {
         console.log(res);
         this.loggedInUser = res;

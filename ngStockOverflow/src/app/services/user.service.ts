@@ -8,14 +8,15 @@ import { Stock } from '../models/stock';
 import { identifierModuleUrl } from '@angular/compiler';
 import { User } from '../models/user';
 import { Webinar } from '../models/webinar';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private baseUrl = 'http://localhost:8090/';
-  private url = this.baseUrl + 'api/users';
+  // private baseUrl = 'http://localhost:8090/';
+  private url = environment.baseUrl + 'api/users';
 
   constructor(
     private http: HttpClient,
@@ -183,7 +184,7 @@ export class UserService {
   //     'X-Requested-With': 'XMLHttpRequest'
   //   })
   // }
-  return this.http.get<Webinar[]>(this.url +'/'+ userId + '/webinars')
+  return this.http.get<Webinar[]>(this.url + '/' + userId + '/webinars')
   .pipe(
     catchError((err:any) => {
       console.log('cannot retrieve other user webinars');
@@ -200,7 +201,7 @@ export class UserService {
   //     'X-Requested-With': 'XMLHttpRequest'
   //   })
   // }
-  return this.http.get<Post[]>(this.url +'/'+userId+'/posts')
+  return this.http.get<Post[]>(this.url + '/' + userId + '/posts')
   .pipe(
     catchError((err:any) => {
       console.log('cannot retrieve other user posts');
@@ -210,7 +211,7 @@ export class UserService {
  }
 
  allWebinarsHostingForOtherUser(userId: number) {
-   return this.http.get<Webinar[]>(this.url +'/' +userId+ '/webinarshostedbyuser')
+   return this.http.get<Webinar[]>(this.url + '/' + userId + '/webinarshostedbyuser')
    .pipe(
      catchError((err:any) => {
        console.log('cannot retrieve other user webinars');
